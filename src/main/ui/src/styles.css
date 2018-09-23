@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  direction: rtl;
+  font-family: nafees-web-naskh !important;
+  font-size: 25px;
+}
+
+.form-text {
+  font-family: inherit !important;
+  font-size: 14px;
+}
+
+.form-control {
+  font-family: inherit !important;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.btn {
+  font-family: inherit !important;
+  font-size: 25px;
+}

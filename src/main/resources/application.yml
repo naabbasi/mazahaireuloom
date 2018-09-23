@@ -1,0 +1,11 @@
+server:
+  port: 90
+
+spring:
+  data:
+    rest:
+      base-path: /api
+    mongodb:
+      port: 27017
+      database: mazahireuloom
+      host: localhost
