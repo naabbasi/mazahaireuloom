@@ -1,3 +1,6 @@
 <p>
   books works!
 </p>
+<ul>
+  <li *ngFor="let book of books | async">{{book.bookId}}</li>
+</ul>

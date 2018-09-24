@@ -1,5 +1,6 @@
-interface Book {
-  bookName : string,
-  bookAuthor : string,
-  bookPublish : string
+export declare class Book {
+  bookId : string;
+  bookName : string;
+  bookAuthor : string;
+  bookPublish : string;
 }

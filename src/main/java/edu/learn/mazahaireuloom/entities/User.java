@@ -1,5 +1,8 @@
 package edu.learn.mazahaireuloom.entities;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -11,13 +14,12 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Data
-@ToString(exclude = "password")
 @AllArgsConstructor
 @EqualsAndHashCode
 @Document(collection = "users")
 public class User {
     @Id
-    private String userId = UUID.randomUUID().toString();
+    private UUID userId = UUID.randomUUID();
 
     @NotNull
     @TextIndexed(weight = 2)
@@ -30,5 +32,20 @@ public class User {
     public User(@NotNull String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        ObjectMapper mapper = new ObjectMapper();
+
+        String jsonToString = "";
+        try {
+            mapper.enable(SerializationFeature.INDENT_OUTPUT);
+            return mapper.writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return jsonToString;
     }
 }

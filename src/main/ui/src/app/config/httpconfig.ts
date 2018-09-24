@@ -20,14 +20,15 @@ export class HttpConfig {
     };
   }
 
-  public get(url: string) : Observable<any> {
+  public get<T>(url: string) : Observable<any> {
     return this.httpClient.get(this.baseUrl + url, this.options)
       .pipe(
+        retry(3),
         catchError(this.handleError)
       );
   }
 
-  public post(url: string, body) {
+  public post<T>(url: string, body) : Observable<any>{
     return this.httpClient.post(this.baseUrl + url,body, this.options)
       .pipe(
         retry(3),

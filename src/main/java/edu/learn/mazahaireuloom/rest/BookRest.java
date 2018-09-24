@@ -11,7 +11,6 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true", exposedHeaders = "true")
 @RequestMapping( path = "/api/books")
 @RestController
 public class BookRest {

@@ -8,13 +8,18 @@ declare var $ : any;
   styleUrls: ['./add-book.component.css']
 })
 export class AddBookComponent implements OnInit {
+  private value: string;
   constructor(private http: HttpConfig) { }
 
   ngOnInit() {
   }
 
   bindKeyboard(fieldName) {
-    $('#' + fieldName.id).setUrduInput();
+    $('#' + fieldName.id).setUrduInput({urduNumerals: true});
+  }
+
+  onEnter(value: string) {
+    this.value = value;
   }
 
   onSave() {

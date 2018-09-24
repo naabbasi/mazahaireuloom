@@ -1,7 +1,7 @@
 <div class="container" style="margin-top: 5%;">
   <form (submit)="onSave()" name="addNewBook" >
     <div class="form-group">
-      <input type="text" class="form-control" #bookName id="bookName" name="bookName" (focus)="bindKeyboard(bookName)" required placeholder="کتاب کا نام">
+      <input type="text" class="form-control" #bookName id="bookName" name="bookName" (focus)="bindKeyboard(bookName)" (keyup.enter)="onEnter(bookName.value)" required placeholder="کتاب کا نام">
       <small class="form-text text-muted">کتاب کا نام مثال کے طور پر مشکوۃ شریف</small>
     </div>
     <div class="form-group">
