@@ -8,9 +8,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
@@ -20,24 +23,25 @@ import java.util.UUID;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Document(collection = "books")
+@CompoundIndexes(
+    @CompoundIndex(unique = true, name = "name_author_publisher", def ="{'bookName': 1, 'author.authorName': 1, 'publisher.publisherName': 1}")
+)
 public class Book {
     @Id
     private String bookId = UUID.randomUUID().toString();
 
     @NotNull
-    @TextIndexed(weight = 2)
+    @TextIndexed(weight = 5)
     @Indexed(unique = true)
     private String bookName;
 
     @NotNull
-    @TextIndexed(weight = 2)
-    @Indexed(unique = true)
-    private String bookAuthor;
+    @Field( value = "author")
+    private BookAuthor bookAuthor;
 
     @NotNull
-    @TextIndexed(weight = 2)
-    @Indexed(unique = true)
-    private String bookPublisher;
+    @Field( value = "publisher")
+    private BookPublisher bookPublisher;
 
     @Override
     public String toString() {

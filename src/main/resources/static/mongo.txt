@@ -1,0 +1,6 @@
+show dbs
+use mazahireuloom
+show collections
+db.books.getIndexes();
+db.books.find() -- find all records in a collection
+db.books.find({bookName: 'Core Java'}) | db.books.find({"bookName":"Core Java"}) -- find by parent collection
