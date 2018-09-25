@@ -8,8 +8,13 @@
 If --aot=true is not provided then lazy routing wont work<br>
 ng serve --aot=true
 
-### Handy tips: 
-Add HttpClientModule in imports section to works with http
+### Handy tips:
+1. Add HttpClientModule in imports section to works with http
+2. ngNativeValidate helps to prevent form submission if required field is not filled, usage e.g.  
+<code>
+    &lt;form (submit)="onSave()" name="addNewBook" ngNativeValidate&gt;
+</code>
+
 
 
 

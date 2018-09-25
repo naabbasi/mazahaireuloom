@@ -21,7 +21,8 @@ export class HttpConfig {
   }
 
   public get<T>(url: string) : Observable<any> {
-    return this.httpClient.get(this.baseUrl + url, this.options)
+    let completeUrl = `${this.baseUrl}${url}`;
+    return this.httpClient.get(completeUrl, this.options)
       .pipe(
         retry(3),
         catchError(this.handleError)
@@ -29,7 +30,8 @@ export class HttpConfig {
   }
 
   public post<T>(url: string, body) : Observable<any>{
-    return this.httpClient.post(this.baseUrl + url,body, this.options)
+    let completeUrl = `${this.baseUrl}${url}`;
+    return this.httpClient.post(completeUrl,body, this.options)
       .pipe(
         retry(3),
         catchError(this.handleError)

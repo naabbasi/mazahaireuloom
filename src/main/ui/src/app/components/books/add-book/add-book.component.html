@@ -1,20 +1,31 @@
-<div class="container" style="margin-top: 5%;">
-  <form (submit)="onSave()" name="addNewBook" >
-    <div class="form-group">
-      <input type="text" class="form-control" #bookName id="bookName" name="bookName" (focus)="bindKeyboard(bookName)" (keyup.enter)="onEnter(bookName.value)" required placeholder="کتاب کا نام">
-      <small class="form-text text-muted">کتاب کا نام مثال کے طور پر مشکوۃ شریف</small>
-    </div>
-    <div class="form-group">
-      <input type="text" class="form-control" #bookAuthor id="bookAuthor" name="bookAuthor" (focus)="bindKeyboard(bookAuthor)" required placeholder="کتاب کا مصنف">
-      <small class="form-text text-muted">کتاب کا مصنف مثال کے طور پر مفتی تقی عثمانی</small>
-    </div>
-    <div class="form-group">
-      <input type="text" class="form-control" #bookPublisher id="bookPublisher" name="bookPublisher" (focus)="bindKeyboard(bookPublisher)" required placeholder="ادرہ اعشاعت">
-      <small class="form-text text-muted">کتاب کا ادرہ اعشاعت کے طور پر بیروت</small>
-    </div>
-    <div class="form-group" style="text-align: right;">
-      <button type="submit" class="btn btn-primary">محفوظ کریں</button>
-      <small id="status" class="form-text text-muted" style="color: red !important;"></small>
-    </div>
+<div style="margin-top: 5%; margin-right: 30%;" dir="rtl">
+  <form (submit)="onSave()" name="addNewBook" ngNativeValidate>
+    <mat-form-field class="text-box-width-fifty">
+      <input matInput #bookName id="bookName" name="bookName"
+             (focus)="bindKeyboard(bookName)" (keyup.enter)="onEnter(bookName.value)"
+             required placeholder="کتاب کا نام"
+             oninvalid="this.setCustomValidity('کتاب کا نام')"
+             oninput="setCustomValidity('')">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="text-box-width-fifty">
+      <input matInput #bookAuthor id="bookAuthor" name="bookAuthor"
+             (focus)="bindKeyboard(bookAuthor)"
+             required placeholder="کتاب کے مصنف"
+             oninvalid="this.setCustomValidity('کتاب کا مصنف')"
+             oninput="setCustomValidity('')">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="text-box-width-fifty">
+      <input matInput #bookPublisher id="bookPublisher" name="bookPublisher"
+             (focus)="bindKeyboard(bookPublisher)"
+             required placeholder="ادرہ اعشاعت"
+             oninvalid="this.setCustomValidity('ادرہ اعشاعت')"
+             oninput="setCustomValidity('')">
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary">محفوظ کریں</button>
+    <br>
+    <small id="status" style="font-size: 12px; color: red !important;"></small>
   </form>
 </div>

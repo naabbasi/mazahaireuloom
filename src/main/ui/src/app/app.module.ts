@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BooksModule } from './components/books/books.module';
 import {HttpClientModule} from "@angular/common/http";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MyMaterialModule} from "./components/my-material/my-material.module";
 
 @NgModule({
   declarations: [
@@ -12,9 +14,11 @@ import {HttpClientModule} from "@angular/common/http";
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    BooksModule
+    BooksModule,
+    MyMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

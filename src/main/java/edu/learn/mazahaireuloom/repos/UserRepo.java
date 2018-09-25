@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface UserRepo extends GenericRepo<User, String> {
 
+    User findByUsername(String username);
+
     default List<User> searchUser(MongoTemplate mongoTemplate, String username) {
         Criteria regex = Criteria.where("username").regex(username, "i");
         org.springframework.data.mongodb.core.query.Query query = new org.springframework.data.mongodb.core.query.Query();
