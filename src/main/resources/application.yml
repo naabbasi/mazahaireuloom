@@ -9,3 +9,7 @@ spring:
       port: 27017
       database: mazahireuloom
       host: localhost
+
+logging:
+  level:
+    org.springframework.data.mongodb.core.ReactiveMongoTemplate: DEBUG

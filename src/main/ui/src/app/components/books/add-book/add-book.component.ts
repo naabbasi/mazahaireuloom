@@ -25,8 +25,12 @@ export class AddBookComponent implements OnInit {
   onSave() {
     let addBook = {
       "bookName": $('#bookName').val(),
-      "bookAuthor": $('#bookAuthor').val(),
-      "bookPublisher": $('#bookPublisher').val()
+      "bookAuthor": {
+        "name" : $('#bookAuthor').val()
+      },
+      "bookPublisher": {
+        "name": $('#bookPublisher').val()
+      }
     };
 
     console.log($('#bookName').val())

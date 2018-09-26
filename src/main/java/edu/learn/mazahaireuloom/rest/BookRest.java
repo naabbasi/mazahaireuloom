@@ -5,10 +5,13 @@ import edu.learn.mazahaireuloom.repos.BookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.net.URI;
 import java.util.List;
 
 @RequestMapping( path = "/api/books")
@@ -27,14 +30,15 @@ public class BookRest {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Boolean save(@RequestBody Book book) {
+    public ResponseEntity<Object> save(@RequestBody Book book, UriComponentsBuilder builder) {
         try{
-            this.bookRepo.save(book).subscribe(System.out::println);
+            this.bookRepo.save(book).subscribe();
         }catch (RuntimeException e){
-            return false;
+            return ResponseEntity.badRequest().build();
         }
 
-        return true;
+        URI location = builder.path("{bookId}").buildAndExpand(book.getBookId()).toUri();
+        return ResponseEntity.created(location).build();
     }
 
     @DeleteMapping(path = "/{id}")
@@ -43,17 +47,17 @@ public class BookRest {
     }
 
     @GetMapping(path = "/search/bookName/{bookName}")
-    public List<Book> searchBookName(@PathVariable String username) {
-        return this.bookRepo.searchBookName(this.mongoTemplate, username);
+    public List<Book> searchBookName(@PathVariable String bookName) {
+        return this.bookRepo.searchBookName(this.mongoTemplate, bookName);
     }
 
     @GetMapping(path = "/search/bookAuthor/{bookAuthor}")
-    public List<Book> searchBookAuthor(@PathVariable String username) {
-        return this.bookRepo.searchBookAuthor(this.mongoTemplate, username);
+    public List<Book> searchBookAuthor(@PathVariable String bookAuthor) {
+        return this.bookRepo.searchBookAuthor(this.mongoTemplate, bookAuthor);
     }
 
     @GetMapping(path = "/search/bookPublisher/{bookPublisher}")
-    public List<Book> searchBookPublisher(@PathVariable String username) {
-        return this.bookRepo.searchBookPublisher(this.mongoTemplate, username);
+    public List<Book> searchBookPublisher(@PathVariable String bookPublisher) {
+        return this.bookRepo.searchBookPublisher(this.mongoTemplate, bookPublisher);
     }
 }
