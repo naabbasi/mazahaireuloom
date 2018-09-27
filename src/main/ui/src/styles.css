@@ -7,8 +7,16 @@ body {
   font-size: 25px;
 }
 
+.text-box-width-seventy-five {
+  width: 75%;
+}
+
 .text-box-width-fifty {
   width: 50%;
+}
+
+.text-box-width-twenty-five {
+  width: 25%;
 }
 
 table {

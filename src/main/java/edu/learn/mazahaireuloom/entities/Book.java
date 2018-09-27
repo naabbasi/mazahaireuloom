@@ -16,6 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -24,7 +25,7 @@ import java.util.UUID;
 @EqualsAndHashCode
 @Document(collection = "books")
 @CompoundIndexes(
-    @CompoundIndex(unique = true, name = "name_author_publisher", def ="{'bookName': 1, 'author.authorName': 1, 'publisher.publisherName': 1}")
+    @CompoundIndex(unique = true, name = "name_author_publisher", def ="{'bookName': 1, 'date': 1, 'author.authorName': 1, 'publisher.publisherName': 1}")
 )
 public class Book {
     @Id
@@ -36,12 +37,19 @@ public class Book {
     private String bookName;
 
     @NotNull
+    private String date;
+
+    @NotNull
     @Field( value = "author")
     private BookAuthor bookAuthor;
 
     @NotNull
     @Field( value = "publisher")
     private BookPublisher bookPublisher;
+
+    @NotNull
+    @Field( value = "tags")
+    private List<Tag> tags;
 
     @Override
     public String toString() {

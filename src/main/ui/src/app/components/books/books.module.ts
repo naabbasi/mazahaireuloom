@@ -7,7 +7,14 @@ import { AddBookComponent } from './add-book/add-book.component';
 import {FormsModule} from "@angular/forms";
 import {MyMaterialModule} from "../my-material/my-material.module";
 import {MatInputModule} from "@angular/material/input";
-import {MatFormFieldModule, MatTableModule} from "@angular/material";
+import {
+  MatChipsModule,
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatNativeDateModule,
+  MatTableModule
+} from "@angular/material";
+import {MatMomentDateModule} from "@angular/material-moment-adapter";
 
 @NgModule({
   imports: [
@@ -16,6 +23,9 @@ import {MatFormFieldModule, MatTableModule} from "@angular/material";
     MyMaterialModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatChipsModule,
     MatTableModule,
     BooksRoutingModule
   ],

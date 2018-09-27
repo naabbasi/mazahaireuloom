@@ -4,6 +4,7 @@ import edu.learn.mazahaireuloom.entities.Book;
 import edu.learn.mazahaireuloom.repos.BookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,11 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
+import java.util.Locale;
 
 @RequestMapping( path = "/api/books")
 @RestController
@@ -30,15 +35,23 @@ public class BookRest {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> save(@RequestBody Book book, UriComponentsBuilder builder) {
+    public ResponseEntity<Book> save(@RequestBody Book book, UriComponentsBuilder builder) {
         try{
             this.bookRepo.save(book).subscribe();
         }catch (RuntimeException e){
             return ResponseEntity.badRequest().build();
         }
 
-        URI location = builder.path("{bookId}").buildAndExpand(book.getBookId()).toUri();
-        return ResponseEntity.created(location).build();
+        Locale arabicLocale = new Locale.Builder().setLanguageTag("ar-SA-u-nu-arab").build();
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(arabicLocale);
+
+        String formatted = date.format(formatter);
+        System.out.println(formatted);
+        System.out.println(formatter.parse(formatted));
+
+        //return new ResponseEntity<>(book, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(book);
     }
 
     @DeleteMapping(path = "/{id}")
