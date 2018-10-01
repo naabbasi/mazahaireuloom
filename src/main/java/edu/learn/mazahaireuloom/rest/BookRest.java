@@ -2,7 +2,6 @@ package edu.learn.mazahaireuloom.rest;
 
 import edu.learn.mazahaireuloom.entities.Book;
 import edu.learn.mazahaireuloom.repos.BookRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,7 +11,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.net.URI;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -22,12 +20,14 @@ import java.util.Locale;
 @RequestMapping( path = "/api/books")
 @RestController
 public class BookRest {
-    @Autowired
-    private BookRepo bookRepo;
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
+    private final MongoTemplate mongoTemplate;
+    private final BookRepo bookRepo;
 
+    public BookRest(BookRepo bookRepo, MongoTemplate mongoTemplate) {
+        this.bookRepo = bookRepo;
+        this.mongoTemplate = mongoTemplate;
+    }
 
     @GetMapping
     public Flux<Book> all() {
@@ -57,6 +57,11 @@ public class BookRest {
     @DeleteMapping(path = "/{id}")
     public Mono<Void> deleteBook(@PathVariable("id") String id) {
         return this.bookRepo.deleteById(id);
+    }
+
+    @GetMapping(path = "/search/{book}")
+    public List<Book> searchBook(@PathVariable String book) {
+        return this.bookRepo.searchBook(this.mongoTemplate, book);
     }
 
     @GetMapping(path = "/search/bookName/{bookName}")

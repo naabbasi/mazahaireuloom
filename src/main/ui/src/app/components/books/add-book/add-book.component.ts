@@ -5,6 +5,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from "@angular/material";
 import {Tags} from '../entity/Tags';
+import {GenericComponent} from "../../GenericComponent";
 declare var $ : any;
 
 @Component({
@@ -23,8 +24,7 @@ declare var $ : any;
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
   ]
 })
-export class AddBookComponent implements OnInit {
-  value: string;
+export class AddBookComponent extends GenericComponent implements OnInit {
   minDate = new Date(2018, 0, 1);
   visible = true;
   selectable = true;
@@ -39,17 +39,9 @@ export class AddBookComponent implements OnInit {
     "color": "#F00"
   };
 
-  constructor(private http: HttpConfig) { }
+  constructor(private http: HttpConfig) { super() }
 
   ngOnInit() {
-  }
-
-  bindKeyboard(fieldName) {
-    $('#' + fieldName.id).setUrduInput({urduNumerals: true});
-  }
-
-  onEnter(value: string) {
-    this.value = value;
   }
 
   add(event: MatChipInputEvent): void {
@@ -94,7 +86,7 @@ export class AddBookComponent implements OnInit {
         "font-weight": "normal",
         "color": "#0F0"
       };
-      $('#status').html("Book saved successfully ...");
+      $('#status').html("کتاب کا اندراج ہوچکا ہے");
     }, error => {
       $('#status').html(error);
     });

@@ -30,6 +30,22 @@ public interface BookRepo extends GenericRepo<Book, String> {
         });
     }
 
+    default List<Book> searchBook(MongoTemplate mongoTemplate, String book) {
+
+        Criteria regex = new Criteria();
+        regex.orOperator(
+            Criteria.where("bookName").regex(book, "i"),
+            Criteria.where("author.name").regex(book, "i"),
+            Criteria.where("publisher.name").regex(book, "i"),
+            Criteria.where("tags.name").regex(book, "i")
+        );
+
+        org.springframework.data.mongodb.core.query.Query query = new org.springframework.data.mongodb.core.query.Query();
+        query.limit(20);
+        query.addCriteria(regex);
+        return mongoTemplate.find(query, Book.class);
+    }
+
     default List<Book> searchBookName(MongoTemplate mongoTemplate, String bookName) {
         Criteria regex = Criteria.where("bookName").regex(bookName, "i");
         org.springframework.data.mongodb.core.query.Query query = new org.springframework.data.mongodb.core.query.Query();

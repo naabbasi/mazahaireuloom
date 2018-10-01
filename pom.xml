@@ -21,6 +21,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<service.url>http://localhost:4200</service.url>
 	</properties>
 
 	<dependencies>
@@ -92,13 +93,38 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <mainClass>edu.learn.mazahaireuloom.MazahaireuloomApplication</mainClass>
                 </configuration>
-			</plugin>
+            </plugin>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <basedir>${project.basedir}/src/main/ui</basedir>
+                    <includes>
+                        <include>httpconfig.ts</include>
+                    </includes>
+                    <replacements>
+                        <replacement>
+                            <token>readonly baseUrl : string = "(.*)"</token>
+                            <value>readonly baseUrl : string = "${service.url}/api";</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 </project>

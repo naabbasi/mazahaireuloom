@@ -7,11 +7,10 @@ import {Observable, throwError} from "rxjs";
   providedIn: 'root'
 })
 export class HttpConfig {
-  private readonly baseUrl : string;
+  readonly baseUrl : string = "http://localhost:4200/api";
   private readonly options : {};
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = "http://localhost:90/api";
     this.options = {
       withCredentials: true,
       headers: new HttpHeaders({

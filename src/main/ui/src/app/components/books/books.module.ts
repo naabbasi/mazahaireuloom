@@ -11,7 +11,7 @@ import {
   MatChipsModule,
   MatDatepickerModule,
   MatFormFieldModule,
-  MatNativeDateModule,
+  MatPaginatorModule,
   MatTableModule
 } from "@angular/material";
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
@@ -27,6 +27,7 @@ import {MatMomentDateModule} from "@angular/material-moment-adapter";
     MatMomentDateModule,
     MatChipsModule,
     MatTableModule,
+    MatPaginatorModule,
     BooksRoutingModule
   ],
   declarations: [BooksComponent, AddBookComponent]
