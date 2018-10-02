@@ -7,7 +7,7 @@ import {Observable, throwError} from "rxjs";
   providedIn: 'root'
 })
 export class HttpConfig {
-  readonly baseUrl : string = "http://localhost:4200/api";
+  readonly baseUrl : string = "http://localhost:90/api";
   private readonly options : {};
 
   constructor(private httpClient: HttpClient) {

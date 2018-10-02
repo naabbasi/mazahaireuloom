@@ -3,7 +3,7 @@
     <form #findBook="ngForm" ngNativeValidate style="width: 100%;">
       <mat-form-field class="text-box-width-seventy-five">
         <input matInput #findBook id="findBook" name="findBook" (keyup)='keyUp.next($event.target.value)' (keyup.enter)="onSearch(findBook.value)"
-               (focus)="bindKeyboard(findBook)" (keyup.enter)="onEnter(findBook.value)"
+               (focus)="bindKeyboard(findBook)" (blur)="hideKeyboard()" (keyup.enter)="onEnter(findBook.value)"
                required placeholder="کتاب کا نام یا مصنف یا ادرہ اعشاعت کا اندراج کریں"
                oninvalid="this.setCustomValidity('کتاب کا نام یا مصنف یا ادرہ اعشاعت کا اندراج کریں')"
                oninput="setCustomValidity('')">
@@ -21,7 +21,9 @@
     <!-- Book Name Column -->
     <ng-container matColumnDef="bookName">
       <th mat-header-cell *matHeaderCellDef style="width: 25%;"> کتاب کا نام </th>
-      <td mat-cell *matCellDef="let element"> {{element.bookName}} </td>
+      <td mat-cell *matCellDef="let element">
+        <a href="javascript: void(0)" routerLink="/books/edit/{{element.bookId}}">{{element.bookName}} </a>
+      </td>
     </ng-container>
 
     <!-- Book Author Column -->
@@ -54,3 +56,8 @@
 
   <mat-paginator dir="ltr" [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
 </div>
+<ng-template #template>
+  <div style="width: 100%">
+    <img src="/assets/images/kb.png" style="width: inherit;">
+  </div>
+</ng-template>

@@ -1,6 +1,8 @@
-export declare class Book {
+export interface Book {
   bookId : string;
   bookName : string;
-  bookAuthor : string;
-  bookPublish : string;
+  bookAuthor: { name: "" };
+  bookPublisher: { name: "" };
+  tags: any;
+  date : string;
 }

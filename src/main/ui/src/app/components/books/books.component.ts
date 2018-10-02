@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpConfig} from "../../config/httpconfig";
 import {Subject, Observable, of, merge} from 'rxjs';
 import {Book} from "./entity/Book";
-import {MatPaginator, MatTableDataSource} from "@angular/material";
+import {MatPaginator, MatSnackBar, MatTableDataSource} from "@angular/material";
 import {GenericComponent} from "../GenericComponent";
 import {
   catchError,
@@ -31,8 +31,8 @@ export class BooksComponent extends GenericComponent implements OnInit{
 
   resultsLength = 0;
 
-  constructor(private http : HttpConfig) {
-    super();
+  constructor(private http : HttpConfig, snackBar : MatSnackBar) {
+    super(snackBar);
   }
 
   ngOnInit() {

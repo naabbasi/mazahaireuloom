@@ -21,7 +21,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<service.url>http://localhost:4200</service.url>
+		<service.url>http://localhost:90</service.url>
 	</properties>
 
 	<dependencies>
@@ -92,6 +92,7 @@
 	</dependencies>
 
 	<build>
+        <finalName>mazahireuloom</finalName>
 		<plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

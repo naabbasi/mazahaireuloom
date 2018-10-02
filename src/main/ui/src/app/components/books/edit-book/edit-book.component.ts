@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpConfig} from "../../../config/httpconfig";
-import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatChipInputEvent, MatSnackBar} from "@angular/material";
-import {Tags} from '../entity/Tags';
 import {GenericComponent} from "../../GenericComponent";
+import {HttpConfig} from "../../../config/httpconfig";
+import {ActivatedRoute} from "@angular/router";
+import {Book} from "../entity/Book";
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatChipInputEvent, MatSnackBar} from "@angular/material";
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from "@angular/material-moment-adapter";
+import {Tags} from "../entity/Tags";
+
 declare var $ : any;
 
 @Component({
-  selector: 'app-add-book',
-  templateUrl: './add-book.component.html',
-  styleUrls: ['./add-book.component.css'],
+  selector: 'app-edit-book',
+  templateUrl: './edit-book.component.html',
+  styleUrls: ['./edit-book.component.css'],
   providers: [
     // The locale would typically be provided on the root module of your application. We do it at
     // the component level here, due to limitations of our example generation script.
@@ -24,14 +25,20 @@ declare var $ : any;
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
   ]
 })
-export class AddBookComponent extends GenericComponent implements OnInit {
-  minDate = new Date(2018, 0, 1);
-  visible = true;
-  tags: Tags[] = [];
-
-  constructor(private http: HttpConfig, snackBar: MatSnackBar) { super(snackBar) }
+export class EditBookComponent extends GenericComponent implements OnInit {
+  book : Book;
+  constructor(private http : HttpConfig, private route : ActivatedRoute, snackBar: MatSnackBar) {
+    super(snackBar);
+  }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      let {bookId} = params;
+      this.http.get<Book>(`/books/${bookId}`).subscribe( (book : Book) => {
+        this.book = book;
+        console.log(this.book);
+      });
+    })
   }
 
   add(event: MatChipInputEvent): void {
@@ -40,7 +47,7 @@ export class AddBookComponent extends GenericComponent implements OnInit {
 
     // Add our tags
     if ((value || '').trim()) {
-      this.tags.push({name: value.trim()});
+      this.book.tags.push({name: value.trim()});
     }
 
     // Reset the input value
@@ -50,27 +57,20 @@ export class AddBookComponent extends GenericComponent implements OnInit {
   }
 
   remove(tag: Tags): void {
-    const index = this.tags.indexOf(tag);
+    const index = this.book.tags.indexOf(tag);
 
     if (index >= 0) {
-      this.tags.splice(index, 1);
+      this.book.tags.splice(index, 1);
     }
   }
 
-  onSave() {
-    let addBook = {
-      "bookName": $('#bookName').val(),
-      "date": $('#date').val(),
-      "bookAuthor": {
-        "name" : $('#bookAuthor').val()
-      },
-      "bookPublisher": {
-        "name": $('#bookPublisher').val()
-      },
-      "tags": this.tags
-    };
+  OnUpdate() {
+    console.log(this.book);
+    this.book.bookAuthor['name'] = $('#bookAuthor').val();
+    this.book.bookPublisher['name'] = $('#bookPublisher').val();
+    this.book.date = $('#date').val();
 
-    this.http.post("/books", addBook).subscribe(res => {
+    this.http.post("/books", this.book).subscribe(res => {
       this.statusStyle = {
         "font-size": "12px",
         "font-weight": "normal",

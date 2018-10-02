@@ -1,24 +1,26 @@
 <div style="margin-top: 5%; margin-right: 23%;" dir="rtl">
-  <form (submit)="onSave()"  #addNewBook="ngForm" ngNativeValidate>
+  <form (submit)="OnUpdate()" #editBook="ngForm" ngNativeValidate>
     <mat-form-field class="text-box-width-seventy-five">
-      <input matInput #bookName id="bookName" name="bookName"
-             (focus)="bindKeyboard(bookName)" (blur)="hideKeyboard()" (keyup.enter)="onEnter(bookName.value)"
+      <input matInput #editBookName id="bookName" name="bookName" [value]="book?.bookName" readonly
+             (focus)="bindKeyboard(editBookName)" (blur)="hideKeyboard()" (keyup.enter)="onEnter(editBookName.value)"
              required placeholder="کتاب کا نام"
              oninvalid="this.setCustomValidity('کتاب کا نام کا اندراج کریں')"
              oninput="setCustomValidity('')">
     </mat-form-field>
     <br>
     <mat-form-field class="text-box-width-seventy-five">
-      <input matInput #bookAuthor id="bookAuthor" name="bookAuthor"
-             (focus)="bindKeyboard(bookAuthor)" (blur)="hideKeyboard()"
+      <input matInput #bookAuthor id="bookAuthor" name="bookAuthor" [(ngModel)]="book?.bookAuthor.name"
+             (focus)="bindKeyboard(bookAuthor)"
+             (blur)="hideKeyboard()"
              required placeholder="کتاب کے مصنف"
              oninvalid="this.setCustomValidity('کتاب کے مصنف کا اندراج کریں')"
              oninput="setCustomValidity('')">
     </mat-form-field>
     <br>
     <mat-form-field class="text-box-width-seventy-five">
-      <input matInput #bookPublisher id="bookPublisher" name="bookPublisher"
-             (focus)="bindKeyboard(bookPublisher)" (blur)="hideKeyboard()"
+      <input matInput #bookPublisher id="bookPublisher" name="bookPublisher" [value]="book?.bookPublisher.name"
+             (focus)="bindKeyboard(bookPublisher)"
+             (blur)="hideKeyboard()"
              required placeholder="ادرہ اعشاعت"
              oninvalid="this.setCustomValidity('ادرہ اعشاعت کا اندراج کریں')"
              oninput="setCustomValidity('')">
@@ -26,18 +28,18 @@
     <br>
     <mat-form-field class="text-box-width-seventy-five">
       <mat-chip-list #chipList>
-        <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+        <mat-chip *ngFor="let tag of book?.tags" [selectable]="selectable"
                   [removable]="removable" (removed)="remove(tag)">
           {{tag.name}}
           <mat-icon matChipRemove *ngIf="removable">x</mat-icon>
         </mat-chip>
         <input #tagsText placeholder="قسم"
-             (focus)="bindKeyboard(tagsText)"
-             (blur)="hideKeyboard()"
-             [matChipInputFor]="chipList"
-             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             [matChipInputAddOnBlur]="addOnBlur"
-             (matChipInputTokenEnd)="add($event)">
+               (focus)="bindKeyboard(tagsText)"
+               (blur)="hideKeyboard()"
+               [matChipInputFor]="chipList"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="addOnBlur"
+               (matChipInputTokenEnd)="add($event)">
       </mat-chip-list>
     </mat-form-field>
     <br>
@@ -49,7 +51,7 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <br>
-    <button type="submit" mat-raised-button color="primary" [disabled]="!addNewBook.form.valid">محفوظ کریں</button>
+    <button type="submit" mat-raised-button color="primary" [disabled]="!editBook.form.valid">محفوظ کریں</button>
     <br>
     <small id="status" [ngStyle]="statusStyle"></small>
   </form>

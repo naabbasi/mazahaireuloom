@@ -2,6 +2,7 @@ package edu.learn.mazahaireuloom.rest;
 
 import edu.learn.mazahaireuloom.entities.Book;
 import edu.learn.mazahaireuloom.repos.BookRepo;
+import org.springframework.data.domain.Example;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,6 +33,13 @@ public class BookRest {
     @GetMapping
     public Flux<Book> all() {
         return this.bookRepo.findAll();
+    }
+
+    @GetMapping("{bookId}")
+    public Mono<Book> findBook(@PathVariable("bookId") String bookId) {
+        Book book = new Book();
+        book.setBookId(bookId);
+        return this.bookRepo.findOne(Example.of(book));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
