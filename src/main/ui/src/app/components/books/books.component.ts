@@ -30,6 +30,7 @@ export class BooksComponent extends GenericComponent implements OnInit{
   displayedColumns = ['bookName', 'bookAuthor', 'bookPublisher', 'tags'];
 
   resultsLength = 0;
+  isLoadingResults: boolean = false;
 
   constructor(private http : HttpConfig, snackBar : MatSnackBar) {
     super(snackBar);
@@ -37,23 +38,24 @@ export class BooksComponent extends GenericComponent implements OnInit{
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
-    this.loadBooks();
     //this.paginator._intl.itemsPerPageLabel = "";
     this.keyUp.pipe(
       map(value => value),
-      debounceTime(500),
+      debounceTime(200),
       distinctUntilChanged(),
       flatMap(search => of(search).pipe(delay(500)))
     ).subscribe(value => {
-      if(value === ""){
-        this.loadBooks();
-      }else {
-        this.http.get(`/books/search/${value}`).subscribe( (data) => {
-          this.books = of(data);
-          this.dataSource.data = data;
-          this.resultsLength = data.length;
-        });
-      }
+        if(value === ""){
+          this.isLoadingResults = false;
+        } else {
+          this.isLoadingResults = true;
+          this.http.get(`/books/search/${value}`).subscribe( (data) => {
+            this.books = of(data);
+            this.dataSource.data = data;
+            this.resultsLength = data.length;
+            this.isLoadingResults = false;
+          });
+        }
     });
   }
 

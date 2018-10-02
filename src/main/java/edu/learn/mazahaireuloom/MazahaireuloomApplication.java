@@ -1,6 +1,7 @@
 package edu.learn.mazahaireuloom;
 
 import edu.learn.mazahaireuloom.entities.User;
+import edu.learn.mazahaireuloom.repos.BookRepo;
 import edu.learn.mazahaireuloom.repos.UserRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -25,12 +26,41 @@ public class MazahaireuloomApplication {
     }
 
     @Bean
-    public CommandLineRunner init(UserRepo userRepo){
+    public CommandLineRunner init(UserRepo userRepo, BookRepo bookRepo){
         return args -> {
             try{
                 userRepo.deleteAll().block();
                 userRepo.save(new User("اصغر", "786")).block();
                 userRepo.save(new User("نعمان", "786")).block();
+
+                /*Locale arabicLocale = new Locale.Builder().setLanguageTag("ar-SA-u-nu-arab").build();
+                LocalDate date = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(arabicLocale);
+
+                String formatted = date.format(formatter);
+                System.out.println(formatted);
+                System.out.println(formatter.parse(formatted));
+
+                for(int i = 0 ; i < 900000 ; i++){
+                    Book book = new Book();
+                    book.setBookName( i + "اصغر");
+                    book.setBookAuthor(new BookAuthor("نعمان"));
+                    book.setBookPublisher(new BookPublisher("نعمان"));
+                    List<Tag> tags = List.of(new Tag("اصغرنعماننعمان"));
+                    book.setTags(tags);
+                    book.setDate(formatted);
+                    bookRepo.save(book).block();
+
+                    book = new Book();
+                    book.setBookName(i + "نعمان");
+                    book.setBookAuthor(new BookAuthor("اصغر"));
+                    book.setBookPublisher(new BookPublisher("اصغر"));
+                    tags = List.of(new Tag("ا صغ رنع مانن عمان"));
+                    book.setTags(tags);
+                    book.setDate(formatted);
+                    bookRepo.save(book).block();
+                }*/
+
             }catch (DataAccessException e){
                 log.error("Exception:  " , e);
             }

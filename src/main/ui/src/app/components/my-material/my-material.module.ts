@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatButtonModule, MatCardModule, MatDividerModule, MatSnackBarModule} from "@angular/material";
+import {MatButtonModule, MatCardModule, MatDividerModule, MatProgressBarModule, MatSnackBarModule} from "@angular/material";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
@@ -14,7 +14,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatIconModule,
     MatCardModule,
     MatDividerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressBarModule
   ],
   exports: [
     MatButtonModule,
@@ -23,7 +24,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatIconModule,
     MatCardModule,
     MatDividerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressBarModule
   ],
   declarations: []
 })
