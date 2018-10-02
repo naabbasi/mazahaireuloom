@@ -114,14 +114,14 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <basedir>${project.basedir}/src/main/ui</basedir>
+                    <basedir>${project.basedir}/src/main/ui/</basedir>
                     <includes>
-                        <include>httpconfig.ts</include>
+                        <include>src/app/config/httpconfig.ts</include>
                     </includes>
                     <replacements>
                         <replacement>
                             <token>readonly baseUrl : string = "(.*)"</token>
-                            <value>readonly baseUrl : string = "${service.url}/api";</value>
+                            <value>readonly baseUrl : string = "${service.url}/api"</value>
                         </replacement>
                     </replacements>
                 </configuration>
