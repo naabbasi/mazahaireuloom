@@ -1,5 +1,5 @@
 <div style="margin-top: 5%; margin-right: 23%;" dir="rtl">
-  <form (submit)="OnUpdate()" #editBook="ngForm" ngNativeValidate>
+  <form (submit)="onUpdate()" #editBook="ngForm" ngNativeValidate>
     <mat-form-field class="text-box-width-seventy-five">
       <input matInput #editBookName id="bookName" name="bookName" [value]="book?.bookName" readonly
              (focus)="bindKeyboard(editBookName)" (blur)="hideKeyboard()" (keyup.enter)="onEnter(editBookName.value)"
@@ -51,7 +51,8 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <br>
-    <button type="submit" mat-raised-button color="primary" [disabled]="!editBook.form.valid">محفوظ کریں</button>
+    <button type="submit" mat-raised-button color="primary" [disabled]="!editBook.form.valid">محفوظ کریں</button>&nbsp;&nbsp;
+    <button type="button" mat-raised-button  (click)="onDelete()">حذف کردیں</button>
     <br>
     <small id="status" [ngStyle]="statusStyle"></small>
   </form>
@@ -59,5 +60,17 @@
 <ng-template #template>
   <div style="width: 100%">
     <img src="/assets/images/kb.png" style="width: inherit;">
+  </div>
+</ng-template>
+
+<ng-template #dialogTemplate>
+  <div dir="rtl">
+    <h2 mat-dialog-title>مظاہر العلوم</h2>
+    <mat-dialog-content>کیا آپ کو یقین ہے؟</mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button mat-dialog-close>نہیں</button>
+      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+      <button mat-button [mat-dialog-close]="true">جی ہاں</button>
+    </mat-dialog-actions>
   </div>
 </ng-template>

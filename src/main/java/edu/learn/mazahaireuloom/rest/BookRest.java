@@ -63,8 +63,14 @@ public class BookRest {
     }
 
     @DeleteMapping(path = "/{id}")
-    public Mono<Void> deleteBook(@PathVariable("id") String id) {
-        return this.bookRepo.deleteById(id);
+    public ResponseEntity deleteBook(@PathVariable("id") String id) {
+        try{
+            this.bookRepo.deleteById(id).block();
+        }catch (RuntimeException e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @GetMapping(path = "/search/{book}")

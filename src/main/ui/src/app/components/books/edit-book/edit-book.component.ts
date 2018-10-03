@@ -1,11 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {GenericComponent} from "../../GenericComponent";
 import {HttpConfig} from "../../../config/httpconfig";
 import {ActivatedRoute} from "@angular/router";
 import {Book} from "../entity/Book";
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatChipInputEvent, MatSnackBar} from "@angular/material";
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+  MatChipInputEvent,
+  MatDialog,
+  MatSnackBar
+} from "@angular/material";
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from "@angular/material-moment-adapter";
 import {Tags} from "../entity/Tags";
+import {GenericDialogComponent} from "../../my-material/generic-dialog/generic-dialog.component";
 
 declare var $ : any;
 
@@ -27,7 +35,10 @@ declare var $ : any;
 })
 export class EditBookComponent extends GenericComponent implements OnInit {
   book : Book;
-  constructor(private http : HttpConfig, private route : ActivatedRoute, snackBar: MatSnackBar) {
+  @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
+
+  constructor(private http : HttpConfig, private route : ActivatedRoute,
+              snackBar: MatSnackBar, private dialog: MatDialog) {
     super(snackBar);
   }
 
@@ -64,7 +75,7 @@ export class EditBookComponent extends GenericComponent implements OnInit {
     }
   }
 
-  OnUpdate() {
+  onUpdate() {
     console.log(this.book);
     this.book.bookAuthor['name'] = $('#bookAuthor').val();
     this.book.bookPublisher['name'] = $('#bookPublisher').val();
@@ -81,5 +92,19 @@ export class EditBookComponent extends GenericComponent implements OnInit {
       $('#status').html(error);
     });
     return false;
+  }
+
+  onDelete() {
+    //const dialogRef = this.dialog.open(GenericDialogComponent);
+    const dialogRef = this.dialog.open(this.dialogTemplate);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.http.delete(`/books/${this.book.bookId}`).subscribe( response => {
+          $('#status').html("کتاب حذف ہوچکی ہے");
+        }, error => {
+          $('#status').html(error);
+        });
+      }
+    });
   }
 }

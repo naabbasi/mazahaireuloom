@@ -37,6 +37,15 @@ export class HttpConfig {
       );
   }
 
+  public delete<T>(url: string) : Observable<any> {
+    let completeUrl = `${this.baseUrl}${url}`;
+    return this.httpClient.delete(completeUrl, this.options)
+      .pipe(
+        retry(3),
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if(error.error instanceof ErrorEvent){
       console.error(`Backend return code ${error.error.message}`);

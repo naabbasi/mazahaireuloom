@@ -1,9 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatButtonModule, MatCardModule, MatDividerModule, MatProgressBarModule, MatSnackBarModule} from "@angular/material";
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatProgressBarModule,
+  MatSnackBarModule
+} from "@angular/material";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
+import { GenericDialogComponent } from './generic-dialog/generic-dialog.component';
 
 @NgModule({
   imports: [
@@ -15,7 +23,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatCardModule,
     MatDividerModule,
     MatSnackBarModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatDialogModule
   ],
   exports: [
     MatButtonModule,
@@ -25,8 +34,10 @@ import {MatIconModule} from "@angular/material/icon";
     MatCardModule,
     MatDividerModule,
     MatSnackBarModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatDialogModule
   ],
-  declarations: []
+  declarations: [GenericDialogComponent],
+  entryComponents: [GenericDialogComponent]
 })
 export class MyMaterialModule { }

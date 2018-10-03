@@ -38,7 +38,7 @@ public class AppConfig {
                         .allowedOrigins(hostnames.toArray(new String[0]))
                         .allowCredentials(true)
                         .allowedHeaders("Origin", "Cache-Control", "accept", "Content-Type", "X-Auth-Token", "X-Requested-With")
-                        .allowedMethods("GET", "POST", "OPTIONS")
+                        .allowedMethods("GET", "POST", "OPTIONS", "DELETE", "PUT")
                         .exposedHeaders("Content-Disposition");
 
 
