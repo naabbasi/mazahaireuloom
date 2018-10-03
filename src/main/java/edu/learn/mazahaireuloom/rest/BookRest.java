@@ -65,7 +65,7 @@ public class BookRest {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity deleteBook(@PathVariable("id") String id) {
         try{
-            this.bookRepo.deleteById(id).block();
+            this.bookRepo.deleteById(id).subscribe();
         }catch (RuntimeException e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

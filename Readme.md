@@ -4,6 +4,25 @@
     <li>mongod --dbpath=E:\mongodb-win32-x86_64-2008plus-ssl-4.0.2/mydb/</li>
 </ul>
 
+## Angular routing with Springboot thymeleaf
+1. Create a 404.html in templates/error folder
+<pre>
+<!-- This file is being to handle angular routing problem while refreshing the page -->
+&lt;html&gt;
+    &lt;meta http-equiv="refresh" content="0;url=/" /&gt;
+&lt;/html&gt;
+</pre>
+
+2. Create IndexController as following to register / path to serve index.html
+<pre>
+@Controller
+public class IndexController {
+    @RequestMapping(value = {"/"})
+    public String index() {
+        return "index";
+    }
+}
+</pre>
 ## Start development server (angular)
 If --aot=true is not provided then lazy routing wont work<br>
 ng serve --aot=true

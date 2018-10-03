@@ -100,6 +100,12 @@ export class EditBookComponent extends GenericComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result){
         this.http.delete(`/books/${this.book.bookId}`).subscribe( response => {
+          this.statusStyle = {
+            "font-size": "12px",
+            "font-weight": "normal",
+            "color": "#0F0"
+          };
+
           $('#status').html("کتاب حذف ہوچکی ہے");
         }, error => {
           $('#status').html(error);
