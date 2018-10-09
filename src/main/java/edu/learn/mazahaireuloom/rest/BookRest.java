@@ -3,7 +3,7 @@ package edu.learn.mazahaireuloom.rest;
 import edu.learn.mazahaireuloom.entities.Book;
 import edu.learn.mazahaireuloom.repos.BookRepo;
 import org.springframework.data.domain.Example;
-import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,17 +15,16 @@ import reactor.core.publisher.Mono;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.List;
 import java.util.Locale;
 
 @RequestMapping( path = "/api/books")
 @RestController
 public class BookRest {
 
-    private final MongoTemplate mongoTemplate;
+    private final ReactiveMongoTemplate mongoTemplate;
     private final BookRepo bookRepo;
 
-    public BookRest(BookRepo bookRepo, MongoTemplate mongoTemplate) {
+    public BookRest(BookRepo bookRepo, ReactiveMongoTemplate mongoTemplate) {
         this.bookRepo = bookRepo;
         this.mongoTemplate = mongoTemplate;
     }
@@ -74,22 +73,22 @@ public class BookRest {
     }
 
     @GetMapping(path = "/search/{book}")
-    public List<Book> searchBook(@PathVariable String book) {
+    public Flux<Book> searchBook(@PathVariable String book) {
         return this.bookRepo.searchBook(this.mongoTemplate, book);
     }
 
     @GetMapping(path = "/search/bookName/{bookName}")
-    public List<Book> searchBookName(@PathVariable String bookName) {
+    public Flux<Book> searchBookName(@PathVariable String bookName) {
         return this.bookRepo.searchBookName(this.mongoTemplate, bookName);
     }
 
     @GetMapping(path = "/search/bookAuthor/{bookAuthor}")
-    public List<Book> searchBookAuthor(@PathVariable String bookAuthor) {
+    public Flux<Book> searchBookAuthor(@PathVariable String bookAuthor) {
         return this.bookRepo.searchBookAuthor(this.mongoTemplate, bookAuthor);
     }
 
     @GetMapping(path = "/search/bookPublisher/{bookPublisher}")
-    public List<Book> searchBookPublisher(@PathVariable String bookPublisher) {
+    public Flux<Book> searchBookPublisher(@PathVariable String bookPublisher) {
         return this.bookRepo.searchBookPublisher(this.mongoTemplate, bookPublisher);
     }
 }

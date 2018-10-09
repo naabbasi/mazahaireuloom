@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +31,7 @@ public class BookTest {
     private BookRepo bookRepo;
 
     @Autowired
-    private MongoTemplate mongoTemplate;
+    private ReactiveMongoTemplate mongoTemplate;
 
     @Test
     public void pass_001() {
@@ -76,20 +78,23 @@ public class BookTest {
 
     @Test
     public void pass_007() {
-        List<Book> books = this.bookRepo.searchBookName(mongoTemplate, "re");
-        assertFalse(books.isEmpty());
+        Flux<Book> books = this.bookRepo.searchBookName(mongoTemplate, "re");
+        List<Book> bookList = books.collectList().block();
+        assertFalse(bookList.isEmpty());
     }
 
     @Test
     public void pass_008() {
-        List<Book> books = this.bookRepo.searchBookAuthor(mongoTemplate, "man");
-        assertFalse(books.isEmpty());
+        Flux<Book> books = this.bookRepo.searchBookAuthor(mongoTemplate, "man");
+        List<Book> bookList = books.collectList().block();
+        assertFalse(bookList.isEmpty());
     }
 
     @Test
     public void pass_009() {
-        List<Book> books = this.bookRepo.searchBookPublisher(mongoTemplate, "le");
-        assertFalse(books.isEmpty());
+        Flux<Book> books = this.bookRepo.searchBookPublisher(mongoTemplate, "le");
+        List<Book> bookList = books.collectList().block();
+        assertFalse(bookList.isEmpty());
     }
 
     /**
