@@ -1,11 +1,16 @@
 package edu.learn.mazahaireuloom.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @Configuration
-//@EnableWebFluxSecurity
+@EnableWebFluxSecurity
 public class SecurityConfig {
-/*    @Bean
+    //Following code will be commented when ServiceReactiveUserDetailsService is in use
+    /*@Bean
     public MapReactiveUserDetailsService userDetailsService() {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         System.out.println(encoder.encode("user"));
@@ -14,19 +19,20 @@ public class SecurityConfig {
                 .roles("USER")
                 .build();
         return new MapReactiveUserDetailsService(user);
-    }
+    }*/
 
-    *//**
+    /*
      * Following example is taken from @see WebFluxSecurityConfiguration in EnableWebFluxSecurity
-     *//*
+     */
     @Bean
     SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-        http.authorizeExchange().pathMatchers("/login","/signup","/webjars/**").permitAll()
+        http.authorizeExchange().pathMatchers("/login","/signup","/api/users/login","/ui/**","/webjars/**").permitAll()
                 .anyExchange().authenticated()
                 .and()
-                .httpBasic().and()
-                .formLogin();//.and().csrf().disable();
-        //.loginPage("/login");
+                .httpBasic().disable()
+                .formLogin().loginPage("/login").and()
+                .csrf().disable()
+                .logout().disable();
         return http.build();
-    }*/
+    }
 }

@@ -27,6 +27,7 @@ public class AppConfig {
         try {
             hostnames.add("http://localhost:4200");
             hostnames.add("http://localhost:90");
+            hostnames.add("http://b4ca4abf.ngrok.io");
             hostnames.add("http://" + InetAddress.getLocalHost().getHostName().toLowerCase() + ":90");
         } catch (UnknownHostException e) {
             e.printStackTrace();

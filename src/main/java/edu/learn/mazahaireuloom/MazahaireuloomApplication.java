@@ -10,6 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Slf4j
@@ -29,9 +31,13 @@ public class MazahaireuloomApplication {
     public CommandLineRunner init(UserRepo userRepo, BookRepo bookRepo){
         return args -> {
             try{
+                PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+                System.out.println(encoder.encode("اسد"));
                 userRepo.deleteAll().block();
-                userRepo.save(new User("اصغر", "786")).block();
-                userRepo.save(new User("نعمان", "786")).block();
+                userRepo.save(new User("اسد", encoder.encode("اسد"))).block();
+                userRepo.save(new User("noman", encoder.encode("786"))).block();
+                userRepo.save(new User("اصغر", encoder.encode("اصغر"))).block();
+                userRepo.save(new User("نعمان", encoder.encode("نعمان"))).block();
 
                 /*Locale arabicLocale = new Locale.Builder().setLanguageTag("ar-SA-u-nu-arab").build();
                 LocalDate date = LocalDate.now();

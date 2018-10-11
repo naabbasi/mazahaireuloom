@@ -5,3 +5,4 @@ db.books.count()
 db.books.getIndexes();
 db.books.find() -- find all records in a collection
 db.books.find({bookName: 'Core Java'}) | db.books.find({"bookName":"Core Java"}) -- find by parent collection
+db.books.find({"publisher": {"name":"نعمان"}}) -- find by child collection

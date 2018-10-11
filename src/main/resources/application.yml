@@ -13,3 +13,6 @@ spring:
 logging:
   level:
     org.springframework.data.mongodb.core.ReactiveMongoTemplate: DEBUG
+
+security:
+  ignored: "*.js*"

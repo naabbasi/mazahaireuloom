@@ -29,7 +29,11 @@ public class User {
     @TextScore
     private Float textScore = 1.0f;
 
-    public User(@NotNull String username, String password) {
+    public User(User user) {
+        this(user.getUsername(), user.getPassword());
+    }
+
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }

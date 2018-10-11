@@ -56,7 +56,8 @@ providers: [
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
 ]
 
-
+### spring security
+https://stackoverflow.com/questions/52753656/how-to-login-via-rest-api-using-reactiveuserdetailsservice-springboot
 
 
 
