@@ -130,12 +130,12 @@
             border-radius: 5px 5px 5px 5px;
         }
 
-        input[type=text]:focus {
+        input[type=text], input[type=password]:focus {
             background-color: #fff;
             border-bottom: 2px solid #5fbae9;
         }
 
-        input[type=text]:placeholder {
+        input[type=text], input[type=password]:placeholder {
             color: #cccccc;
         }
 
@@ -261,29 +261,46 @@
     </style>
 </head>
 <body>
-<div class="wrapper fadeInDown">
+<div class="wrapper fadeInDown" dir="rtl">
     <div id="formContent">
         <!-- Tabs Titles -->
-        <h2 class="active"> Sign In </h2>
+        <h2 class="active"> شناخت بذریعہ یوزرنیم اور پاسورڈ </h2>
 
         <!-- Icon -->
         <div class="fadeIn first">
-            <img src="/ui/assets/images/icon.svg" id="icon" alt="User Icon" />
+            <img src="ui/assets/images/icon.svg" id="icon" alt="User Icon" />
         </div>
 
         <!-- Login Form -->
         <form th:action="@{/login}" method="post">
-            <input type="text" id="username" class="fadeIn second" name="username">
-            <input type="password" id="password" class="fadeIn third" name="password">
-            <input type="submit" class="fadeIn fourth" value="Log In">
+            <input type="text" id="username" class="fadeIn second" name="username" value="اصغر" onfocus="bindKeyboard(this.name)" onblur="hideKeyboard()">
+            <input type="password" id="password" class="fadeIn third" name="password" value="اصغر" onfocus="bindKeyboard(this.name)" onblur="hideKeyboard()">
+            <input type="submit" class="fadeIn fourth" value="شناخت کروایں">
         </form>
 
-        <!-- Remind Passowrd -->
+        <!-- Footer -->
         <div id="formFooter">
-            <a class="underlineHover" href="#">Forgot Password?</a>
+            <a class="underlineHover" href="/">مظاہرالعلوم</a>
         </div>
 
     </div>
 </div>
+<div id="keyboard" style="position: absolute; left: 0px; margin-left: 25%; width: 50%; height: 25%; display: none;">
+    <img src="ui/assets/images/kb.png" style="width: 100%;">
+</div>
+<script type="application/javascript">
+    function bindKeyboard(name){
+        $('#' + name).setUrduInput({urduNumerals: true})
+        $('#keyboard').css('display','block');
+        $('#keyboard').addClass('fadeInDown');
+    }
+
+    function hideKeyboard(){
+        $('#keyboard').css('display','none');
+    }
+</script>
+<!-- jQuery -->
+<script src="ui/assets/js/jquery-3.2.1.slim.min.js"></script>
+<script src="ui/assets/js/yauk.js"></script>
 </body>
 </html>

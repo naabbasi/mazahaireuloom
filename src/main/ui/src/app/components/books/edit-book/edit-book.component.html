@@ -33,7 +33,7 @@
           {{tag.name}}
           <mat-icon matChipRemove *ngIf="removable">x</mat-icon>
         </mat-chip>
-        <input #tagsText placeholder="قسم"
+        <input #tagsText placeholder="موضوع"
                (focus)="bindKeyboard(tagsText)"
                (blur)="hideKeyboard()"
                [matChipInputFor]="chipList"

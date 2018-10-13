@@ -144,6 +144,8 @@
 							<arguments>
 								<argument>build</argument>
 								<argument>--prod</argument>
+								<argument>--base-href=/ui/</argument>
+								<argument>--deploy-url=/ui/</argument>
 							</arguments>
 						</configuration>
 						<goals>
@@ -159,8 +161,8 @@
                             <arguments>
                                 <argument>/E</argument>
                                 <argument>/Y</argument>
-                                <argument>ui\*</argument>
-                                <argument>..\..\resources\static</argument>
+                                <argument>ui</argument>
+                                <argument>..\..\resources\static\ui</argument>
                             </arguments>
                         </configuration>
                         <goals>
