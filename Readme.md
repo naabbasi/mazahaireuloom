@@ -56,6 +56,18 @@ providers: [
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
 ]
 
+### Deploy angular application in springboot application
+To remove directory while building application: npm install rimraf -g<br>
+To create directory while building application: npm install mkdirp -g<br>
+To copy application from dist into springboot static folder: npm i copyfiles -g<br>
+Sample configuration : e.g. package.json
+<pre>
+"build": "ng build --prod --aot=true --base-href=/ui/ --deploy-url=/ui/",
+"postbuild": "npm run deploy",
+"predeploy": "rimraf ../resources/static/ui && mkdirp ../resources/static/ui",
+"deploy": "copyfiles --up 2 dist/**/*.* ../resources/static/ui && copyfiles --up 2 dist/**/index.html ../resources/templates/ui/",
+</pre>
+
 ### spring security
 https://stackoverflow.com/questions/52753656/how-to-login-via-rest-api-using-reactiveuserdetailsservice-springboot
 
