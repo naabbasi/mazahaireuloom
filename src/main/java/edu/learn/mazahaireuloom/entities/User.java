@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
 @Document(collection = "users")
