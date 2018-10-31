@@ -1,7 +1,9 @@
 package edu.learn.mazahaireuloom.rest;
 
 import edu.learn.mazahaireuloom.entities.Book;
+import edu.learn.mazahaireuloom.entities.User;
 import edu.learn.mazahaireuloom.repos.BookRepo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Example;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
 
+@Slf4j
 @RequestMapping( path = "/api/books")
 @RestController
 public class BookRest {
@@ -74,7 +77,8 @@ public class BookRest {
     }
 
     @GetMapping(path = "/search/{book}")
-    public Flux<Book> searchBook(@PathVariable String book) {
+    public Flux<Book> searchBook(@AuthenticationPrincipal Mono<User> user, @PathVariable String book) {
+        log.info(user.block().toString());
         return this.bookRepo.searchBook(this.mongoTemplate, book);
     }
 

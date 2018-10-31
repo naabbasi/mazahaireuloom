@@ -1,5 +1,6 @@
 package edu.learn.mazahaireuloom.config;
 
+import edu.learn.mazahaireuloom.entities.User;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import reactor.core.publisher.Mono;
@@ -18,7 +19,7 @@ public class SecurityControllerAdvice {
     }*/
 
     @ModelAttribute("currentUser")
-    Mono<Principal> currentUser(Mono<Principal> currentUser){
+    Mono<User> currentUser(Mono<User> currentUser){
         return currentUser;
     }
 }
