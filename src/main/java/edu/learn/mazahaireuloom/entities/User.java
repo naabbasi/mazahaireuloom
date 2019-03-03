@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.index.TextIndexed;
@@ -13,6 +14,7 @@ import org.springframework.data.mongodb.core.mapping.TextScore;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
+@Slf4j
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -48,7 +50,7 @@ public class User {
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
             return mapper.writeValueAsString(this);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            log.error("User toString: ", e);
         }
 
         return jsonToString;

@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, LOCALE_ID, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {GenericComponent} from "../../GenericComponent";
 import {HttpConfig} from "../../../config/httpconfig";
 import {ActivatedRoute} from "@angular/router";
@@ -25,6 +25,7 @@ declare var $ : any;
     // The locale would typically be provided on the root module of your application. We do it at
     // the component level here, due to limitations of our example generation script.
     {provide: MAT_DATE_LOCALE, useValue: 'ar-SA'},
+    {provide: LOCALE_ID, useValue: 'ar-SA'},
 
     // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
     // `MatMomentDateModule` in your applications root module. We provide it at the component level
@@ -79,7 +80,8 @@ export class EditBookComponent extends GenericComponent implements OnInit {
     console.log(this.book);
     this.book.bookAuthor['name'] = $('#bookAuthor').val();
     this.book.bookPublisher['name'] = $('#bookPublisher').val();
-    this.book.date = $('#date').val();
+    this.book.bookQuantities = $('#bookQuantities').val();
+    this.book.bookVolumes = $('#bookVolumes').val();
 
     this.http.post("/books", this.book).subscribe(res => {
       this.statusStyle = {

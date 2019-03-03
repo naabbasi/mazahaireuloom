@@ -1,7 +1,6 @@
 package edu.learn.mazahaireuloom.rest;
 
 import edu.learn.mazahaireuloom.entities.Book;
-import edu.learn.mazahaireuloom.entities.User;
 import edu.learn.mazahaireuloom.repos.BookRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Example;
@@ -9,7 +8,6 @@ import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Flux;
@@ -40,7 +38,7 @@ public class BookRest {
 
     @GetMapping("{bookId}")
     public Mono<Book> findBook(@PathVariable("bookId") String bookId) {
-        Book book = new Book();
+        var book = new Book();
         book.setBookId(bookId);
         return this.bookRepo.findOne(Example.of(book));
     }
@@ -53,11 +51,11 @@ public class BookRest {
             return ResponseEntity.badRequest().build();
         }
 
-        Locale arabicLocale = new Locale.Builder().setLanguageTag("ar-SA-u-nu-arab").build();
-        LocalDate date = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(arabicLocale);
+        var arabicLocale = new Locale.Builder().setLanguageTag("ar-SA-u-nu-arab").build();
+        var date = LocalDate.now();
+        var formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(arabicLocale);
 
-        String formatted = date.format(formatter);
+        var formatted = date.format(formatter);
         System.out.println(formatted);
         System.out.println(formatter.parse(formatted));
 
@@ -77,8 +75,7 @@ public class BookRest {
     }
 
     @GetMapping(path = "/search/{book}")
-    public Flux<Book> searchBook(@AuthenticationPrincipal Mono<User> user, @PathVariable String book) {
-        log.info(user.block().toString());
+    public Flux<Book> searchBook(@PathVariable String book) {
         return this.bookRepo.searchBook(this.mongoTemplate, book);
     }
 

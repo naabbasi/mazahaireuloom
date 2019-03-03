@@ -16,6 +16,7 @@ import {
 } from "@angular/material";
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
 import { EditBookComponent } from './edit-book/edit-book.component';
+import { AllBooksComponent } from './all-books/all-books.component';
 
 @NgModule({
   imports: [
@@ -31,6 +32,6 @@ import { EditBookComponent } from './edit-book/edit-book.component';
     MatPaginatorModule,
     BooksRoutingModule
   ],
-  declarations: [BooksComponent, AddBookComponent, EditBookComponent]
+  declarations: [BooksComponent, AddBookComponent, EditBookComponent, AllBooksComponent]
 })
 export class BooksModule { }

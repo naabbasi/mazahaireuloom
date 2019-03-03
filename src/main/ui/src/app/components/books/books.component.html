@@ -5,8 +5,8 @@
         <mat-label>کتاب تلاش کریں</mat-label>
         <input matInput #findBook id="findBook" name="findBook" (keyup)='keyUp.next($event.target.value)' (keyup.enter)="onSearch(findBook.value)"
                (focus)="bindKeyboard(findBook)" (blur)="hideKeyboard()" (keyup.enter)="onEnter(findBook.value)"
-               required placeholder="کتاب کا نام یا مصنف یا ادرہ اعشاعت یا موضوع کا اندراج کریں"
-               oninvalid="this.setCustomValidity('کتاب کا نام یا مصنف یا ادرہ اعشاعت کا اندراج کریں')"
+               required placeholder="کتاب کا نام یا مصنف یا ادرہ اشاعت یا موضوع کا اندراج کریں"
+               oninvalid="this.setCustomValidity('کتاب کا نام یا مصنف یا ادرہ اشاعت کا اندراج کریں')"
                oninput="setCustomValidity('')">
       </mat-form-field>
       <br>
@@ -38,7 +38,7 @@
 
     <!-- Book Publisher Column -->
     <ng-container matColumnDef="bookPublisher">
-      <th mat-header-cell *matHeaderCellDef style="width: 25%;"> ادرہ اعشاعت </th>
+      <th mat-header-cell *matHeaderCellDef style="width: 25%;"> ادرہ اشاعت </th>
       <td mat-cell *matCellDef="let element"> {{element.bookPublisher.name}} </td>
     </ng-container>
 

@@ -19,7 +19,7 @@ public interface BookRepo extends GenericRepo<Book, String> {
     Mono<Book> findByBookPublisher(String bookPublisher);
 
     default Mono<Book> updateBook(Book book, String id){
-        Book findBook = new Book();
+        var findBook = new Book();
         findBook.setBookId(id);
 
         return findOne(Example.of(findBook)).doOnSuccess( foundBook -> {
@@ -31,39 +31,41 @@ public interface BookRepo extends GenericRepo<Book, String> {
 
     default Flux<Book> searchBook(ReactiveMongoTemplate mongoTemplate, String book) {
 
-        Criteria regex = new Criteria();
+        var regex = new Criteria();
         regex.orOperator(
             Criteria.where("bookName").regex(book, "i"),
             Criteria.where("author.name").regex(book, "i"),
             Criteria.where("publisher.name").regex(book, "i"),
-            Criteria.where("tags.name").regex(book, "i")
+            Criteria.where("tags.name").regex(book, "i"),
+            Criteria.where("bookQuantities").regex(book, "i"),
+            Criteria.where("bookVolumes").regex(book, "i")
         );
 
-        org.springframework.data.mongodb.core.query.Query query = new org.springframework.data.mongodb.core.query.Query();
+        var query = new org.springframework.data.mongodb.core.query.Query();
         query.limit(20);
         query.addCriteria(regex);
         return mongoTemplate.find(query, Book.class);
     }
 
     default Flux<Book> searchBookName(ReactiveMongoTemplate mongoTemplate, String bookName) {
-        Criteria regex = Criteria.where("bookName").regex(bookName, "i");
-        org.springframework.data.mongodb.core.query.Query query = new org.springframework.data.mongodb.core.query.Query();
+        var regex = Criteria.where("bookName").regex(bookName, "i");
+        var query = new org.springframework.data.mongodb.core.query.Query();
         query.limit(20);
         query.addCriteria(regex);
         return mongoTemplate.find(query, Book.class);
     }
 
     default Flux<Book> searchBookAuthor(ReactiveMongoTemplate mongoTemplate, String authorName) {
-        Criteria regex = Criteria.where("author.name").regex(authorName, "i");
-        org.springframework.data.mongodb.core.query.Query query = new org.springframework.data.mongodb.core.query.Query();
+        var regex = Criteria.where("author.name").regex(authorName, "i");
+        var query = new org.springframework.data.mongodb.core.query.Query();
         query.limit(20);
         query.addCriteria(regex);
         return mongoTemplate.find(query, Book.class);
     }
 
     default Flux<Book> searchBookPublisher(ReactiveMongoTemplate mongoTemplate, String publisherName) {
-        Criteria regex = Criteria.where("publisher.name").regex(publisherName, "i");
-        org.springframework.data.mongodb.core.query.Query query = new org.springframework.data.mongodb.core.query.Query();
+        var regex = Criteria.where("publisher.name").regex(publisherName, "i");
+        var query = new org.springframework.data.mongodb.core.query.Query();
         query.limit(20);
         query.addCriteria(regex);
         return mongoTemplate.find(query, Book.class);

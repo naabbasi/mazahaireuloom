@@ -4,5 +4,6 @@ export interface Book {
   bookAuthor: { name: "" };
   bookPublisher: { name: "" };
   tags: any;
-  date : string;
+  bookQuantities : number;
+  bookVolumes : number;
 }

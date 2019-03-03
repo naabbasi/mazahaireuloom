@@ -1,7 +1,7 @@
 <div style="margin-top: 5%; margin-right: 23%;" dir="rtl">
   <form (submit)="onUpdate()" #editBook="ngForm" ngNativeValidate>
     <mat-form-field class="text-box-width-seventy-five">
-      <input matInput #editBookName id="bookName" name="bookName" [value]="book?.bookName" readonly
+      <input matInput #editBookName id="bookName" name="bookName" [value]="book?.bookName"
              (focus)="bindKeyboard(editBookName)" (blur)="hideKeyboard()" (keyup.enter)="onEnter(editBookName.value)"
              required placeholder="کتاب کا نام"
              oninvalid="this.setCustomValidity('کتاب کا نام کا اندراج کریں')"
@@ -21,8 +21,8 @@
       <input matInput #bookPublisher id="bookPublisher" name="bookPublisher" [value]="book?.bookPublisher.name"
              (focus)="bindKeyboard(bookPublisher)"
              (blur)="hideKeyboard()"
-             required placeholder="ادرہ اعشاعت"
-             oninvalid="this.setCustomValidity('ادرہ اعشاعت کا اندراج کریں')"
+             required placeholder="ادرہ اشاعت"
+             oninvalid="this.setCustomValidity('ادرہ اشاعت کا اندراج کریں')"
              oninput="setCustomValidity('')">
     </mat-form-field>
     <br>
@@ -43,12 +43,20 @@
       </mat-chip-list>
     </mat-form-field>
     <br>
-    <mat-form-field class="text-box-width-fifty">
-      <input matInput #date id="date" name="date" [matDatepicker]="picker" placeholder="تاریخ کا انتخاب کریں" required
-             oninvalid="this.setCustomValidity('تاریخ کا انتخاب کریں')"
+    <mat-form-field>
+      <input matInput #bookQuantities id="bookQuantities" name="bookQuantities" [value]="book?.bookQuantities"
+             (focus)="bindKeyboard(bookQuantities)" (blur)="hideKeyboard()"
+             required placeholder="کتاب کی تعداد"
+             oninvalid="this.setCustomValidity('کتاب کی تعداد کا اندراج کریں')"
              oninput="setCustomValidity('')">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field>
+      <input matInput #bookVolumes id="bookVolumes" name="bookVolumes" [value]="book?.bookVolumes"
+             (focus)="bindKeyboard(bookVolumes)" (blur)="hideKeyboard()"
+             required placeholder="کتاب کی جلدیں"
+             oninvalid="this.setCustomValidity('کتاب کی جلدوں کا اندراج کریں')"
+             oninput="setCustomValidity('')">
     </mat-form-field>
     <br>
     <button type="submit" mat-raised-button color="primary" [disabled]="!editBook.form.valid">محفوظ کریں</button>&nbsp;&nbsp;
@@ -59,7 +67,7 @@
 </div>
 <ng-template #template>
   <div style="width: 100%">
-    <img src="/assets/images/kb.png" style="width: inherit;">
+    <img src="/ui/assets/images/kb.png" style="width: inherit;">
   </div>
 </ng-template>
 

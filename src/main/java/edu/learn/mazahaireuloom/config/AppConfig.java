@@ -1,6 +1,7 @@
 package edu.learn.mazahaireuloom.config;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,8 +14,8 @@ import org.springframework.web.reactive.config.WebFluxConfigurerComposite;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.List;
 
+@Slf4j
 @Component
 @ComponentScan(basePackages =  {"edu.learn.mazahaireuloom.rest", "edu.learn.mazahaireuloom.ui_controller"})
 @EntityScan(basePackages = "edu.learn.mazahaireuloom.entities")
@@ -23,14 +24,14 @@ public class AppConfig {
 
     @Bean
     public WebFluxConfigurer corsConfigurer() {
-        List<String> hostnames = new ArrayList<>();
+        var hostnames = new ArrayList<>();
         try {
-            hostnames.add("http://localhost:4200");
+            hostnames.add("http://localhost");
             hostnames.add("http://localhost:90");
             hostnames.add("http://b4ca4abf.ngrok.io");
             hostnames.add("http://" + InetAddress.getLocalHost().getHostName().toLowerCase() + ":90");
         } catch (UnknownHostException e) {
-            e.printStackTrace();
+            log.error("AppConfig-> corsConfigurer: " ,e);
         }
         return new WebFluxConfigurerComposite() {
             @Override

@@ -7,7 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,7 +26,7 @@ public class BookPublisher {
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
             return mapper.writeValueAsString(this);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            log.error("BookPublisher toString: ", e);
         }
 
         return jsonToString;

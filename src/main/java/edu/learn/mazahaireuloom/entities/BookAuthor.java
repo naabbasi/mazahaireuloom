@@ -7,8 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.index.Indexed;
 
+@Slf4j
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,7 +28,7 @@ public class BookAuthor {
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
             return mapper.writeValueAsString(this);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            log.error("BookAuthor toString: ", e);
         }
 
         return jsonToString;

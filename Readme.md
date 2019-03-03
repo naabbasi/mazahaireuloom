@@ -71,5 +71,10 @@ Sample configuration : e.g. package.json
 ### spring security
 https://stackoverflow.com/questions/52753656/how-to-login-via-rest-api-using-reactiveuserdetailsservice-springboot
 
+### Disable spring security while development
+Add /** in last pathMatchers to bypass security
+http.authorizeExchange().pathMatchers("/login","/signup","/api/users/login","/ui/assets/**","/webjars/**").permitAll()
+
+
 
 

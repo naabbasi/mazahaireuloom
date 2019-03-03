@@ -60,7 +60,8 @@ export class AddBookComponent extends GenericComponent implements OnInit {
   onSave() {
     let addBook = {
       "bookName": $('#bookName').val(),
-      "date": $('#date').val(),
+      "bookQuantities": $('#bookQuantities').val(),
+      "bookVolumes": $('#bookVolumes').val(),
       "bookAuthor": {
         "name" : $('#bookAuthor').val()
       },
@@ -69,6 +70,8 @@ export class AddBookComponent extends GenericComponent implements OnInit {
       },
       "tags": this.tags
     };
+
+    console.log(addBook);
 
     this.http.post("/books", addBook).subscribe(res => {
       this.statusStyle = {

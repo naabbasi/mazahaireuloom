@@ -26,6 +26,7 @@ public class SecurityConfig {
      */
     @Bean
     SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+        //Add the "/**" following for dev to disable security
         http.authorizeExchange().pathMatchers("/login","/signup","/api/users/login","/ui/assets/**","/webjars/**").permitAll()
                 .anyExchange().authenticated()
                 .and()

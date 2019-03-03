@@ -1,12 +1,56 @@
-<mat-card>
+<mat-card dir="rtl">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
       <span>مظاہر العلوم</span>&nbsp;
       <div style="width: 100%; margin-right: 5%;">
-        <a mat-button [matMenuTriggerFor]="menu">کتابیں</a>
+        <a mat-button [matMenuTriggerFor]="menu" style="font-size: 18px;">کتابیں</a>
         <mat-menu #menu="matMenu">
-          <a mat-menu-item routerLink="/books">کتاب تلاش کریں</a>
+          <a mat-menu-item routerLink="/books">اندراج شدہ کتابیں</a>
+          <a mat-menu-item routerLink="/books/search">کتاب تلاش کریں</a>
           <a mat-menu-item routerLink="books/add">کتاب کا اندراج</a>
+        </mat-menu>
+        <a mat-button [matMenuTriggerFor]="menuTafseer" style="font-size: 18px;">التفسیر</a>
+        <mat-menu #menuTafseer="matMenu">
+          <a mat-menu-item routerLink="">متون</a>
+          <a mat-menu-item routerLink="">احکام القرآن</a>
+          <a mat-menu-item routerLink="">لغات القرآن</a>
+          <a mat-menu-item routerLink="">علوم القرآن</a>
+          <a mat-menu-item routerLink="">المتفرقات</a>
+        </mat-menu>
+        <a mat-button [matMenuTriggerFor]="menuHadith" style="font-size: 18px;">الحدیث</a>
+        <mat-menu #menuHadith="matMenu">
+          <a mat-menu-item routerLink="">متون</a>
+          <a mat-menu-item routerLink="">شروح الحدیث</a>
+          <a mat-menu-item routerLink="">فقہ الحدیث</a>
+          <a mat-menu-item routerLink=""> مصطلح الحدیث</a>
+          <a mat-menu-item routerLink="">موسوعتہ الحدیث</a>
+          <a mat-menu-item routerLink="">اسماءالرجال</a>
+          <a mat-menu-item routerLink="">المتفرقات</a>
+        </mat-menu>
+        <a mat-button [matMenuTriggerFor]="menuFiqh" style="font-size: 18px;">الفقہ</a>
+        <mat-menu #menuFiqh="matMenu">
+          <a mat-menu-item routerLink="">الفقہ الحنفی</a>
+          <a mat-menu-item routerLink="">الفقہ المالکی</a>
+          <a mat-menu-item routerLink="">الفقہ الشافعی</a>
+          <a mat-menu-item routerLink="">الفقہ الحنبلی</a>
+          <a mat-menu-item routerLink="">الفقہ الظاھری</a>
+          <a mat-menu-item routerLink="">المتفرقات</a>
+        </mat-menu>
+        <a mat-button [matMenuTriggerFor]="menuFiqh" style="font-size: 18px;">المتفرقات</a>
+        <mat-menu #menuFiqh="matMenu">
+          <a mat-menu-item routerLink="">العقائدوالکلام</a>
+          <a mat-menu-item routerLink="">الفرق الباطلتہ</a>
+          <a mat-menu-item routerLink="">سیرت صلی اللہ علیہ وسلم</a>
+          <a mat-menu-item routerLink="">سیرالصابتہ</a>
+          <a mat-menu-item routerLink="">التاریخ و الایام</a>
+          <a mat-menu-item routerLink="">السوانح و الاحوال</a>
+          <a mat-menu-item routerLink="">التزکیتہ والاحسان</a>
+          <a mat-menu-item routerLink="">کتب الفضائل</a>
+          <a mat-menu-item routerLink="">مواعظ و خطبات</a>
+          <a mat-menu-item routerLink="">المکاتیب و المقالات</a>
+          <a mat-menu-item routerLink="">الادب العربی</a>
+          <a mat-menu-item routerLink="">الصرف و النحو</a>
+          <a mat-menu-item routerLink="">الغات</a>
         </mat-menu>
       </div>
     </mat-toolbar-row>

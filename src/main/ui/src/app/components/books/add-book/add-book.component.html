@@ -19,8 +19,8 @@
     <mat-form-field class="text-box-width-seventy-five">
       <input matInput #bookPublisher id="bookPublisher" name="bookPublisher"
              (focus)="bindKeyboard(bookPublisher)" (blur)="hideKeyboard()"
-             required placeholder="ادرہ اعشاعت"
-             oninvalid="this.setCustomValidity('ادرہ اعشاعت کا اندراج کریں')"
+             required placeholder="ادرہ اشاعت"
+             oninvalid="this.setCustomValidity('ادرہ اشاعت کا اندراج کریں')"
              oninput="setCustomValidity('')">
     </mat-form-field>
     <br>
@@ -41,12 +41,20 @@
       </mat-chip-list>
     </mat-form-field>
     <br>
-    <mat-form-field class="text-box-width-fifty">
-      <input matInput #date id="date" name="date" [matDatepicker]="picker" placeholder="تاریخ کا انتخاب کریں" required
-             oninvalid="this.setCustomValidity('تاریخ کا انتخاب کریں')"
+    <mat-form-field>
+      <input matInput #bookQuantities id="bookQuantities" name="bookQuantities"
+             (focus)="bindKeyboard(bookQuantities)" (blur)="hideKeyboard()"
+             required placeholder="کتاب کی تعداد"
+             oninvalid="this.setCustomValidity('کتاب کی تعداد کا اندراج کریں')"
              oninput="setCustomValidity('')">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field>
+      <input matInput #bookVolumes id="bookVolumes" name="bookVolumes"
+             (focus)="bindKeyboard(bookVolumes)" (blur)="hideKeyboard()"
+             required placeholder="کتاب کی جلدیں"
+             oninvalid="this.setCustomValidity('کتاب کی جلدوں کا اندراج کریں')"
+             oninput="setCustomValidity('')">
     </mat-form-field>
     <br>
     <button type="submit" mat-raised-button color="primary" [disabled]="!addNewBook.form.valid">محفوظ کریں</button>

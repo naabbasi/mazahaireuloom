@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
@@ -19,13 +20,14 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
 @Document(collection = "books")
 @CompoundIndexes(
-    @CompoundIndex(unique = true, name = "name_author_publisher", def ="{'bookName': 1, 'date': 1, 'author.authorName': 1, 'publisher.publisherName': 1}")
+    @CompoundIndex(unique = true, name = "name_author_publisher", def ="{'bookName': 1, 'author.authorName': 1, 'publisher.publisherName': 1}")
 )
 public class Book {
     @Id
@@ -35,9 +37,6 @@ public class Book {
     @TextIndexed(weight = 5)
     @Indexed(unique = true)
     private String bookName;
-
-    @NotNull
-    private String date;
 
     @NotNull
     @Field( value = "author")
@@ -51,6 +50,10 @@ public class Book {
     @Field( value = "tags")
     private List<Tag> tags;
 
+    private String bookQuantities;
+
+    private String bookVolumes;
+
     @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
@@ -60,7 +63,7 @@ public class Book {
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
             return mapper.writeValueAsString(this);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            log.error("Book toString: ", e);
         }
 
         return jsonToString;
