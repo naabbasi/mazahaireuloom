@@ -1,7 +1,7 @@
 <mat-card dir="rtl">
   <mat-card-header>
     <form #findBook="ngForm" ngNativeValidate style="width: 100%;">
-      <mat-form-field class="text-box-width-seventy-five">
+      <mat-form-field class="text-box-width-seventy-five" appearance="outline">
         <mat-label>کتاب تلاش کریں</mat-label>
         <input matInput #findBook id="findBook" name="findBook" (keyup)='keyUp.next($event.target.value)' (keyup.enter)="onSearch(findBook.value)"
                (focus)="bindKeyboard(findBook)" (blur)="hideKeyboard()" (keyup.enter)="onEnter(findBook.value)"
