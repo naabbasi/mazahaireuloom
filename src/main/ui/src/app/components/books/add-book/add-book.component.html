@@ -1,6 +1,7 @@
 <div style="margin-top: 5%; margin-right: 23%;" dir="rtl">
   <form (submit)="onSave()"  #addNewBook="ngForm" ngNativeValidate>
-    <mat-form-field class="text-box-width-seventy-five">
+    <mat-form-field class="text-box-width-seventy-five" appearance="outline">
+      <mat-label>کتاب کا نام</mat-label>
       <input matInput #bookName id="bookName" name="bookName"
              (focus)="bindKeyboard(bookName)" (blur)="hideKeyboard()" (keyup.enter)="onEnter(bookName.value)"
              required placeholder="کتاب کا نام"
@@ -8,7 +9,8 @@
              oninput="setCustomValidity('')">
     </mat-form-field>
     <br>
-    <mat-form-field class="text-box-width-seventy-five">
+    <mat-form-field class="text-box-width-seventy-five" appearance="outline">
+      <mat-label>کتاب کے مصنف</mat-label>
       <input matInput #bookAuthor id="bookAuthor" name="bookAuthor"
              (focus)="bindKeyboard(bookAuthor)" (blur)="hideKeyboard()"
              required placeholder="کتاب کے مصنف"
@@ -16,7 +18,8 @@
              oninput="setCustomValidity('')">
     </mat-form-field>
     <br>
-    <mat-form-field class="text-box-width-seventy-five">
+    <mat-form-field class="text-box-width-seventy-five" appearance="outline">
+      <mat-label>ادرہ اشاعت</mat-label>
       <input matInput #bookPublisher id="bookPublisher" name="bookPublisher"
              (focus)="bindKeyboard(bookPublisher)" (blur)="hideKeyboard()"
              required placeholder="ادرہ اشاعت"
@@ -24,7 +27,8 @@
              oninput="setCustomValidity('')">
     </mat-form-field>
     <br>
-    <mat-form-field class="text-box-width-seventy-five">
+    <mat-form-field class="text-box-width-seventy-five" appearance="outline">
+      <mat-label>موضوع</mat-label>
       <mat-chip-list #chipList>
         <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
                   [removable]="removable" (removed)="remove(tag)">
@@ -41,7 +45,8 @@
       </mat-chip-list>
     </mat-form-field>
     <br>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>کتاب کی تعداد</mat-label>
       <input matInput #bookQuantities id="bookQuantities" name="bookQuantities"
              (focus)="bindKeyboard(bookQuantities)" (blur)="hideKeyboard()"
              required placeholder="کتاب کی تعداد"
@@ -49,7 +54,8 @@
              oninput="setCustomValidity('')">
     </mat-form-field>
     &nbsp;
-    <mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>کتاب کی جلدیں</mat-label>
       <input matInput #bookVolumes id="bookVolumes" name="bookVolumes"
              (focus)="bindKeyboard(bookVolumes)" (blur)="hideKeyboard()"
              required placeholder="کتاب کی جلدیں"
