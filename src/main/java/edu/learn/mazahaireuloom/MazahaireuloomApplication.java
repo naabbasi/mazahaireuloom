@@ -13,6 +13,11 @@ import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventL
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
+
 @Slf4j
 @SpringBootApplication(scanBasePackages = "edu.learn.mazahaireuloom.config")
 public class MazahaireuloomApplication {
@@ -37,22 +42,23 @@ public class MazahaireuloomApplication {
                 userRepo.save(new User("اصغر", encoder.encode("اصغر"))).block();
                 userRepo.save(new User("نعمان", encoder.encode("نعمان"))).block();
 
-                /*Locale arabicLocale = new Locale.Builder().setLanguageTag("ar-SA-u-nu-arab").build();
-                LocalDate date = LocalDate.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(arabicLocale);
+                var arabicLocale = new Locale.Builder().setLanguageTag("ar-SA-u-nu-arab").build();
+                var date = LocalDate.now();
+                var formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(arabicLocale);
 
                 String formatted = date.format(formatter);
                 System.out.println(formatted);
                 System.out.println(formatter.parse(formatted));
 
-                for(int i = 0 ; i < 900000 ; i++){
-                    Book book = new Book();
+
+
+                /*for(int i = 0 ; i < 50000 ; i++){
+                    var book = new Book();
                     book.setBookName( i + "اصغر");
                     book.setBookAuthor(new BookAuthor("نعمان"));
                     book.setBookPublisher(new BookPublisher("نعمان"));
-                    List<Tag> tags = List.of(new Tag("اصغرنعماننعمان"));
+                    var tags = List.of(new Tag("اصغرنعماننعمان"));
                     book.setTags(tags);
-                    book.setDate(formatted);
                     bookRepo.save(book).block();
 
                     book = new Book();
@@ -61,7 +67,6 @@ public class MazahaireuloomApplication {
                     book.setBookPublisher(new BookPublisher("اصغر"));
                     tags = List.of(new Tag("ا صغ رنع مانن عمان"));
                     book.setTags(tags);
-                    book.setDate(formatted);
                     bookRepo.save(book).block();
                 }*/
 
