@@ -36,7 +36,7 @@ declare var $ : any;
 })
 export class EditBookComponent extends GenericComponent implements OnInit {
   book : Book;
-  @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
+  @ViewChild('dialogTemplate', { static: true }) dialogTemplate: TemplateRef<any>;
 
   constructor(private http : HttpConfig, private route : ActivatedRoute,
               snackBar: MatSnackBar, private dialog: MatDialog) {

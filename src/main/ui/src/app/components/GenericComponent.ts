@@ -4,7 +4,7 @@ import {TemplateRef, ViewChild} from "@angular/core";
 
 declare var $ : any;
 export class GenericComponent {
-  @ViewChild('template') template: TemplateRef<any>;
+  @ViewChild('template', { static: true }) template: TemplateRef<any>;
   constructor(public snackBar?: MatSnackBar){}
 
   value: string;

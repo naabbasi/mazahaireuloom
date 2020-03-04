@@ -4,7 +4,7 @@ import {BooksModule} from "./components/books/books.module";
 
 const routes: Routes = [
   { path: '', redirectTo: 'books', pathMatch: 'full' },
-  { path: 'books', loadChildren: './components/books/books.module#BooksModule' }
+  { path: 'books', loadChildren: () => import('./components/books/books.module').then(m => m.BooksModule) }
 ];
 
 @NgModule({

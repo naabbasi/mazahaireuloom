@@ -13,7 +13,7 @@ import {ActivatedRoute} from "@angular/router";
 export class AllBooksComponent implements OnInit {
   private books : Observable<Book>;
   private dataSource = new MatTableDataSource();
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   private displayedColumns = ['bookName', 'bookAuthor', 'bookPublisher', 'tags'];
   resultsLength = 0;
 
