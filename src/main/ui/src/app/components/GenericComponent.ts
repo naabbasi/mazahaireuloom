@@ -1,8 +1,9 @@
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import {TemplateRef, ViewChild} from "@angular/core";
+import { TemplateRef, ViewChild, Directive } from "@angular/core";
 
 declare var $ : any;
+@Directive()
 export class GenericComponent {
   @ViewChild('template', { static: true }) template: TemplateRef<any>;
   constructor(public snackBar?: MatSnackBar){}

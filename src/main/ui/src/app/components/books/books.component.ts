@@ -28,7 +28,7 @@ export class BooksComponent extends GenericComponent implements OnInit{
   books : Observable<Book>;
   keyUp = new Subject<string>();
   dataSource = new MatTableDataSource();
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns = ['bookName', 'bookAuthor', 'bookPublisher', 'tags'];
 
   resultsLength = 0;
