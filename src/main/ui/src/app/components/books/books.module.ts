@@ -7,13 +7,11 @@ import { AddBookComponent } from './add-book/add-book.component';
 import {FormsModule} from "@angular/forms";
 import {MyMaterialModule} from "../my-material/my-material.module";
 import {MatInputModule} from "@angular/material/input";
-import {
-  MatChipsModule,
-  MatDatepickerModule,
-  MatFormFieldModule,
-  MatPaginatorModule,
-  MatTableModule
-} from "@angular/material";
+import { MatChipsModule } from "@angular/material/chips";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatTableModule } from "@angular/material/table";
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
 import { EditBookComponent } from './edit-book/edit-book.component';
 import { AllBooksComponent } from './all-books/all-books.component';

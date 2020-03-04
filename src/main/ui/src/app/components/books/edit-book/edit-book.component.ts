@@ -3,14 +3,10 @@ import {GenericComponent} from "../../GenericComponent";
 import {HttpConfig} from "../../../config/httpconfig";
 import {ActivatedRoute} from "@angular/router";
 import {Book} from "../entity/Book";
-import {
-  DateAdapter,
-  MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE,
-  MatChipInputEvent,
-  MatDialog,
-  MatSnackBar
-} from "@angular/material";
+import { MatChipInputEvent } from "@angular/material/chips";
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
+import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from "@angular/material-moment-adapter";
 import {Tags} from "../entity/Tags";
 import {GenericDialogComponent} from "../../my-material/generic-dialog/generic-dialog.component";
