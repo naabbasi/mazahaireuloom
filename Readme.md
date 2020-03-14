@@ -75,6 +75,8 @@ https://stackoverflow.com/questions/52753656/how-to-login-via-rest-api-using-rea
 Add /** in last pathMatchers to bypass security
 http.authorizeExchange().pathMatchers("/login","/signup","/api/users/login","/ui/assets/**","/webjars/**").permitAll()
 
+### Clean npm cache
+npm cache clean --force
 
 
 

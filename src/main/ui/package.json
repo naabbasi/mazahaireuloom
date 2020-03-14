@@ -4,10 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --aot=true --base-href=/ui/ --deploy-url=/ui/",
-    "postbuild": "npm run deploy",
-    "predeploy": "rimraf ../resources/static/ui && mkdirp ../resources/static/ui",
-    "deploy": "copyfiles --up 2 dist/**/*.* ../resources/static/ui && copyfiles --up 2 dist/**/index.html ../resources/templates/ui/",
+    "build": "ng build --prod --base-href=/ui/ --deploy-url=/ui/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -25,11 +22,8 @@
     "@angular/platform-browser": "^9.0.4",
     "@angular/platform-browser-dynamic": "^9.0.4",
     "@angular/router": "^9.0.4",
-    "copyfiles": "^2.1.0",
     "core-js": "^2.6.9",
-    "mkdirp": "^0.5.1",
     "moment": "^2.24.0",
-    "rimraf": "^2.6.3",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
