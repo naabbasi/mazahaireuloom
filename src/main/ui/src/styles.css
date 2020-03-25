@@ -1,9 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-body {
+* {
   direction: rtl;
-  font-family: nafees-web-naskh !important;
+  font-family: 'nafees', cursive !important;
+}
+
+body {
   font-size: 18px !important;
   font-weight: bold !important;
 }
@@ -20,20 +23,19 @@ body {
   width: 25%;
 }
 
-table {
+/*table {
   direction: rtl;
   width: 100%;
-}
+}*/
 
-th {
-  font-family: nafees-web-naskh !important;
+/*th {
   text-align: -webkit-center !important;
   font-weight: bolder !important;
-  font-size: 20px !important;
+  font-size: 16px !important;
 }
 
 td {
   font-family: nafees-web-naskh !important;
   padding-right: 5px !important;
   font-size: 16px !important;
-}
+}*/
