@@ -1,9 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+@font-face {
+    font-family: 'NotoSansArabic-Condensed';
+    src: url('/fonts/NotoSansArabic-Condensed.eot');
+    src: url('/fonts/NotoSansArabic-Condensed.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/NotoSansArabic-Condensed.svg#NotoSansArabic-Condensed') format('svg'),
+         url('/fonts/NotoSansArabic-Condensed.ttf') format('truetype'),
+         url('/fonts/NotoSansArabic-Condensed.woff') format('woff'),
+         url('/fonts/NotoSansArabic-Condensed.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+
 * {
-  direction: rtl;
-  font-family: 'nafees', cursive !important;
+    direction: rtl;
+    font-family: "NotoSansArabic-Condensed";
 }
 
 body {
