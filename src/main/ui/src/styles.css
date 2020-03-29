@@ -1,53 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
-@font-face {
-    font-family: 'NotoSansArabic-Condensed';
-    src: url('/fonts/NotoSansArabic-Condensed.eot');
-    src: url('/fonts/NotoSansArabic-Condensed.eot?#iefix') format('embedded-opentype'),
-         url('/fonts/NotoSansArabic-Condensed.svg#NotoSansArabic-Condensed') format('svg'),
-         url('/fonts/NotoSansArabic-Condensed.ttf') format('truetype'),
-         url('/fonts/NotoSansArabic-Condensed.woff') format('woff'),
-         url('/fonts/NotoSansArabic-Condensed.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-  }
+@import "~assets/fonts/noto/font.css";
 
 * {
     direction: rtl;
-    font-family: "NotoSansArabic-Condensed";
+    /*font-family: 'NotoNaskhArabic-Bold';*/
+    /*font-family: NotoNastaliqUrdu;*/
+    font-family: 'NotoNaskhArabicUI-Bold';
+    font-size: 16px;
 }
 
-body {
-  font-size: 18px !important;
-  font-weight: bold !important;
+.mat-menu-item {
+  font-family: inherit;
 }
 
-.text-box-width-seventy-five {
-  width: 75%;
+.mat-form-field {
+  line-height: inherit;
 }
-
-.text-box-width-fifty {
-  width: 50%;
-}
-
-.text-box-width-twenty-five {
-  width: 25%;
-}
-
-/*table {
-  direction: rtl;
-  width: 100%;
-}*/
-
-/*th {
-  text-align: -webkit-center !important;
-  font-weight: bolder !important;
-  font-size: 16px !important;
-}
-
-td {
-  font-family: nafees-web-naskh !important;
-  padding-right: 5px !important;
-  font-size: 16px !important;
-}*/

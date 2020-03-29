@@ -1,6 +1,11 @@
-@font-face {
-  font-family: 'nafees' !important;
-  src: url('assets/fonts/noto/NotoNaskhArabic-Regular.ttf') format('truetype'),
-  url('assets/fonts/noto/NotoNaskhArabicUI-Regular.ttf') format('truetype'),
-  url('assets/fonts/noto/NotoNastaliqUrdu-Regular.ttf') format('truetype');
+.text-box-width-seventy-five {
+  width: 75%;
+}
+
+.text-box-width-fifty {
+  width: 50%;
+}
+
+.text-box-width-twenty-five {
+  width: 25%;
 }
