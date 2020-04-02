@@ -1,13 +1,17 @@
 package edu.learn.mazahaireuloom.repos;
 
 import edu.learn.mazahaireuloom.entities.Book;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Example;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.repository.Query;
+import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Qualifier("bookRepo")
+@Repository
 public interface BookRepo extends GenericRepo<Book, String> {
 
     Mono<Book> findByBookName(String bookName);

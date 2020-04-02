@@ -1,12 +1,16 @@
 package edu.learn.mazahaireuloom.repos;
 
 import edu.learn.mazahaireuloom.entities.User;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
 
+@Qualifier("userRepo")
+@Repository
 public interface UserRepo extends GenericRepo<User, String> {
 
     Mono<User> findByUsername(String username);

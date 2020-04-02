@@ -9,7 +9,7 @@ spring:
       port: 27017
       database: mazahireuloom
       host: localhost
-
+      auto-index-creation: false
 logging:
   level:
     org.springframework.data.mongodb.core.ReactiveMongoTemplate: DEBUG
