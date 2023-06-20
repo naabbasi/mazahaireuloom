@@ -3,6 +3,8 @@ package edu.learn.mazahaireuloom.entities;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,7 +18,6 @@ import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,20 +34,17 @@ public class Book {
     @Id
     private String bookId = UUID.randomUUID().toString();
 
-    @NotNull
+    @NotBlank
     @TextIndexed(weight = 5)
     @Indexed(unique = true)
     private String bookName;
 
-    @NotNull
     @Field( value = "author")
     private BookAuthor bookAuthor;
 
-    @NotNull
     @Field( value = "publisher")
     private BookPublisher bookPublisher;
 
-    @NotNull
     @Field( value = "tags")
     private List<Tag> tags;
 

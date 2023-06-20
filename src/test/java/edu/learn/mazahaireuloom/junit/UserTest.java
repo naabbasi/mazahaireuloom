@@ -3,26 +3,23 @@ package edu.learn.mazahaireuloom.junit;
 import edu.learn.mazahaireuloom.config.AppConfig;
 import edu.learn.mazahaireuloom.entities.User;
 import edu.learn.mazahaireuloom.repos.UserRepo;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.data.mongodb.core.query.TextQuery;
-import org.springframework.test.context.junit4.SpringRunner;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
+import java.util.Objects;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = {AppConfig.class})
 @EnableAutoConfiguration
 public class UserTest {
@@ -31,7 +28,7 @@ public class UserTest {
     private UserRepo userRepo;
 
     @Autowired
-    private MongoTemplate mongoTemplate;
+    private ReactiveMongoTemplate reactiveMongoTemplate;
 
     @Test
     public void pass_1() {
@@ -59,8 +56,9 @@ public class UserTest {
     @Test
     public void pass_3() {
         Query query = Query.query(TextCriteria.forDefaultLanguage().matching("nabbasi"));
-        List<User> users = this.mongoTemplate.find(query, User.class);
-        assertFalse(users.isEmpty());
+        Flux<User> users = this.reactiveMongoTemplate.find(query, User.class);
+        List<User> userList = users.collectList().block();
+        assertFalse(Objects.requireNonNull(userList).isEmpty());
     }
 
     @Test
@@ -70,8 +68,9 @@ public class UserTest {
                 .sortByScore()
                 .with(PageRequest.of(0, 5));
 
-        List<User> users = this.mongoTemplate.find(query, User.class);
-        assertFalse(users.isEmpty());
+        Flux<User> users = this.reactiveMongoTemplate.find(query, User.class);
+        List<User> userList = users.collectList().block();
+        assertFalse(Objects.requireNonNull(userList).isEmpty());
     }
 
     @Test
@@ -81,8 +80,10 @@ public class UserTest {
         Query query = new Query();
         query.limit(10);
         query.addCriteria(regex);
-        List<User> users = mongoTemplate.find(query, User.class);
-        assertFalse(users.isEmpty());
+
+        Flux<User> users = this.reactiveMongoTemplate.find(query, User.class);
+        List<User> userList = users.collectList().block();
+        assertFalse(Objects.requireNonNull(userList).isEmpty());
     }
 
     @Test
@@ -92,8 +93,10 @@ public class UserTest {
         Query query = new Query();
         query.limit(10);
         query.addCriteria(regex);
-        List<User> users = mongoTemplate.find(query, User.class);
-        assertFalse(users.isEmpty());
+
+        Flux<User> users = this.reactiveMongoTemplate.find(query, User.class);
+        List<User> userList = users.collectList().block();
+        assertFalse(Objects.requireNonNull(userList).isEmpty());
     }
 
     @Test
@@ -103,7 +106,9 @@ public class UserTest {
         Query query = new Query();
         query.limit(10);
         query.addCriteria(regex);
-        List<User> users = mongoTemplate.find(query, User.class);
-        assertFalse(users.isEmpty());
+
+        Flux<User> users = this.reactiveMongoTemplate.find(query, User.class);
+        List<User> userList = users.collectList().block();
+        assertFalse(Objects.requireNonNull(userList).isEmpty());
     }
 }

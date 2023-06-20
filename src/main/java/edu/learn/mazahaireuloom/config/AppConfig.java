@@ -1,6 +1,10 @@
 package edu.learn.mazahaireuloom.config;
 
 
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.reactivestreams.client.MongoClient;
+import com.mongodb.reactivestreams.client.MongoClients;
 import edu.learn.mazahaireuloom.entities.User;
 import edu.learn.mazahaireuloom.repos.BookRepo;
 import edu.learn.mazahaireuloom.repos.UserRepo;
@@ -11,6 +15,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguration;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -33,18 +40,26 @@ import java.util.Locale;
 @ComponentScan(basePackages =  {"edu.learn.mazahaireuloom.rest", "edu.learn.mazahaireuloom.ui_controller"})
 @EntityScan(basePackages = "edu.learn.mazahaireuloom.entities")
 @EnableReactiveMongoRepositories( basePackages = "edu.learn.mazahaireuloom.repos")
-public class AppConfig {
+public class AppConfig extends AbstractReactiveMongoConfiguration {
     @Bean
-    public LocalValidatorFactoryBean validator() {
-        return new LocalValidatorFactoryBean();
+    public ValidatingMongoEventListener validatingMongoEventListener(final LocalValidatorFactoryBean factory) {
+        return new ValidatingMongoEventListener(factory);
     }
 
     @Bean
-    public ValidatingMongoEventListener validatingMongoEventListener() {
-        return new ValidatingMongoEventListener(new LocalValidatorFactoryBean());
+    public MongoClient mongoClient() {
+        return MongoClients.create();
     }
 
+    @Override
+    protected String getDatabaseName() {
+        return "mazahireuloom";
+    }
 
+    @Bean
+    public ReactiveMongoTemplate reactiveMongoTemplate() {
+        return new ReactiveMongoTemplate(mongoClient(), "mazahireuloom");
+    }
 
     @Bean
     public CommandLineRunner init(@Qualifier("userRepo") UserRepo userRepo, @Qualifier("bookRepo") BookRepo bookRepo){

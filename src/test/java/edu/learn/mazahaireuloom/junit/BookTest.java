@@ -5,24 +5,18 @@ import edu.learn.mazahaireuloom.entities.Book;
 import edu.learn.mazahaireuloom.entities.BookAuthor;
 import edu.learn.mazahaireuloom.entities.BookPublisher;
 import edu.learn.mazahaireuloom.repos.BookRepo;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
 import reactor.core.publisher.Flux;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = {AppConfig.class})
 @EnableAutoConfiguration
 public class BookTest {
