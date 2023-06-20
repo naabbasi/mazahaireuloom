@@ -2,9 +2,9 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpConfig} from "../../config/httpconfig";
 import {Subject, Observable, of, merge} from 'rxjs';
 import {Book} from "./entity/Book";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { MatTableDataSource } from "@angular/material/table";
+import { MatLegacyPaginator as MatPaginator } from "@angular/material/legacy-paginator";
+import { MatLegacySnackBar as MatSnackBar } from "@angular/material/legacy-snack-bar";
+import { MatLegacyTableDataSource as MatTableDataSource } from "@angular/material/legacy-table";
 import {GenericComponent} from "../GenericComponent";
 import {
   catchError,

@@ -1,5 +1,5 @@
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatLegacySnackBar as MatSnackBar } from "@angular/material/legacy-snack-bar";
 import { TemplateRef, ViewChild, Directive } from "@angular/core";
 
 declare var $ : any;
