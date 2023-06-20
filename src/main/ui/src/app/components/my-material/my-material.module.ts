@@ -12,30 +12,29 @@ import {MatIconModule} from "@angular/material/icon";
 import { GenericDialogComponent } from './generic-dialog/generic-dialog.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatCardModule,
-    MatDividerModule,
-    MatSnackBarModule,
-    MatProgressBarModule,
-    MatDialogModule
-  ],
-  exports: [
-    MatButtonModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatCardModule,
-    MatDividerModule,
-    MatSnackBarModule,
-    MatProgressBarModule,
-    MatDialogModule
-  ],
-  declarations: [GenericDialogComponent],
-  entryComponents: [GenericDialogComponent]
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatCardModule,
+        MatDividerModule,
+        MatSnackBarModule,
+        MatProgressBarModule,
+        MatDialogModule
+    ],
+    exports: [
+        MatButtonModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatCardModule,
+        MatDividerModule,
+        MatSnackBarModule,
+        MatProgressBarModule,
+        MatDialogModule
+    ],
+    declarations: [GenericDialogComponent]
 })
 export class MyMaterialModule { }
