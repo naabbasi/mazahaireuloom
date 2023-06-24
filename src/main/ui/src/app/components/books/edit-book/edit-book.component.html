@@ -31,12 +31,12 @@
     <br>
     <mat-form-field class="text-box-width-seventy-five" appearance="outline">
       <mat-label>موضوع</mat-label>
-      <mat-chip-list #chipList>
-        <mat-chip *ngFor="let tag of book?.tags" [selectable]="selectable"
+      <mat-chip-grid #chipList>
+        <mat-chip-row *ngFor="let tag of book?.tags" [selectable]="selectable"
                   [removable]="removable" (removed)="remove(tag)">
           {{tag.name}}
           <mat-icon matChipRemove *ngIf="removable">x</mat-icon>
-        </mat-chip>
+        </mat-chip-row>
         <input #tagsText placeholder="موضوع"
                (focus)="bindKeyboard(tagsText)"
                (blur)="hideKeyboard()"
@@ -44,7 +44,7 @@
                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                [matChipInputAddOnBlur]="addOnBlur"
                (matChipInputTokenEnd)="add($event)">
-      </mat-chip-list>
+      </mat-chip-grid>
     </mat-form-field>
     <br>
     <mat-form-field appearance="outline">
