@@ -17,7 +17,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(classes = {AppConfig.class})
+@SpringBootTest
 @EnableAutoConfiguration
 public class BookTest {
 
@@ -117,5 +117,11 @@ public class BookTest {
             updateBook.setBookAuthor(new BookAuthor("xxxxxx"));
             assertNotNull(this.bookRepo.updateBook(updateBook, updateBook.getBookId()).block());
         }
+    }
+
+    @Test
+    public void pass_012() {
+        Optional<Book> book = this.bookRepo.findByBookName("Core Java").blockOptional();
+        book.ifPresent(value -> this.bookRepo.delete(value).block());
     }
 }

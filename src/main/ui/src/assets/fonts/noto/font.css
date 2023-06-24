@@ -1,35 +1,35 @@
 @font-face {
   font-family: 'NotoNastaliqUrdu';
-  src: url('/ui/assets/fonts/noto/NotoNastaliqUrdu/NotoNastaliqUrdu.eot');
-  src: url('/ui/assets/fonts/noto/NotoNastaliqUrdu/NotoNastaliqUrdu.eot?#iefix') format('embedded-opentype'),
-    url('/ui/assets/fonts/noto/NotoNastaliqUrdu/NotoNastaliqUrdu.svg#NotoNastaliqUrdu') format('svg'),
-    url('/ui/assets/fonts/noto/NotoNastaliqUrdu/NotoNastaliqUrdu.ttf') format('truetype'),
-    url('/ui/assets/fonts/noto/NotoNastaliqUrdu/NotoNastaliqUrdu.woff') format('woff'),
-    url('/ui/assets/fonts/noto/NotoNastaliqUrdu/NotoNastaliqUrdu.woff2') format('woff2');
+  src: url('./NotoNastaliqUrdu/NotoNastaliqUrdu.eot');
+  src: url('./NotoNastaliqUrdu/NotoNastaliqUrdu.eot?#iefix') format('embedded-opentype'),
+    url('./NotoNastaliqUrdu/NotoNastaliqUrdu.svg#NotoNastaliqUrdu') format('svg'),
+    url('./NotoNastaliqUrdu/NotoNastaliqUrdu.ttf') format('truetype'),
+    url('./NotoNastaliqUrdu/NotoNastaliqUrdu.woff') format('woff'),
+    url('./NotoNastaliqUrdu/NotoNastaliqUrdu.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'NotoNaskhArabic-Bold';
-  src: url('/ui/assets/fonts/noto/NotoNaskhArabicBold/NotoNaskhArabic-Bold.eot');
-  src: url('/ui/assets/fonts/noto/NotoNaskhArabicBold/NotoNaskhArabic-Bold.eot?#iefix') format('embedded-opentype'),
-  url('/ui/assets/fonts/noto/NotoNaskhArabicBold/NotoNaskhArabic-Bold.svg#NotoNaskhArabic-Bold') format('svg'),
-  url('/ui/assets/fonts/noto/NotoNaskhArabicBold/NotoNaskhArabic-Bold.ttf') format('truetype'),
-  url('/ui/assets/fonts/noto/NotoNaskhArabicBold/NotoNaskhArabic-Bold.woff') format('woff'),
-  url('/ui/assets/fonts/noto//NotoNaskhArabic-Bold.woff2') format('woff2');
+  src: url('./NotoNaskhArabicBold/NotoNaskhArabic-Bold.eot');
+  src: url('./NotoNaskhArabicBold/NotoNaskhArabic-Bold.eot?#iefix') format('embedded-opentype'),
+  url('./NotoNaskhArabicBold/NotoNaskhArabic-Bold.svg#NotoNaskhArabic-Bold') format('svg'),
+  url('./NotoNaskhArabicBold/NotoNaskhArabic-Bold.ttf') format('truetype'),
+  url('./NotoNaskhArabicBold/NotoNaskhArabic-Bold.woff') format('woff'),
+  url('./NotoNaskhArabicBold/NotoNaskhArabic-Bold.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'NotoNaskhArabicUI-Bold';
-  src: url('/ui/assets/fonts/noto/NotoNaskhArabicUI-Bold/NotoNaskhArabicUI-Bold.eot');
-  src: url('/ui/assets/fonts/noto/NotoNaskhArabicUI-Bold/NotoNaskhArabicUI-Bold.eot?#iefix') format('embedded-opentype'),
-  url('/ui/assets/fonts/noto/NotoNaskhArabicUI-Bold/NotoNaskhArabicUI-Bold.svg#NotoNaskhArabicUI-Bold') format('svg'),
-  url('/ui/assets/fonts/noto/NotoNaskhArabicUI-Bold/NotoNaskhArabicUI-Bold.ttf') format('truetype'),
-  url('/ui/assets/fonts/noto/NotoNaskhArabicUI-Bold/NotoNaskhArabicUI-Bold.woff') format('woff'),
-  url('/ui/assets/fonts/noto/NotoNaskhArabicUI-Bold/NotoNaskhArabicUI-Bold.woff2') format('woff2');
+  src: url('./NotoNaskhArabicUI-Bold/NotoNaskhArabicUI-Bold.eot');
+  src: url('./NotoNaskhArabicUI-Bold/NotoNaskhArabicUI-Bold.eot?#iefix') format('embedded-opentype'),
+  url('./NotoNaskhArabicUI-Bold/NotoNaskhArabicUI-Bold.svg#NotoNaskhArabicUI-Bold') format('svg'),
+  url('./NotoNaskhArabicUI-Bold/NotoNaskhArabicUI-Bold.ttf') format('truetype'),
+  url('./NotoNaskhArabicUI-Bold/NotoNaskhArabicUI-Bold.woff') format('woff'),
+  url('./NotoNaskhArabicUI-Bold/NotoNaskhArabicUI-Bold.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }

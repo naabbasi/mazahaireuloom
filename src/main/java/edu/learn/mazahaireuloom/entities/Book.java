@@ -39,17 +39,22 @@ public class Book {
     @Indexed(unique = true)
     private String bookName;
 
+    @NotNull
     @Field( value = "author")
     private BookAuthor bookAuthor;
 
+    @NotNull
     @Field( value = "publisher")
     private BookPublisher bookPublisher;
 
+    @NotNull
     @Field( value = "tags")
     private List<Tag> tags;
 
+    @NotBlank
     private String bookQuantities;
 
+    @NotBlank
     private String bookVolumes;
 
     @Override

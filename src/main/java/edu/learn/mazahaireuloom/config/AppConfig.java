@@ -1,8 +1,6 @@
 package edu.learn.mazahaireuloom.config;
 
 
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientSettings;
 import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoClients;
 import edu.learn.mazahaireuloom.entities.User;
@@ -11,17 +9,13 @@ import edu.learn.mazahaireuloom.repos.UserRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguration;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
-import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.reactive.config.CorsRegistry;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
@@ -36,10 +30,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 @Slf4j
-@Component
-@ComponentScan(basePackages =  {"edu.learn.mazahaireuloom.rest", "edu.learn.mazahaireuloom.ui_controller"})
-@EntityScan(basePackages = "edu.learn.mazahaireuloom.entities")
-@EnableReactiveMongoRepositories( basePackages = "edu.learn.mazahaireuloom.repos")
+@Configuration
 public class AppConfig extends AbstractReactiveMongoConfiguration {
     @Bean
     public ValidatingMongoEventListener validatingMongoEventListener(final LocalValidatorFactoryBean factory) {
