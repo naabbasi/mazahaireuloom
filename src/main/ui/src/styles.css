@@ -10,10 +10,10 @@
     font-size: 16px;
 }
 
-.mat-menu-item {
+.mat-mdc-menu-item {
   font-family: inherit;
 }
 
-.mat-form-field {
+.mat-mdc-form-field {
   line-height: inherit;
 }
