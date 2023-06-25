@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Slf4j
 @Setter
@@ -12,8 +13,11 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class BookPublisher {
-    private String bookPublisherName;
+@Document(collection = "shelf")
+public class Shelf {
+    private String libraryId;
+    private String shelfName;
+    private String shelfNumber;
 
     @Override
     public String toString() {
@@ -24,7 +28,7 @@ public class BookPublisher {
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
             return mapper.writeValueAsString(this);
         } catch (JsonProcessingException e) {
-            log.error("BookPublisher toString: ", e);
+            log.error("Tag toString: ", e);
         }
 
         return jsonToString;

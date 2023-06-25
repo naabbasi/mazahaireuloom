@@ -7,39 +7,31 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.TextScore;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
-@Setter @Getter
-@NoArgsConstructor
+@Setter
+@Getter
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode
-@Document(collection = "users")
-public class User {
+@Document(collection = "library")
+public class Library {
     @Id
-    private UUID userId = UUID.randomUUID();
+    private String libraryId = UUID.randomUUID().toString();
 
     @NotBlank
-    @TextIndexed(weight = 2)
-    @Indexed(unique = true)
-    private String username;
-    private String password;
-    @TextScore
-    private Float textScore = 1.0f;
+    private String libraryName;
 
-    public User(User user) {
-        this(user.getUsername(), user.getPassword());
-    }
+    @NotBlank
+    private String libraryNumber;
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
+    @Field( value = "shelves")
+    private List<Shelf> shelves;
 
     @Override
     public String toString() {
@@ -50,7 +42,7 @@ public class User {
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
             return mapper.writeValueAsString(this);
         } catch (JsonProcessingException e) {
-            log.error("User toString: ", e);
+            log.error("Shelf toString: ", e);
         }
 
         return jsonToString;

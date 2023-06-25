@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
@@ -22,11 +19,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Slf4j
-@Data
+@Setter @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-@Document(collection = "books")
+@Document(collection = "book")
 @CompoundIndexes(
     @CompoundIndex(unique = true, name = "name_author_publisher", def ="{'bookName': 1, 'author.authorName': 1, 'publisher.publisherName': 1}")
 )
@@ -51,11 +48,11 @@ public class Book {
     @Field( value = "tags")
     private List<Tag> tags;
 
-    @NotBlank
-    private String bookQuantities;
+    @NotNull
+    private Integer bookQuantities;
 
-    @NotBlank
-    private String bookVolumes;
+    @NotNull
+    private Integer bookVolumes;
 
     @Override
     public String toString() {

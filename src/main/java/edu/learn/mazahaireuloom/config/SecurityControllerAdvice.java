@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import reactor.core.publisher.Mono;
 
-import java.security.Principal;
-
 @ControllerAdvice
 public class SecurityControllerAdvice {
 

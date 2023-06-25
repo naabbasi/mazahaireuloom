@@ -1,6 +1,6 @@
 package edu.learn.mazahaireuloom.repos;
 
-import edu.learn.mazahaireuloom.entities.User;
+import edu.learn.mazahaireuloom.entities.Library;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Repository;
@@ -10,14 +10,13 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 @Repository
-public interface UserRepo extends GenericRepo<User, String> {
+public interface LibraryRepo extends GenericRepo<Library, String> {
 
-    Mono<User> findByUsername(String username);
+    Mono<Library> findByLibraryName(String libraryName);
+    //Flux<Library> findByLibraryNameAndShelfNumber(String libraryName, String shelfNumber);
 
-    Mono<User> findByUsernameAndPassword(String username, String password);
-
-    default Flux<List> searchUser(ReactiveMongoTemplate reactiveMongoTemplate, String username) {
-        Criteria regex = Criteria.where("username").regex(username, "i");
+    default Flux<List> searchLibrary(ReactiveMongoTemplate reactiveMongoTemplate, String libraryName) {
+        Criteria regex = Criteria.where("libraryName").regex(libraryName, "i");
         org.springframework.data.mongodb.core.query.Query query = new org.springframework.data.mongodb.core.query.Query();
         query.limit(10);
         query.addCriteria(regex);

@@ -1,9 +1,8 @@
 package edu.learn.mazahaireuloom.rest;
 
 import edu.learn.mazahaireuloom.entities.User;
-import edu.learn.mazahaireuloom.repos.UserRepo;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
+import edu.learn.mazahaireuloom.services.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -13,24 +12,19 @@ import java.util.List;
 
 @RequestMapping( path = "/api/users")
 @RestController
+@RequiredArgsConstructor
 public class UserRest {
-    private UserRepo userRepo;
-    private ReactiveMongoTemplate reactiveMongoTemplate;
-
-    public UserRest(UserRepo userRepo, ReactiveMongoTemplate reactiveMongoTemplate) {
-        this.userRepo = userRepo;
-        this.reactiveMongoTemplate = reactiveMongoTemplate;
-    }
+    private UserService userService;
 
     @GetMapping
     public Flux<User> all() {
-        return this.userRepo.findAll();
+        return this.userService.findAll();
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public Boolean save(@RequestBody User user) {
         try{
-            this.userRepo.save(user).subscribe(System.out::println);
+            this.userService.save(user).subscribe(System.out::println);
         }catch (RuntimeException e){
             return false;
         }
@@ -42,7 +36,7 @@ public class UserRest {
     public Mono<User> login(@RequestBody User user) {
         Mono<User> isLoggedIn = Mono.empty();
         try{
-            isLoggedIn = this.userRepo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+            isLoggedIn = this.userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
         }catch (RuntimeException e){
             return isLoggedIn;
         }
@@ -52,6 +46,6 @@ public class UserRest {
 
     @GetMapping(path = "/search/{username}")
     public Flux<List> search(@PathVariable String username) {
-        return this.userRepo.searchUser(this.reactiveMongoTemplate, username);
+        return this.userService.searchUser(username);
     }
 }

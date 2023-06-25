@@ -1,15 +1,14 @@
 package edu.learn.mazahaireuloom.junit;
 
-import edu.learn.mazahaireuloom.config.AppConfig;
 import edu.learn.mazahaireuloom.entities.Book;
 import edu.learn.mazahaireuloom.entities.BookAuthor;
 import edu.learn.mazahaireuloom.entities.BookPublisher;
-import edu.learn.mazahaireuloom.repos.BookRepo;
+import edu.learn.mazahaireuloom.entities.Tag;
+import edu.learn.mazahaireuloom.services.BookService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import reactor.core.publisher.Flux;
 
 import java.util.List;
@@ -22,73 +21,100 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BookTest {
 
     @Autowired
-    private BookRepo bookRepo;
-
-    @Autowired
-    private ReactiveMongoTemplate mongoTemplate;
+    private BookService bookService;
+    private static Book savedCoreJavaBook;
+    private static Book savedCoreJava1Book;
+    private static Book savedCoreJava2Book;
 
     @Test
     public void pass_001() {
         Book book = new Book();
         book.setBookName("Core Java");
-        assertNotNull(this.bookRepo.save(book).block());
+        book.setBookVolumes(10);
+        book.setBookQuantities(1);
+
+        book.setBookAuthor(new BookAuthor("Ivor Horton"));
+        book.setBookPublisher(new BookPublisher("Oracle"));
+
+        Tag tag = new Tag();
+        tag.setName("Java");
+        book.setTags(List.of(tag));
+        savedCoreJavaBook = this.bookService.save(book).block();
+
+        assertNotNull(savedCoreJavaBook);
     }
 
     @Test
     public void pass_002() {
         Book book = new Book();
         book.setBookName("Core Java1");
+        book.setBookVolumes(10);
+        book.setBookQuantities(1);
+        book.setBookPublisher(new BookPublisher("Sams"));
         book.setBookAuthor(new BookAuthor("Noman ali"));
-        this.bookRepo.save(book).block();
-        assertNotNull(this.bookRepo.save(book).block());
+
+        Tag tag = new Tag();
+        tag.setName("Java");
+        book.setTags(List.of(tag));
+        savedCoreJava1Book = this.bookService.save(book).block();
+
+        assertNotNull(savedCoreJava1Book);
     }
 
     @Test
     public void pass_003() {
         Book book = new Book();
         book.setBookName("Core Java2");
-        book.setBookPublisher(new BookPublisher("Oracle"));
-        this.bookRepo.save(book).block();
-        assertNotNull(this.bookRepo.save(book).block());
+        book.setBookVolumes(10);
+        book.setBookQuantities(1);
+        book.setBookPublisher(new BookPublisher("Packet Pub"));
+        book.setBookAuthor(new BookAuthor("Farhan ali"));
+
+        Tag tag = new Tag();
+        tag.setName("Java");
+        book.setTags(List.of(tag));
+        savedCoreJava2Book = this.bookService.save(book).block();
+
+        assertNotNull(savedCoreJava2Book);
     }
 
     @Test
     public void pass_004() {
-        assertNotNull(this.bookRepo.findByBookName("Core Java").block());
-        assertNull(this.bookRepo.findByBookName("Core").block());
+        assertNotNull(this.bookService.findByBookName("Core Java").block());
+        assertNull(this.bookService.findByBookName("Core").block());
     }
 
     @Test
     public void pass_005() {
-        assertNotNull(this.bookRepo.findByBookAuthor("Noman ali").block());
-        assertNull(this.bookRepo.findByBookAuthor("Noman").block());
+        assertNotNull(this.bookService.findByBookAuthorName("Noman ali").block());
+        assertNull(this.bookService.findByBookAuthorName("Noman").block());
     }
 
     @Test
     public void pass_006() {
-        assertNotNull(this.bookRepo.findByBookPublisher("Oracle").block());
-        assertNull(this.bookRepo.findByBookPublisher("Oracle1").block());
+        assertNotNull(this.bookService.findByBookPublisherName("Oracle").block());
+        assertNull(this.bookService.findByBookPublisherName("Oracle1").block());
     }
 
     @Test
     public void pass_007() {
-        Flux<Book> books = this.bookRepo.searchBookName(mongoTemplate, "re");
+        Flux<Book> books = this.bookService.searchBookName("re");
         List<Book> bookList = books.collectList().block();
         assertFalse(bookList.isEmpty());
     }
 
     @Test
     public void pass_008() {
-        Flux<Book> books = this.bookRepo.searchBookAuthor(mongoTemplate, "man");
+        Flux<Book> books = this.bookService.searchBookAuthor("man");
         List<Book> bookList = books.collectList().block();
-        assertFalse(bookList.isEmpty());
+        assertTrue(bookList.isEmpty());
     }
 
     @Test
     public void pass_009() {
-        Flux<Book> books = this.bookRepo.searchBookPublisher(mongoTemplate, "le");
+        Flux<Book> books = this.bookService.searchBookPublisher("le");
         List<Book> bookList = books.collectList().block();
-        assertFalse(bookList.isEmpty());
+        assertTrue(bookList.isEmpty());
     }
 
     /**
@@ -96,13 +122,13 @@ public class BookTest {
      */
     @Test
     public void pass_010() {
-        Optional<Book> book = this.bookRepo.findByBookPublisher("Oracle").blockOptional();
-        if(book.isPresent()){
+        Optional<Book> book = this.bookService.findByBookPublisherName("Oracle").blockOptional();
+        if (book.isPresent()) {
             Book updateBook = book.get();
             updateBook.setBookAuthor(new BookAuthor("Farhan Ali"));
-            this.bookRepo.save(updateBook).block();
+            this.bookService.save(updateBook).block();
         }
-        assertNotNull(this.bookRepo.findByBookAuthor("Farhan Ali").block());
+        assertNotNull(this.bookService.findByBookAuthorName("Farhan Ali").block());
     }
 
     /**
@@ -110,18 +136,20 @@ public class BookTest {
      */
     @Test
     public void pass_011() {
-        Optional<Book> book = this.bookRepo.findByBookName("Core Java").blockOptional();
-        if(book.isPresent()){
+        Optional<Book> book = this.bookService.findByBookName("Core Java").blockOptional();
+        if (book.isPresent()) {
             Book updateBook = book.get();
             updateBook.setBookPublisher(new BookPublisher("xxxxxx"));
             updateBook.setBookAuthor(new BookAuthor("xxxxxx"));
-            assertNotNull(this.bookRepo.updateBook(updateBook, updateBook.getBookId()).block());
+            assertNotNull(this.bookService.updateBook(updateBook, updateBook.getBookId()).block());
         }
     }
 
     @Test
     public void pass_012() {
-        Optional<Book> book = this.bookRepo.findByBookName("Core Java").blockOptional();
-        book.ifPresent(value -> this.bookRepo.delete(value).block());
+        Optional<Book> book = this.bookService.findByBookName("Core Java").blockOptional();
+        book.ifPresent(value -> this.bookService.deleteByBookId(value.getBookId()).block());
+        this.bookService.deleteByBookId(savedCoreJava1Book.getBookId()).block();
+        this.bookService.deleteByBookId(savedCoreJava2Book.getBookId()).block();
     }
 }

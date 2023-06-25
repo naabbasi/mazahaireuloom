@@ -1,7 +1,6 @@
 package edu.learn.mazahaireuloom.repos;
 
 import edu.learn.mazahaireuloom.entities.Book;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Example;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -10,17 +9,16 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@Qualifier("bookRepo")
 @Repository
 public interface BookRepo extends GenericRepo<Book, String> {
 
     Mono<Book> findByBookName(String bookName);
 
-    @Query(value = "{'author.name': ?0}")
-    Mono<Book> findByBookAuthor(String bookAuthor);
+    @Query(value = "{'author.bookAuthorName': ?0}")
+    Mono<Book> findByBookAuthorName(String bookAuthorName);
 
-    @Query(value = "{'publisher.name': ?0}")
-    Mono<Book> findByBookPublisher(String bookPublisher);
+    @Query(value = "{'publisher.bookPublisherName': ?0}")
+    Mono<Book> findByBookPublisherName(String bookPublisherName);
 
     default Mono<Book> updateBook(Book book, String id){
         var findBook = new Book();
@@ -51,27 +49,27 @@ public interface BookRepo extends GenericRepo<Book, String> {
         return mongoTemplate.find(query, Book.class);
     }
 
-    default Flux<Book> searchBookName(ReactiveMongoTemplate mongoTemplate, String bookName) {
+    default Flux<Book> searchBookName(ReactiveMongoTemplate reactiveMongoTemplate, String bookName) {
         var regex = Criteria.where("bookName").regex(bookName, "i");
         var query = new org.springframework.data.mongodb.core.query.Query();
         query.limit(20);
         query.addCriteria(regex);
-        return mongoTemplate.find(query, Book.class);
+        return reactiveMongoTemplate.find(query, Book.class);
     }
 
-    default Flux<Book> searchBookAuthor(ReactiveMongoTemplate mongoTemplate, String authorName) {
+    default Flux<Book> searchBookAuthor(ReactiveMongoTemplate reactiveMongoTemplate, String authorName) {
         var regex = Criteria.where("author.name").regex(authorName, "i");
         var query = new org.springframework.data.mongodb.core.query.Query();
         query.limit(20);
         query.addCriteria(regex);
-        return mongoTemplate.find(query, Book.class);
+        return reactiveMongoTemplate.find(query, Book.class);
     }
 
-    default Flux<Book> searchBookPublisher(ReactiveMongoTemplate mongoTemplate, String publisherName) {
+    default Flux<Book> searchBookPublisher(ReactiveMongoTemplate reactiveMongoTemplate, String publisherName) {
         var regex = Criteria.where("publisher.name").regex(publisherName, "i");
         var query = new org.springframework.data.mongodb.core.query.Query();
         query.limit(20);
         query.addCriteria(regex);
-        return mongoTemplate.find(query, Book.class);
+        return reactiveMongoTemplate.find(query, Book.class);
     }
 }
