@@ -16,7 +16,7 @@ declare var $ : any;
 @Component({
   selector: 'app-edit-book',
   templateUrl: './edit-book.component.html',
-  styleUrls: ['./edit-book.component.css'],
+  styleUrls: ['./edit-book.component.scss'],
   providers: [
     // The locale would typically be provided on the root module of your application. We do it at
     // the component level here, due to limitations of our example generation script.

@@ -11,7 +11,7 @@
     <br>
     <mat-form-field class="text-box-width-seventy-five" appearance="outline">
       <mat-label>کتاب کے مصنف</mat-label>
-      <input matInput #bookAuthor id="bookAuthor" name="bookAuthor" [(ngModel)]="book?.bookAuthor.name"
+      <input matInput #bookAuthor id="bookAuthorNamer" name="bookAuthorName" [(ngModel)]="book?.bookAuthor.bookAuthorName"
              (focus)="bindKeyboard(bookAuthor)"
              (blur)="hideKeyboard()"
              required placeholder="کتاب کے مصنف"
@@ -21,7 +21,7 @@
     <br>
     <mat-form-field class="text-box-width-seventy-five" appearance="outline">
       <mat-label>ادرہ اشاعت</mat-label>
-      <input matInput #bookPublisher id="bookPublisher" name="bookPublisher" [value]="book?.bookPublisher.name"
+      <input matInput #bookPublisher id="bookPublisherName" name="bookPublisherName" [value]="book?.bookPublisher.bookPublisherName"
              (focus)="bindKeyboard(bookPublisher)"
              (blur)="hideKeyboard()"
              required placeholder="ادرہ اشاعت"

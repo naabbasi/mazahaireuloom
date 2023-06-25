@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+/*@import "@angular/material/prebuilt-themes/indigo-pink.css";*/
+@import "~assets/fonts/noto/font.css";
+
+* {
+    direction: rtl;
+    font-family: 'NotoNaskhArabicUI-Bold';
+    font-size: 16px;
+}
+
+/* $my-custom-level: mat.define-typography-level(
+  $font-family: 'NotoNaskhArabicUI-Bold',
+  $font-weight: 400,
+  $font-size: 15rem,
+  $line-height: 1,
+  $letter-spacing: normal,
+); */
+
+$mdc-typography-font-family: unquote("NotoNaskhArabicUI-Bold, sans-serif");
+
+/* .mat-mdc-header-cell {
+  font-family: inherit;
+}
+
+.mat-mdc-standard-chip {
+  font-family: inherit !important;
+}
+
+.mat-mdc-menu-item {
+  font-family: inherit;
+}
+
+.mat-mdc-cell {
+  font-family: inherit;
+}
+
+.mat-mdc-menu-item {
+  font-family: inherit;
+}
+
+.mat-mdc-form-field {
+  line-height: inherit;
+} */

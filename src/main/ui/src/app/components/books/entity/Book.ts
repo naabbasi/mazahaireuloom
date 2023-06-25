@@ -1,8 +1,8 @@
 export interface Book {
   bookId : string;
   bookName : string;
-  bookAuthor: { name: "" };
-  bookPublisher: { name: "" };
+  bookAuthor: { bookAuthorName: "" };
+  bookPublisher: { bookPublisherName: "" };
   tags: any;
   bookQuantities : number;
   bookVolumes : number;

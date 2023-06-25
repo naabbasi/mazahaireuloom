@@ -22,7 +22,7 @@ declare var $ : any;
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html',
-  styleUrls: ['./books.component.css']
+  styleUrls: ['./books.component.scss']
 })
 export class BooksComponent extends GenericComponent implements OnInit{
   books : Observable<Book>;

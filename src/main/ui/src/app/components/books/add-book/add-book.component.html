@@ -11,7 +11,7 @@
     <br>
     <mat-form-field class="text-box-width-seventy-five" appearance="outline">
       <mat-label>کتاب کے مصنف</mat-label>
-      <input matInput #bookAuthor id="bookAuthor" name="bookAuthor"
+      <input matInput #bookAuthor id="bookAuthorName" name="bookAuthorName"
              (focus)="bindKeyboard(bookAuthor)" (blur)="hideKeyboard()"
              required placeholder="کتاب کے مصنف"
              oninvalid="this.setCustomValidity('کتاب کے مصنف کا اندراج کریں')"
@@ -20,7 +20,7 @@
     <br>
     <mat-form-field class="text-box-width-seventy-five" appearance="outline">
       <mat-label>ادرہ اشاعت</mat-label>
-      <input matInput #bookPublisher id="bookPublisher" name="bookPublisher"
+      <input matInput #bookPublisher id="bookPublisherName" name="bookPublisherName"
              (focus)="bindKeyboard(bookPublisher)" (blur)="hideKeyboard()"
              required placeholder="ادرہ اشاعت"
              oninvalid="this.setCustomValidity('ادرہ اشاعت کا اندراج کریں')"

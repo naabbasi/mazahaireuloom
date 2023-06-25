@@ -16,13 +16,13 @@
     <!-- Book Author Column -->
     <ng-container matColumnDef="bookAuthor">
       <th mat-header-cell *matHeaderCellDef > کتاب کے مصنف </th>
-      <td mat-cell *matCellDef="let element"> {{element.bookAuthor.name}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.bookAuthor.bookAuthorName}} </td>
     </ng-container>
 
     <!-- Book Publisher Column -->
     <ng-container matColumnDef="bookPublisher">
       <th mat-header-cell *matHeaderCellDef > ادرہ اشاعت </th>
-      <td mat-cell *matCellDef="let element"> {{element.bookPublisher.name}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.bookPublisher.bookPublisherName}} </td>
     </ng-container>
 
     <!-- Book Tags Column -->

@@ -36,8 +36,8 @@ public interface BookRepo extends GenericRepo<Book, String> {
         var regex = new Criteria();
         regex.orOperator(
             Criteria.where("bookName").regex(book, "i"),
-            Criteria.where("author.name").regex(book, "i"),
-            Criteria.where("publisher.name").regex(book, "i"),
+            Criteria.where("author.bookAuthorName").regex(book, "i"),
+            Criteria.where("publisher.bookPublisherName").regex(book, "i"),
             Criteria.where("tags.name").regex(book, "i"),
             Criteria.where("bookQuantities").regex(book, "i"),
             Criteria.where("bookVolumes").regex(book, "i")

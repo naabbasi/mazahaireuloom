@@ -12,7 +12,7 @@ declare var $ : any;
 @Component({
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
-  styleUrls: ['./add-book.component.css'],
+  styleUrls: ['./add-book.component.scss'],
   providers: [
     // The locale would typically be provided on the root module of your application. We do it at
     // the component level here, due to limitations of our example generation script.
@@ -64,10 +64,10 @@ export class AddBookComponent extends GenericComponent implements OnInit {
       "bookQuantities": $('#bookQuantities').val(),
       "bookVolumes": $('#bookVolumes').val(),
       "bookAuthor": {
-        "name" : $('#bookAuthor').val()
+        "bookAuthorName" : $('#bookAuthorName').val()
       },
       "bookPublisher": {
-        "name": $('#bookPublisher').val()
+        "bookPublisherName": $('#bookPublisherName').val()
       },
       "tags": this.tags
     };

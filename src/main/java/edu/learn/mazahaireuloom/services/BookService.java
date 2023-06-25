@@ -15,7 +15,7 @@ public class BookService {
     private final ReactiveMongoTemplate reactiveMongoTemplate;
     private final BookRepo bookRepo;
     public Flux<Book> findAll() {
-        return null;
+        return this.bookRepo.findAll();
     }
 
     public Mono<Book> findOne(String bookId) {

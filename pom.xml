@@ -100,7 +100,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>edu.learn.mazahaireuloom.MazahaireuloomApplication</mainClass>
+                    <mainClass>edu.learn.mazahaireuloom.MazahaireUloomApplication</mainClass>
                 </configuration>
             </plugin>
             <plugin>
