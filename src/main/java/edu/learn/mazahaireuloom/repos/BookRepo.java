@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Map;
+
 @Repository
 public interface BookRepo extends GenericRepo<Book, String> {
 
@@ -31,21 +33,28 @@ public interface BookRepo extends GenericRepo<Book, String> {
         });
     }
 
-    default Flux<Book> searchBook(ReactiveMongoTemplate mongoTemplate, String book) {
+    default Flux<Book> searchBook(ReactiveMongoTemplate mongoTemplate, String book, Map<String, Object> params) {
+        var criteria = new Criteria();
 
-        var regex = new Criteria();
-        regex.orOperator(
-            Criteria.where("bookName").regex(book, "i"),
-            Criteria.where("author.bookAuthorName").regex(book, "i"),
-            Criteria.where("publisher.bookPublisherName").regex(book, "i"),
-            Criteria.where("tags.name").regex(book, "i"),
-            Criteria.where("bookQuantities").regex(book, "i"),
-            Criteria.where("bookVolumes").regex(book, "i")
-        );
+        if(!params.isEmpty()){
+            String by = (String) params.get("by");
+            if("tags".equals(by)){
+                criteria = Criteria.where("tags.name").regex(book, "i");
+            }
+        } else {
+            criteria.orOperator(
+                    Criteria.where("bookName").regex(book, "i"),
+                    Criteria.where("author.bookAuthorName").regex(book, "i"),
+                    Criteria.where("publisher.bookPublisherName").regex(book, "i"),
+                    Criteria.where("bookQuantities").regex(book, "i"),
+                    Criteria.where("bookVolumes").regex(book, "i")
+            );
+        }
+
 
         var query = new org.springframework.data.mongodb.core.query.Query();
         query.limit(20);
-        query.addCriteria(regex);
+        query.addCriteria(criteria);
         return mongoTemplate.find(query, Book.class);
     }
 

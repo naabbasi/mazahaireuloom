@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
+import java.util.Map;
 
 @Slf4j
 @RequestMapping( path = "/api/books")
@@ -66,8 +67,9 @@ public class BookRest {
     }
 
     @GetMapping(path = "/search/{book}")
-    public Flux<Book> searchBook(@PathVariable String book) {
-        return this.bookService.searchBook(book);
+    public Flux<Book> searchBook(@PathVariable String book, @RequestParam Map<String, Object> params) {
+        System.out.println(params);
+        return this.bookService.searchBook(book, params);
     }
 
     @GetMapping(path = "/search/bookName/{bookName}")

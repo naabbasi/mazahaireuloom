@@ -3,16 +3,22 @@
     <mat-toolbar-row>
       <span>مظاہر العلوم</span>&nbsp;
       <div style="width: 100%; margin-right: 5%;">
-        <a mat-button [matMenuTriggerFor]="menu" style="font-size: 18px;">کتابیں</a>
-        <mat-menu #menu="matMenu">
+        <a mat-button [matMenuTriggerFor]="menuLibrary" style="font-size: 18px;">لابیرری</a>
+        <mat-menu #menuLibrary="matMenu">
+          <a mat-menu-item routerLink="/libraries">اندراج شدہ لابیرری</a>
+          <a mat-menu-item routerLink="/libraries/search">لابیرری تلاش کریں</a>
+          <a mat-menu-item routerLink="/libraries/add">لابیرری کا اندراج</a>
+        </mat-menu>
+        <a mat-button [matMenuTriggerFor]="menuBook" style="font-size: 18px;">کتابیں</a>
+        <mat-menu #menuBook="matMenu">
           <a mat-menu-item routerLink="/books">اندراج شدہ کتابیں</a>
           <a mat-menu-item routerLink="/books/search">کتاب تلاش کریں</a>
-          <a mat-menu-item routerLink="books/add">کتاب کا اندراج</a>
+          <a mat-menu-item routerLink="/books/add">کتاب کا اندراج</a>
         </mat-menu>
         <a mat-button [matMenuTriggerFor]="menuTafseer" style="font-size: 18px;">التفسیر</a>
         <mat-menu #menuTafseer="matMenu">
-          <a mat-menu-item routerLink="">متون</a>
-          <a mat-menu-item routerLink="">احکام القرآن</a>
+          <a mat-menu-item routerLink="/mm">متون</a>
+          <a mat-menu-item routerLink="/books/search" [queryParams]="{q:'احکام القرآن', by: 'tags'}">احکام القرآن</a>
           <a mat-menu-item routerLink="">لغات القرآن</a>
           <a mat-menu-item routerLink="">علوم القرآن</a>
           <a mat-menu-item routerLink="">المتفرقات</a>

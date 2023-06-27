@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 public class BookService {
@@ -39,8 +41,8 @@ public class BookService {
         return this.bookRepo.deleteById(id);
     }
 
-    public Flux<Book> searchBook(String book) {
-        return this.bookRepo.searchBook(this.reactiveMongoTemplate, book);
+    public Flux<Book> searchBook(String book, Map<String, Object> params) {
+        return this.bookRepo.searchBook(this.reactiveMongoTemplate, book, params);
     }
 
     public Flux<Book> searchBookName(String bookName) {
