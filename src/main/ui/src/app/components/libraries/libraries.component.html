@@ -1,0 +1,66 @@
+<mat-card appearance="outlined" dir="rtl">
+  <mat-card-header>
+    <form #searchBook="ngForm" ngNativeValidate style="width: 100%;">
+      <mat-form-field class="text-box-width-seventy-five" appearance="outline">
+        <mat-label>کتاب تلاش کریں</mat-label>
+        <input matInput #findBook id="findBook" name="findBook" (keyup)='keyUp.next($event.target.value)'
+               (focus)="bindKeyboard(findBook)" (blur)="hideKeyboard()" (keyup.enter)="onEnter(findBook.value)"
+               required placeholder="کتاب کا نام یا مصنف یا ادرہ اشاعت یا موضوع کا اندراج کریں"
+               oninvalid="this.setCustomValidity('کتاب کا نام یا مصنف یا ادرہ اشاعت کا اندراج کریں')"
+               oninput="setCustomValidity('')">
+      </mat-form-field>
+      <br>
+      <mat-progress-bar *ngIf="isLoadingResults" [mode]="'indeterminate'"></mat-progress-bar>
+    </form>
+  </mat-card-header>
+</mat-card>
+<mat-divider></mat-divider>
+<div *ngIf="resultsLength != 0">
+  <table mat-table [dataSource]="dataSource" style="width: 100%;" class="mat-elevation-z12">
+
+    <!--- Note that these colum-z12">
+      defined in any order.
+      The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Book Name Column -->
+    <ng-container matColumnDef="bookName">
+      <th mat-header-cell *matHeaderCellDef style="width: 25%;"> کتاب کا نام </th>
+      <td mat-cell *matCellDef="let element">
+        <a href="javascript: void(0)" routerLink="/books/edit/{{element.bookId}}">{{element.bookName}} </a>
+      </td>
+    </ng-container>
+
+    <!-- Book Author Column -->
+    <ng-container matColumnDef="bookAuthor">
+      <th mat-header-cell *matHeaderCellDef style="width: 25%;"> کتاب کے مصنف </th>
+      <td mat-cell *matCellDef="let element"> {{element.bookAuthor.bookAuthorName}} </td>
+    </ng-container>
+
+    <!-- Book Publisher Column -->
+    <ng-container matColumnDef="bookPublisher">
+      <th mat-header-cell *matHeaderCellDef style="width: 25%;"> ادرہ اشاعت </th>
+      <td mat-cell *matCellDef="let element"> {{element.bookPublisher.bookPublisherName}} </td>
+    </ng-container>
+
+    <!-- Book Tags Column -->
+    <ng-container matColumnDef="tags">
+      <th mat-header-cell *matHeaderCellDef style="width: 25%;"> موضوع </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-chip-listbox #chipList>
+          <mat-chip-option *ngFor="let tag of element.tags">
+            {{tag.name}}
+          </mat-chip-option>
+        </mat-chip-listbox>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <!--<mat-paginator dir="ltr" [pageSizeOptions]="[10, 15, 20]"></mat-paginator>-->
+</div>
+<ng-template #template>
+  <div style="width: 100%">
+    <img src="assets/images/kb.png" style="width: inherit;">
+  </div>
+</ng-template>

@@ -10,9 +10,9 @@ import {GenericComponent} from "../../GenericComponent";
 declare var $ : any;
 
 @Component({
-  selector: 'app-add-book',
-  templateUrl: './add-book.component.html',
-  styleUrls: ['./add-book.component.scss'],
+  selector: 'app-add-library',
+  templateUrl: './add-library.component.html',
+  styleUrls: ['./add-library.component.scss'],
   providers: [
     // The locale would typically be provided on the root module of your application. We do it at
     // the component level here, due to limitations of our example generation script.
@@ -25,7 +25,7 @@ declare var $ : any;
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
   ]
 })
-export class AddBookComponent extends GenericComponent implements OnInit {
+export class AddLibraryComponent extends GenericComponent implements OnInit {
   minDate = new Date(2018, 0, 1);
   visible = true;
   tags: Tags[] = [];
@@ -59,7 +59,7 @@ export class AddBookComponent extends GenericComponent implements OnInit {
   }
 
   onSave() {
-    let addBook = {
+    let addLibrary = {
       "bookName": $('#bookName').val(),
       "bookQuantities": $('#bookQuantities').val(),
       "bookVolumes": $('#bookVolumes').val(),
@@ -72,9 +72,9 @@ export class AddBookComponent extends GenericComponent implements OnInit {
       "tags": this.tags
     };
 
-    console.log(addBook);
+    console.log(addLibrary);
 
-    this.http.post("/books", addBook).subscribe(res => {
+    this.http.post("/libraries", addLibrary).subscribe(res => {
       this.statusStyle = {
         "font-size": "12px",
         "font-weight": "normal",

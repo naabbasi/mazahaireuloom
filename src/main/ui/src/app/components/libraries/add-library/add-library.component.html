@@ -1,0 +1,75 @@
+<div style="margin-top: 5%; margin-right: 23%;" dir="rtl">
+  <form (submit)="onSave()"  #addNewBook="ngForm" ngNativeValidate>
+    <mat-form-field class="text-box-width-seventy-five" appearance="outline">
+      <mat-label>کتاب کا نام</mat-label>
+      <input matInput #bookName id="bookName" name="bookName"
+             (focus)="bindKeyboard(bookName)" (blur)="hideKeyboard()" (keyup.enter)="onEnter(bookName.value)"
+             required placeholder="کتاب کا نام"
+             oninvalid="this.setCustomValidity('کتاب کا نام کا اندراج کریں')"
+             oninput="setCustomValidity('')">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="text-box-width-seventy-five" appearance="outline">
+      <mat-label>کتاب کے مصنف</mat-label>
+      <input matInput #bookAuthor id="bookAuthorName" name="bookAuthorName"
+             (focus)="bindKeyboard(bookAuthor)" (blur)="hideKeyboard()"
+             required placeholder="کتاب کے مصنف"
+             oninvalid="this.setCustomValidity('کتاب کے مصنف کا اندراج کریں')"
+             oninput="setCustomValidity('')">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="text-box-width-seventy-five" appearance="outline">
+      <mat-label>ادرہ اشاعت</mat-label>
+      <input matInput #bookPublisher id="bookPublisherName" name="bookPublisherName"
+             (focus)="bindKeyboard(bookPublisher)" (blur)="hideKeyboard()"
+             required placeholder="ادرہ اشاعت"
+             oninvalid="this.setCustomValidity('ادرہ اشاعت کا اندراج کریں')"
+             oninput="setCustomValidity('')">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="text-box-width-seventy-five" appearance="outline">
+      <mat-label>موضوع</mat-label>
+      <mat-chip-grid #chipList>
+        <mat-chip-row *ngFor="let tag of tags" [selectable]="selectable"
+                  [removable]="removable" (removed)="remove(tag)">
+          {{tag.name}}
+          <mat-icon matChipRemove *ngIf="removable">x</mat-icon>
+        </mat-chip-row>
+        <input #tagsText placeholder="موضوع"
+             (focus)="bindKeyboard(tagsText)"
+             (blur)="hideKeyboard()"
+             [matChipInputFor]="chipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="addOnBlur"
+             (matChipInputTokenEnd)="add($event)">
+      </mat-chip-grid>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="outline">
+      <mat-label>کتاب کی تعداد</mat-label>
+      <input matInput #bookQuantities id="bookQuantities" name="bookQuantities"
+             (focus)="bindKeyboard(bookQuantities)" (blur)="hideKeyboard()"
+             required placeholder="کتاب کی تعداد"
+             oninvalid="this.setCustomValidity('کتاب کی تعداد کا اندراج کریں')"
+             oninput="setCustomValidity('')">
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field appearance="outline">
+      <mat-label>کتاب کی جلدیں</mat-label>
+      <input matInput #bookVolumes id="bookVolumes" name="bookVolumes"
+             (focus)="bindKeyboard(bookVolumes)" (blur)="hideKeyboard()"
+             required placeholder="کتاب کی جلدیں"
+             oninvalid="this.setCustomValidity('کتاب کی جلدوں کا اندراج کریں')"
+             oninput="setCustomValidity('')">
+    </mat-form-field>
+    <br>
+    <button type="submit" mat-raised-button color="primary" [disabled]="!addNewBook.form.valid">محفوظ کریں</button>
+    <br>
+    <small id="status" [ngStyle]="statusStyle"></small>
+  </form>
+</div>
+<ng-template #template>
+  <div style="width: 100%">
+    <img src="assets/images/kb.png" style="width: inherit;">
+  </div>
+</ng-template>

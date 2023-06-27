@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpConfig} from "../../config/httpconfig";
 import {Subject, Observable, of, merge} from 'rxjs';
-import {Book} from "../entity/Book";
+import {Library} from "../entity/Library";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTableDataSource } from "@angular/material/table";
@@ -20,12 +20,12 @@ import {
 declare var $ : any;
 
 @Component({
-  selector: 'app-books',
-  templateUrl: './books.component.html',
-  styleUrls: ['./books.component.scss']
+  selector: 'app-libraries',
+  templateUrl: './libraries.component.html',
+  styleUrls: ['./libraries.component.scss']
 })
-export class BooksComponent extends GenericComponent implements OnInit{
-  books : Observable<Book>;
+export class LibrariesComponent extends GenericComponent implements OnInit{
+  libraries : Observable<Library>;
   keyUp = new Subject<string>();
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -51,8 +51,8 @@ export class BooksComponent extends GenericComponent implements OnInit{
           this.isLoadingResults = false;
         } else {
           this.isLoadingResults = true;
-          this.http.get(`/books/search/${value}`).subscribe( (data) => {
-            this.books = of(data);
+          this.http.get(`/libraries/search/${value}`).subscribe( (data) => {
+            this.libraries = of(data);
             this.dataSource.data = data;
             this.resultsLength = data.length;
             this.isLoadingResults = false;
@@ -66,23 +66,23 @@ export class BooksComponent extends GenericComponent implements OnInit{
       .pipe(
         startWith({}),
         switchMap(() => {
-          return this.http.get(`/books?page=${this.paginator.pageIndex + 1}`)
+          return this.http.get(`/libraries?page=${this.paginator.pageIndex + 1}`)
         }),
         map(data => {
           // Flip flag to show that loading has finished.
           this.resultsLength = data.length;
           return data;
         })
-      ).subscribe(data => this.books = data);
+      ).subscribe(data => this.libraries = data);
   }
 
   onSearch(searchString) {
     this.keyUp.next(searchString);
   }
 
-  loadBooks() {
-    this.http.get("/books").subscribe( (data) => {
-      this.books = of(data);
+  loadLibraries() {
+    this.http.get("/libraries").subscribe( (data) => {
+      this.libraries = of(data);
       this.dataSource.data = data;
       this.resultsLength = data.length;
     });
