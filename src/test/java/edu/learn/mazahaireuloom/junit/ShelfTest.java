@@ -1,11 +1,14 @@
 package edu.learn.mazahaireuloom.junit;
 
 import edu.learn.mazahaireuloom.entities.Library;
+import edu.learn.mazahaireuloom.entities.Shelf;
 import edu.learn.mazahaireuloom.services.LibraryService;
+import edu.learn.mazahaireuloom.services.ShelfService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +17,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ShelfTest {
     @Autowired
     private LibraryService libraryService;
+    @Autowired
+    private ShelfService shelfService;
     private static Library savedLibrary;
+    private static Shelf savedShelf;
     @Test
     public void pass_001() {
         Library library = new Library();
@@ -28,26 +34,34 @@ public class ShelfTest {
     public void pass_002() {
         Library getLibraryById = this.libraryService.findOne(savedLibrary.getLibraryId()).block();
         assertNotNull(getLibraryById);
-        getLibraryById.setLibraryNumber("Room-001");
-        this.libraryService.save(getLibraryById).block();
 
-        getLibraryById = this.libraryService.findOne(savedLibrary.getLibraryId()).block();
-        assertEquals("Room-001", getLibraryById.getLibraryNumber());
+        Shelf shelf = new Shelf();
+        shelf.setShelfName("Tafseer e Quran");
+        shelf.setShelfNumber("TEQ-000");
+        shelf.setLibraryId(getLibraryById.getLibraryId());
+        getLibraryById.setShelves(List.of(shelf));
+        savedShelf = this.shelfService.save(shelf).block();
     }
 
     @Test
     public void pass_003() {
-        /*Library library = new Library();
-        library.setLibraryName("Core Java2");
-        library.setShelves(new LibraryPublisher("Oracle"));
-        this.libraryService.save(library).block();
-        assertNotNull(this.libraryService.save(library).block());*/
+        Shelf getSavedShelf = this.shelfService.findOne(savedShelf.getShelfId()).block();
+        assert getSavedShelf != null;
+        getSavedShelf.setShelfNumber("TEQ-001");
+
+        this.shelfService.save(getSavedShelf).block();
+
+        getSavedShelf = this.shelfService.findOne(savedShelf.getShelfId()).block();
+        assert getSavedShelf != null;
+        assertEquals("TEQ-001", getSavedShelf.getShelfNumber());
     }
 
     @Test
     public void pass_004() {
-        assertNotNull(this.libraryService.findByLibraryName("Room-1").block());
-        assertNull(this.libraryService.findByLibraryName("Room").block());
+        Shelf getShelfByLibraryAndShelf = this.shelfService.findShelfByLibraryIdAndShelfId(savedLibrary.getLibraryId(), savedShelf.getShelfId()).block();
+
+        assertNotNull(getShelfByLibraryAndShelf);
+        assertEquals("TEQ-001", getShelfByLibraryAndShelf.getShelfNumber());
     }
 
     @Test
@@ -63,8 +77,14 @@ public class ShelfTest {
     }
 
     @Test
+    public void pass_011() {
+        Optional<Shelf> shelf = this.shelfService.findByShelfName(savedShelf.getShelfName()).blockOptional();
+        shelf.ifPresent(value -> this.shelfService.deleteByShelfId(value.getShelfId()).block());
+    }
+
+    @Test
     public void pass_012() {
-        Optional<Library> library = this.libraryService.findByLibraryName("Room-1").blockOptional();
+        Optional<Library> library = this.libraryService.findByLibraryName(savedLibrary.getLibraryName()).blockOptional();
         library.ifPresent(value -> this.libraryService.deleteByLibraryId(value.getLibraryId()).block());
     }
 }

@@ -3,21 +3,30 @@ package edu.learn.mazahaireuloom.entities;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Slf4j
 @Setter
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode
 @Document(collection = "shelf")
 public class Shelf {
-    private String libraryId;
+    @Id
+    private String shelfId;
+    @NotBlank
     private String shelfName;
+    @NotBlank
     private String shelfNumber;
+    @NonNull
+    private String libraryId;
+
+    public Shelf() {
+    }
 
     @Override
     public String toString() {
