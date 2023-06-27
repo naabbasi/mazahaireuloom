@@ -45,16 +45,6 @@ public class LibraryRest {
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().build();
         }
-
-        var arabicLocale = new Locale.Builder().setLanguageTag("ar-SA-u-nu-arab").build();
-        var date = LocalDate.now();
-        var formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(arabicLocale);
-
-        var formatted = date.format(formatter);
-        System.out.println(formatted);
-        System.out.println(formatter.parse(formatted));
-
-        //return new ResponseEntity<>(library, HttpStatus.CREATED);
         return ResponseEntity.status(HttpStatus.CREATED).body(library);
     }
 
@@ -70,7 +60,7 @@ public class LibraryRest {
     }
 
     @GetMapping(path = "/search/{library}")
-    public Flux<List> searchLibrary(@PathVariable String library) {
+    public Flux<Library> searchLibrary(@PathVariable String library) {
         return this.libraryService.searchLibrary(this.reactiveMongoTemplate, library);
     }
 }

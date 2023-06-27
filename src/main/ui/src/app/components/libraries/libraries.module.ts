@@ -13,12 +13,16 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatTableModule } from "@angular/material/table";
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
+import {AllLibrariesComponent} from "./all-libraries/all-libraries.component";
+import { EditLibraryComponent } from './edit-library/edit-library.component';
 
 
 @NgModule({
   declarations: [
+    AllLibrariesComponent,
     LibrariesComponent,
-    AddLibraryComponent
+    AddLibraryComponent,
+    EditLibraryComponent
   ],
   imports: [
     CommonModule,

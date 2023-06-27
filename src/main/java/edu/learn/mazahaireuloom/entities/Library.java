@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -24,10 +25,13 @@ public class Library {
     @Id
     private String libraryId = UUID.randomUUID().toString();
 
+    @Indexed(unique = true)
     @NotBlank
+    @Field("libraryName")
     private String libraryName;
 
     @NotBlank
+    @Field("libraryNumber")
     private String libraryNumber;
 
     @Field( value = "shelves")

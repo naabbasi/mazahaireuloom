@@ -78,7 +78,7 @@ public class ShelfRest {
     }
 
     @GetMapping(path = "/search/{library}")
-    public Flux<List> searchLibrary(@PathVariable String library) {
+    public Flux<Library> searchLibrary(@PathVariable String library) {
         return this.libraryService.searchLibrary(this.reactiveMongoTemplate, library);
     }
 }

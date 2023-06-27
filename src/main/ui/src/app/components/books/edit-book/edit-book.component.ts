@@ -9,7 +9,6 @@ import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from "@angular/material-moment-adapter";
 import {Tags} from "../../entity/Tags";
-import {GenericDialogComponent} from "../../my-material/generic-dialog/generic-dialog.component";
 
 declare var $ : any;
 
@@ -31,7 +30,7 @@ declare var $ : any;
   ]
 })
 export class EditBookComponent extends GenericComponent implements OnInit {
-  book : Book;
+  book : Book = {} as Book;
   @ViewChild('dialogTemplate', { static: true }) dialogTemplate: TemplateRef<any>;
 
   constructor(private http : HttpConfig, private route : ActivatedRoute,

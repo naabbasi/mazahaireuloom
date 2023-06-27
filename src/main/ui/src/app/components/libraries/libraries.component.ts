@@ -29,7 +29,7 @@ export class LibrariesComponent extends GenericComponent implements OnInit{
   keyUp = new Subject<string>();
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns = ['bookName', 'bookAuthor', 'bookPublisher', 'tags'];
+  displayedColumns = ['libraryName', 'libraryNumber'];
 
   resultsLength = 0;
   isLoadingResults: boolean = false;

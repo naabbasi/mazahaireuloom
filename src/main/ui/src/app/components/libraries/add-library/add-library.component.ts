@@ -7,6 +7,7 @@ import { MatChipInputEvent } from "@angular/material/chips";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import {Tags} from '../../entity/Tags';
 import {GenericComponent} from "../../GenericComponent";
+import {Library} from "../../entity/Library";
 declare var $ : any;
 
 @Component({
@@ -28,6 +29,7 @@ declare var $ : any;
 export class AddLibraryComponent extends GenericComponent implements OnInit {
   minDate = new Date(2018, 0, 1);
   visible = true;
+  library: Library = {} as Library;
   tags: Tags[] = [];
 
   constructor(private http: HttpConfig, snackBar: MatSnackBar) { super(snackBar) }
@@ -35,52 +37,14 @@ export class AddLibraryComponent extends GenericComponent implements OnInit {
   ngOnInit() {
   }
 
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add our tags
-    if ((value || '').trim()) {
-      this.tags.push({name: value.trim()});
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-  }
-
-  remove(tag: Tags): void {
-    const index = this.tags.indexOf(tag);
-
-    if (index >= 0) {
-      this.tags.splice(index, 1);
-    }
-  }
-
   onSave() {
-    let addLibrary = {
-      "bookName": $('#bookName').val(),
-      "bookQuantities": $('#bookQuantities').val(),
-      "bookVolumes": $('#bookVolumes').val(),
-      "bookAuthor": {
-        "bookAuthorName" : $('#bookAuthorName').val()
-      },
-      "bookPublisher": {
-        "bookPublisherName": $('#bookPublisherName').val()
-      },
-      "tags": this.tags
-    };
-
-    console.log(addLibrary);
-
-    this.http.post("/libraries", addLibrary).subscribe(res => {
+    this.http.post("/libraries", this.library).subscribe(res => {
       this.statusStyle = {
         "font-size": "12px",
         "font-weight": "normal",
         "color": "#0F0"
       };
-      $('#status').html("کتاب کا اندراج ہوچکا ہے");
+      $('#status').html("لابیرری کا اندراج ہوچکا ہے");
     }, error => {
       $('#status').html(error);
     });

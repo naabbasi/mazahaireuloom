@@ -43,7 +43,7 @@ public class LibraryService {
         return this.libraryRepo.findAll();
     }
 
-    public Flux<List> searchLibrary(ReactiveMongoTemplate reactiveMongoTemplate, String library) {
-        return null;
+    public Flux<Library> searchLibrary(ReactiveMongoTemplate reactiveMongoTemplate, String library) {
+        return this.libraryRepo.searchLibrary(reactiveMongoTemplate, library);
     }
 }
