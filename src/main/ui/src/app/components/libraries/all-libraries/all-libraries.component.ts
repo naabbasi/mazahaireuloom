@@ -15,7 +15,7 @@ export class AllLibrariesComponent implements OnInit {
   private libraries : Observable<Library>;
   private dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  private displayedColumns = ['libraryName', 'libraryNumber', 'shelves'];
+  private displayedColumns = ['libraryName', 'libraryNumber'];
   resultsLength = 0;
 
   constructor(private http : HttpConfig, private route : ActivatedRoute) { }
@@ -26,7 +26,6 @@ export class AllLibrariesComponent implements OnInit {
       this.libraries = of(data);
       this.dataSource.data = data;
       this.resultsLength = data.length;
-      console.log(`resultsLength = ${this.resultsLength}`)
     });
   }
 
