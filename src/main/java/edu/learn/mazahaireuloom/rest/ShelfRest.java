@@ -15,12 +15,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.List;
-import java.util.Locale;
-
 @Slf4j
 @RequestMapping(path = "/api/libraries/{libraryId}/shelves")
 @RestController
@@ -47,23 +41,14 @@ public class ShelfRest {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Library> save(@RequestBody Library library, UriComponentsBuilder builder) {
+    public ResponseEntity<?> save(@RequestBody Shelf shelf, UriComponentsBuilder builder) {
         try {
-            this.libraryService.save(library).subscribe();
+            this.shelfService.save(shelf).subscribe();
         } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
 
-        var arabicLocale = new Locale.Builder().setLanguageTag("ar-SA-u-nu-arab").build();
-        var date = LocalDate.now();
-        var formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(arabicLocale);
-
-        var formatted = date.format(formatter);
-        System.out.println(formatted);
-        System.out.println(formatter.parse(formatted));
-
-        //return new ResponseEntity<>(library, HttpStatus.CREATED);
-        return ResponseEntity.status(HttpStatus.CREATED).body(library);
+        return ResponseEntity.status(HttpStatus.CREATED).body(shelf);
     }
 
     @DeleteMapping(path = "/{id}")

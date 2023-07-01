@@ -44,14 +44,14 @@ public class ShelfService {
     }
 
     public Flux<Shelf> findAllByLibraryId(String libraryId) {
-        return this.shelfRepo.findAllShelfByLibraryId(libraryId);
+        return this.shelfRepo.findAllShelfByLibrary(libraryId);
     }
 
     public Mono<Shelf> findShelfByLibraryIdAndShelfId(String libraryId, String shelfId) {
-        return this.shelfRepo.findShelfByLibraryIdAndShelfId(libraryId, shelfId);
+        return this.shelfRepo.findShelfByLibraryAndShelfId(libraryId, shelfId);
     }
 
-    public Flux<List> searchShelf(String shelfName, String shelfNumber) {
+    public Flux<Shelf> searchShelf(String shelfName, String shelfNumber) {
         return this.shelfRepo.searchLibrary(this.reactiveMongoTemplate, shelfName, shelfNumber);
     }
 }

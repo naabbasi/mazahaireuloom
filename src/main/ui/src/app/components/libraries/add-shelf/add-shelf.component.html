@@ -1,0 +1,44 @@
+<div style="margin-top: 5%; margin-right: 23%;" dir="rtl">
+  <form (submit)="onSave()" #addNewShelf="ngForm" ngNativeValidate>
+    <mat-form-field class="text-box-width-seventy-five" appearance="outline">
+      <mat-label>لابیرری کا نام</mat-label>
+      <input matInput #libraryId name="libraryId" [(ngModel)]="shelf.libraryId" [matAutocomplete]="auto"
+             (focus)="bindKeyboard(libraryId)" (blur)="hideKeyboard()"
+             placeholder="لابیرری کا نام" [matAutocomplete]="auto"
+             oninvalid="this.setCustomValidity('لابیرری کا نام کا اندراج کریں')"
+             oninput="setCustomValidity('')">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" name="libraryId" [value]="option.libraryId" [displayWith]="option.libraryName" >
+          {{option.libraryName}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="text-box-width-seventy-five" appearance="outline">
+      <mat-label>شلف کا نام</mat-label>
+      <input matInput #shelfName name="shelfName"
+             (focus)="bindKeyboard(shelfName)" (blur)="hideKeyboard()" [(ngModel)]="shelf.shelfName"
+             required placeholder="شلف کا نام"
+             oninvalid="this.setCustomValidity('شلف کا نام کا اندراج کریں')"
+             oninput="setCustomValidity('')">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="text-box-width-seventy-five" appearance="outline">
+      <mat-label>شلف کا نمبر</mat-label>
+      <input matInput #shelfNumber name="shelfNumber" [(ngModel)]="shelf.shelfNumber"
+             (focus)="bindKeyboard(shelfNumber)" (blur)="hideKeyboard()"
+             required placeholder="شلف کا نمبر"
+             oninvalid="this.setCustomValidity('شلف کا نمبر کا اندراج کریں')"
+             oninput="setCustomValidity('')">
+    </mat-form-field>
+    <br>
+    <button type="submit" mat-raised-button color="primary" [disabled]="!addNewShelf.form.valid">محفوظ کریں</button>
+    <br>
+    <small id="status" [ngStyle]="statusStyle"></small>
+  </form>
+</div>
+<ng-template #template>
+  <div style="width: 100%">
+    <img src="assets/images/kb.png" style="width: inherit;">
+  </div>
+</ng-template>

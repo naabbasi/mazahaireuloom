@@ -1,18 +1,27 @@
 server:
-  port: 9090
+    port: 9090
 
 spring:
-  data:
-    rest:
-      base-path: /api
-    mongodb:
-      port: 27017
-      database: mazahireuloom
-      host: localhost
-      auto-index-creation: false
+    data:
+        rest:
+            base-path: /api
+        mongodb:
+            port: 27017
+            database: mazahireuloom
+            host: localhost
+            auto-index-creation: false
 logging:
-  level:
-    org.springframework.data.mongodb.core.ReactiveMongoTemplate: DEBUG
+    level:
+        org.springframework.data.mongodb.core.ReactiveMongoTemplate: DEBUG
 
 security:
-  ignored: "*.js*"
+    ignored: "*.js*"
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: "*"
+    endpoint:
+        health:
+            show-details: always

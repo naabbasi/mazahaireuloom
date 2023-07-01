@@ -15,11 +15,11 @@ public interface ShelfRepo extends GenericRepo<Shelf, String> {
     Mono<Shelf> findByShelfName(String shelfName);
     Mono<Shelf> findByShelfNumber(String shelfNumber);
 
-    Flux<Shelf> findAllShelfByLibraryId(String libraryId);
+    Flux<Shelf> findAllShelfByLibrary(String libraryId);
 
-    Mono<Shelf> findShelfByLibraryIdAndShelfId(String libraryId, String shelfId);
+    Mono<Shelf> findShelfByLibraryAndShelfId(String libraryId, String shelfId);
 
-    default Flux<List> searchLibrary(ReactiveMongoTemplate reactiveMongoTemplate, String shelfName, String shelfNumber) {
+    default Flux<Shelf> searchLibrary(ReactiveMongoTemplate reactiveMongoTemplate, String shelfName, String shelfNumber) {
         Criteria criteria = Criteria.where("shelfName").regex(shelfName, "i");
 
         if(shelfNumber != null){
@@ -29,6 +29,6 @@ public interface ShelfRepo extends GenericRepo<Shelf, String> {
         org.springframework.data.mongodb.core.query.Query query = new org.springframework.data.mongodb.core.query.Query();
         query.limit(10);
         query.addCriteria(criteria);
-        return reactiveMongoTemplate.find(query, List.class);
+        return reactiveMongoTemplate.find(query, Shelf.class);
     }
 }

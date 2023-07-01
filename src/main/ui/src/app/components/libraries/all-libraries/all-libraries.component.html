@@ -7,7 +7,7 @@
 
     <!-- Library Name Column -->
     <ng-container matColumnDef="libraryName">
-      <th mat-header-cell *matHeaderCellDef > کتاب کا نام </th>
+      <th mat-header-cell *matHeaderCellDef >لابیرری کا نام</th>
       <td mat-cell *matCellDef="let element">
         <a href="javascript: void(0)" routerLink="/libraries/edit/{{element.libraryId}}">{{element.libraryName}} </a>
       </td>
@@ -15,7 +15,7 @@
 
     <!-- Library Author Column -->
     <ng-container matColumnDef="libraryNumber">
-      <th mat-header-cell *matHeaderCellDef > کتاب کے مصنف </th>
+      <th mat-header-cell *matHeaderCellDef >لابیرری کا نمبر</th>
       <td mat-cell *matCellDef="let element"> {{element.libraryNumber}} </td>
     </ng-container>
 

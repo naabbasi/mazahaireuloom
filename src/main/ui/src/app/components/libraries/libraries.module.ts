@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {AsyncPipe, CommonModule, NgFor} from '@angular/common';
 
 import { LibrariesRoutingModule } from './libraries-routing.module';
 import { AddLibraryComponent } from './add-library/add-library.component';
 import { LibrariesComponent } from './libraries.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MyMaterialModule} from "../my-material/my-material.module";
 import {MatInputModule} from "@angular/material/input";
 import { MatChipsModule } from "@angular/material/chips";
@@ -15,6 +15,8 @@ import { MatTableModule } from "@angular/material/table";
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
 import {AllLibrariesComponent} from "./all-libraries/all-libraries.component";
 import { EditLibraryComponent } from './edit-library/edit-library.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {AddShelfComponent} from "./add-shelf/add-shelf.component";
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import { EditLibraryComponent } from './edit-library/edit-library.component';
     AllLibrariesComponent,
     LibrariesComponent,
     AddLibraryComponent,
-    EditLibraryComponent
+    EditLibraryComponent,
+    AddShelfComponent
   ],
   imports: [
     CommonModule,
@@ -35,6 +38,10 @@ import { EditLibraryComponent } from './edit-library/edit-library.component';
     MatChipsModule,
     MatTableModule,
     MatPaginatorModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    NgFor,
+    AsyncPipe,
     LibrariesRoutingModule
   ]
 })
