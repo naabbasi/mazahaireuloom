@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 @Slf4j
 @Setter
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class BookPublisher {
+    @Indexed
     private String bookPublisherName;
 
     @Override

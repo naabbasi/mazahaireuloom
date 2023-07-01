@@ -2,6 +2,7 @@ package edu.learn.mazahaireuloom.rest;
 
 import edu.learn.mazahaireuloom.entities.Book;
 import edu.learn.mazahaireuloom.services.BookService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -36,9 +37,9 @@ public class BookRest {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Book> save(@RequestBody Book book, UriComponentsBuilder builder) {
+    public ResponseEntity<Book> save(@Valid @RequestBody Book book, UriComponentsBuilder builder) {
         try{
-            this.bookService.save(book).subscribe();
+            this.bookService.save(book).onErrorComplete(RuntimeException.class).subscribe();
         }catch (RuntimeException e){
             return ResponseEntity.badRequest().build();
         }
@@ -53,6 +54,17 @@ public class BookRest {
 
         //return new ResponseEntity<>(book, HttpStatus.CREATED);
         return ResponseEntity.status(HttpStatus.CREATED).body(book);
+    }
+
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Book> update(@Valid @RequestBody Book book) {
+        try{
+            this.bookService.save(book).onErrorComplete(RuntimeException.class).subscribe();
+        }catch (RuntimeException e){
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(book);
     }
 
     @DeleteMapping(path = "/{id}")

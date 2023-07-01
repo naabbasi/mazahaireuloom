@@ -37,7 +37,7 @@ public class UserTest {
     @Test
     public void pass_2() {
         Iterable<User> users = this.userService.findAll().collectList().block();
-        users.forEach(System.out::println);
+        assert users != null;
         assertTrue(users.iterator().hasNext());
     }
 

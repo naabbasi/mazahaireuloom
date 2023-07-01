@@ -29,7 +29,7 @@ import java.util.UUID;
 )
 public class Book {
     @Id
-    private String bookId = UUID.randomUUID().toString();
+    private String bookId;
 
     @NotBlank
     @TextIndexed(weight = 5)

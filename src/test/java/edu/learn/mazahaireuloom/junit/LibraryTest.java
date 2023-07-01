@@ -26,12 +26,12 @@ public class LibraryTest {
 
     @Test
     public void pass_002() {
-        Library getLibraryById = this.libraryService.findOne(savedLibrary.getLibraryId()).block();
+        Library getLibraryById = this.libraryService.findOne(savedLibrary.getId()).block();
         assertNotNull(getLibraryById);
         getLibraryById.setLibraryNumber("Room-001");
         this.libraryService.save(getLibraryById).block();
 
-        getLibraryById = this.libraryService.findOne(savedLibrary.getLibraryId()).block();
+        getLibraryById = this.libraryService.findOne(savedLibrary.getId()).block();
         assertEquals("Room-001", getLibraryById.getLibraryNumber());
     }
 
@@ -65,6 +65,6 @@ public class LibraryTest {
     @Test
     public void pass_012() {
         Optional<Library> library = this.libraryService.findByLibraryName("Room-1").blockOptional();
-        library.ifPresent(value -> this.libraryService.deleteByLibraryId(value.getLibraryId()).block());
+        library.ifPresent(value -> this.libraryService.deleteByLibraryId(value.getId()).block());
     }
 }

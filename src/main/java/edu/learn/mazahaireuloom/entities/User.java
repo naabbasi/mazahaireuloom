@@ -19,10 +19,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@Document(collection = "users")
+@Document(collection = "user")
 public class User {
     @Id
-    private UUID userId = UUID.randomUUID();
+    private String userId;
 
     @NotBlank
     @TextIndexed(weight = 2)

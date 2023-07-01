@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class LibraryService {
@@ -19,7 +17,7 @@ public class LibraryService {
 
     public Mono<Library> findOne(String libraryId) {
         var library = new Library();
-        library.setLibraryId(libraryId);
+        library.setId(libraryId);
         return this.libraryRepo.findOne(Example.of(library));
     }
 

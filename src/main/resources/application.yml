@@ -12,7 +12,12 @@ spring:
             auto-index-creation: false
 logging:
     level:
-        org.springframework.data.mongodb.core.ReactiveMongoTemplate: DEBUG
+        org:
+            springframework:
+                data:
+                    mongodb:
+                        core:
+                            ReactiveMongoTemplate: DEBUG
 
 security:
     ignored: "*.js*"
