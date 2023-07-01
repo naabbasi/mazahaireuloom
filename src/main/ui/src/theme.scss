@@ -1,0 +1,31 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$my-theme-primary: mat.define-palette(mat.$indigo-palette);
+$my-theme-accent: mat.define-palette(mat.$cyan-palette);
+$my-theme-warn: mat.define-palette(mat.$deep-orange-palette, A200);
+
+$light-theme: mat.define-light-theme((
+  color: (
+    primary: $my-theme-primary,
+    accent: $my-theme-accent,
+    warn: $my-theme-warn,
+  ),
+  typography: mat.define-typography-config(
+    $font-family: 'NotoNaskhArabicUI-Bold',
+    
+  ),
+  density: 0,
+));
+
+// Emit theme-dependent styles for common features used across multiple components.
+@include mat.core-theme($light-theme);
+
+
+@include mat.all-component-themes($light-theme);
+
+// Emit styles for MatButton based on `$my-theme`. Because the configuration
+// passed to `define-light-theme` omits typography, `button-theme` will not
+// emit any typography styles.
+//@include mat.button-theme($light-theme);

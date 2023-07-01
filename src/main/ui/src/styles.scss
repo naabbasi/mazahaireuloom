@@ -1,11 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 /*@import "@angular/material/prebuilt-themes/indigo-pink.css";*/
-@import "~assets/fonts/noto/font.css";
+@use "theme" as theme;
+
+@import "assets/fonts/noto/font.css";
 
 * {
     direction: rtl;
-    font-family: 'NotoNaskhArabicUI-Bold';
-    font-size: 16px;
+    font-size: 1.1rem;
 }
 
 /* .mat-mdc-header-cell {
