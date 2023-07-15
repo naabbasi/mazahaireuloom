@@ -1,10 +1,6 @@
 package edu.learn.mazahaireuloom.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -19,7 +15,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @Slf4j
 @Setter @Getter
