@@ -8,6 +8,7 @@ import { LibrariesModule } from './components/libraries/libraries.module';
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MyMaterialModule} from "./components/my-material/my-material.module";
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import {MyMaterialModule} from "./components/my-material/my-material.module";
     LibrariesModule,
     MyMaterialModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import reactor.core.publisher.Flux;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,9 @@ public class BookTest {
     @Test
     public void pass_001() {
         Book book = new Book();
+        book.setBookSource("Core Java");
         book.setBookName("Core Java");
+        book.setBookPublishDate(LocalDate.now());
         book.setBookVolumes(10);
         book.setBookQuantities(1);
 
@@ -47,9 +50,12 @@ public class BookTest {
     @Test
     public void pass_002() {
         Book book = new Book();
+        book.setBookSource("Core Java1");
         book.setBookName("Core Java1");
+        book.setBookPublishDate(LocalDate.now());
         book.setBookVolumes(10);
         book.setBookQuantities(1);
+
         book.setBookPublisher(new BookPublisher("Sams"));
         book.setBookAuthor(new BookAuthor("Noman ali"));
 
@@ -64,9 +70,12 @@ public class BookTest {
     @Test
     public void pass_003() {
         Book book = new Book();
+        book.setBookSource("Core Java2");
         book.setBookName("Core Java2");
         book.setBookVolumes(10);
         book.setBookQuantities(1);
+        book.setBookPublishDate(LocalDate.now());
+
         book.setBookPublisher(new BookPublisher("Packet Pub"));
         book.setBookAuthor(new BookAuthor("Farhan ali"));
 

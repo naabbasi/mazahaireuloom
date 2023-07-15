@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpConfig} from "../../../config/httpconfig";
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from "@angular/material/chips";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import {MatChipInputEvent} from "@angular/material/chips";
+import {MatSnackBar} from "@angular/material/snack-bar";
 import {Tags} from '../../entity/Tags';
+import {Book} from '../../entity/Book';
 import {GenericComponent} from "../../GenericComponent";
-declare var $ : any;
+import {DatePipe} from "@angular/common";
+
+declare var $: any;
 
 @Component({
   selector: 'app-add-book',
@@ -26,11 +29,25 @@ declare var $ : any;
   ]
 })
 export class AddBookComponent extends GenericComponent implements OnInit {
+  book: Book = {
+    bookId: '',
+    bookSource: '',
+    bookName: '',
+    bookPublishDateMomentum: null,
+    bookPublishDate: null,
+    bookAuthor: {bookAuthorName: ''},
+    bookPublisher: {bookPublisherName: ''},
+    bookQuantities: 0,
+    bookVolumes: 0,
+    tags: []
+  };
   minDate = new Date(2018, 0, 1);
   visible = true;
   tags: Tags[] = [];
 
-  constructor(private http: HttpConfig, snackBar: MatSnackBar) { super(snackBar) }
+  constructor(private http: HttpConfig, snackBar: MatSnackBar, public datepipe: DatePipe) {
+    super(snackBar)
+  }
 
   ngOnInit() {
   }
@@ -59,22 +76,19 @@ export class AddBookComponent extends GenericComponent implements OnInit {
   }
 
   onSave() {
-    let addBook = {
-      "bookName": $('#bookName').val(),
-      "bookQuantities": $('#bookQuantities').val(),
-      "bookVolumes": $('#bookVolumes').val(),
-      "bookAuthor": {
-        "bookAuthorName" : $('#bookAuthorName').val()
-      },
-      "bookPublisher": {
-        "bookPublisherName": $('#bookPublisherName').val()
-      },
-      "tags": this.tags
-    };
+    if (this.tags.length !== 0) {
+      this.book.tags = this.tags;
+    }
 
-    console.log(addBook);
+    if (this.book.bookPublishDateMomentum != null) {
+      this.book.bookPublishDate = this.datepipe.transform(this.book.bookPublishDateMomentum.toDate(), 'dd-MM-yyyy');
+      delete this.book.bookPublishDateMomentum;
+      delete this.book.bookId;
+    }
 
-    this.http.post("/books", addBook).subscribe(res => {
+    console.log(this.book);
+
+    this.http.post("/books", this.book).subscribe(res => {
       this.statusStyle = {
         "font-size": "12px",
         "font-weight": "normal",

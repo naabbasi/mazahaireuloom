@@ -39,8 +39,9 @@ public class BookRest {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Book> save(@Valid @RequestBody Book book, UriComponentsBuilder builder) {
         try{
-            this.bookService.save(book).onErrorComplete(RuntimeException.class).subscribe();
+            this.bookService.save(book).subscribe();
         }catch (RuntimeException e){
+            log.error("save(...) ", e);
             return ResponseEntity.badRequest().build();
         }
 
@@ -59,8 +60,9 @@ public class BookRest {
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Book> update(@Valid @RequestBody Book book) {
         try{
-            this.bookService.save(book).onErrorComplete(RuntimeException.class).subscribe();
+            this.bookService.save(book);
         }catch (RuntimeException e){
+            log.error("update(...) ", e);
             return ResponseEntity.badRequest().build();
         }
 

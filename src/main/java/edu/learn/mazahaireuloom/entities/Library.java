@@ -9,10 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
-import java.util.UUID;
 
 @Slf4j
 @Setter
@@ -20,10 +20,11 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
+@ToString
 @Document(collection = "library")
 public class Library {
     @Id
-    private String libraryId = UUID.randomUUID().toString();
+    private String id;
 
     @Indexed(unique = true)
     @NotBlank
@@ -35,20 +36,6 @@ public class Library {
     private String libraryNumber;
 
     @Field( value = "shelves")
+    @DocumentReference
     private List<Shelf> shelves;
-
-    @Override
-    public String toString() {
-        ObjectMapper mapper = new ObjectMapper();
-
-        String jsonToString = "";
-        try {
-            mapper.enable(SerializationFeature.INDENT_OUTPUT);
-            return mapper.writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            log.error("Shelf toString: ", e);
-        }
-
-        return jsonToString;
-    }
 }

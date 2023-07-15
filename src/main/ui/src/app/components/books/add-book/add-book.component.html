@@ -1,8 +1,17 @@
 <div style="margin-top: 5%; margin-right: 23%;" dir="rtl">
-  <form (submit)="onSave()"  #addNewBook="ngForm" ngNativeValidate>
+  <form (submit)="onSave()" #addNewBook="ngForm" ngNativeValidate>
+    <mat-form-field class="text-box-width-seventy-five" appearance="outline">
+      <mat-label>کتاب کی معرفت</mat-label>
+      <input matInput #bookSource name="bookSource" [(ngModel)]="book.bookSource"
+             (focus)="bindKeyboard(bookSource)" (blur)="hideKeyboard()"
+             required placeholder="کتاب کی معرفت"
+             oninvalid="this.setCustomValidity('کتاب کی معرفت کا اندراج کریں')"
+             oninput="setCustomValidity('')">
+    </mat-form-field>
+    <br>
     <mat-form-field class="text-box-width-seventy-five" appearance="outline">
       <mat-label>کتاب کا نام</mat-label>
-      <input matInput #bookName id="bookName" name="bookName"
+      <input matInput #bookName name="bookName" [(ngModel)]="book.bookName"
              (focus)="bindKeyboard(bookName)" (blur)="hideKeyboard()" (keyup.enter)="onEnter(bookName.value)"
              required placeholder="کتاب کا نام"
              oninvalid="this.setCustomValidity('کتاب کا نام کا اندراج کریں')"
@@ -11,7 +20,7 @@
     <br>
     <mat-form-field class="text-box-width-seventy-five" appearance="outline">
       <mat-label>کتاب کے مصنف</mat-label>
-      <input matInput #bookAuthor id="bookAuthorName" name="bookAuthorName"
+      <input matInput #bookAuthor name="bookAuthorName" [(ngModel)]="book.bookAuthor.bookAuthorName"
              (focus)="bindKeyboard(bookAuthor)" (blur)="hideKeyboard()"
              required placeholder="کتاب کے مصنف"
              oninvalid="this.setCustomValidity('کتاب کے مصنف کا اندراج کریں')"
@@ -20,7 +29,7 @@
     <br>
     <mat-form-field class="text-box-width-seventy-five" appearance="outline">
       <mat-label>ادرہ اشاعت</mat-label>
-      <input matInput #bookPublisher id="bookPublisherName" name="bookPublisherName"
+      <input matInput #bookPublisher name="bookPublisherName" [(ngModel)]="book.bookPublisher.bookPublisherName"
              (focus)="bindKeyboard(bookPublisher)" (blur)="hideKeyboard()"
              required placeholder="ادرہ اشاعت"
              oninvalid="this.setCustomValidity('ادرہ اشاعت کا اندراج کریں')"
@@ -28,26 +37,38 @@
     </mat-form-field>
     <br>
     <mat-form-field class="text-box-width-seventy-five" appearance="outline">
+      <mat-label>سن اشاعت</mat-label>
+      <input matInput [matDatepicker]="picker" #bookPublishDate name="bookPublishDate"
+             [(ngModel)]="book.bookPublishDateMomentum"
+             required placeholder="سن اشاعت"
+             oninvalid="this.setCustomValidity('سن اشاعت کا اندراج کریں')"
+             oninput="setCustomValidity('')">
+      <mat-hint>dd-MM-yyyy</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="text-box-width-seventy-five" appearance="outline">
       <mat-label>موضوع</mat-label>
       <mat-chip-grid #chipList>
         <mat-chip-row *ngFor="let tag of tags" [selectable]="selectable"
-                  [removable]="removable" (removed)="remove(tag)">
+                      [removable]="removable" (removed)="remove(tag)">
           {{tag.name}}
           <mat-icon matChipRemove *ngIf="removable">x</mat-icon>
         </mat-chip-row>
         <input #tagsText placeholder="موضوع"
-             (focus)="bindKeyboard(tagsText)"
-             (blur)="hideKeyboard()"
-             [matChipInputFor]="chipList"
-             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             [matChipInputAddOnBlur]="addOnBlur"
-             (matChipInputTokenEnd)="add($event)">
+               (focus)="bindKeyboard(tagsText)"
+               (blur)="hideKeyboard()"
+               [matChipInputFor]="chipList"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="addOnBlur"
+               (matChipInputTokenEnd)="add($event)">
       </mat-chip-grid>
     </mat-form-field>
     <br>
     <mat-form-field appearance="outline">
       <mat-label>کتاب کی تعداد</mat-label>
-      <input matInput #bookQuantities id="bookQuantities" name="bookQuantities"
+      <input matInput #bookQuantities name="bookQuantities" [(ngModel)]="book.bookQuantities"
              (focus)="bindKeyboard(bookQuantities)" (blur)="hideKeyboard()"
              required placeholder="کتاب کی تعداد"
              oninvalid="this.setCustomValidity('کتاب کی تعداد کا اندراج کریں')"
@@ -56,7 +77,7 @@
     &nbsp;
     <mat-form-field appearance="outline">
       <mat-label>کتاب کی جلدیں</mat-label>
-      <input matInput #bookVolumes id="bookVolumes" name="bookVolumes"
+      <input matInput #bookVolumes id="bookVolumes" name="bookVolumes" [(ngModel)]="book.bookVolumes"
              (focus)="bindKeyboard(bookVolumes)" (blur)="hideKeyboard()"
              required placeholder="کتاب کی جلدیں"
              oninvalid="this.setCustomValidity('کتاب کی جلدوں کا اندراج کریں')"

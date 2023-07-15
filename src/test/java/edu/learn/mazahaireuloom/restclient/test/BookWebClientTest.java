@@ -14,6 +14,7 @@ import org.springframework.test.web.reactive.server.EntityExchangeResult;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,10 +29,12 @@ public class BookWebClientTest {
     @Test
     public void pass_1() {
         Book book = new Book();
+        book.setBookSource("WebClient - Marfat");
         book.setBookName("WebClient - Book");
         book.setBookAuthor(new BookAuthor("WebClient - Book Author"));
         book.setBookPublisher(new BookPublisher("WebClient - Book Publisher"));
         book.setTags(List.of(new Tag("WebClient - Tag1"),new Tag("WebClient - Tag2")));
+        book.setBookPublishDate(LocalDate.now());
         book.setBookVolumes(10);
         book.setBookQuantities(1);
 
@@ -66,10 +69,12 @@ public class BookWebClientTest {
     public void pass_3() {
         Book book = new Book();
         book.setBookId(bookId);
+        book.setBookSource("WebClient - Marfat");
         book.setBookName("Book Updated");
         book.setBookAuthor(new BookAuthor("WebClient - Book Author"));
         book.setBookPublisher(new BookPublisher("WebClient - Book Publisher"));
         book.setTags(List.of(new Tag("WebClient - Tag1"),new Tag("WebClient - Tag2")));
+        book.setBookPublishDate(LocalDate.now());
         book.setBookVolumes(10);
         book.setBookQuantities(1);
 
