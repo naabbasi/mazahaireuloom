@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Slf4j
 @RequestMapping( path = "/api/books")
@@ -38,8 +39,13 @@ public class BookRest {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Book> save(@Valid @RequestBody Book book, UriComponentsBuilder builder) {
+        AtomicReference<Book> savedBook = new AtomicReference<>();
         try{
-            this.bookService.save(book).subscribe();
+            this.bookService.save(book).doOnError( error -> {
+                log.error("save(...) ", error);
+            }).subscribe(getSavedBook -> {
+                savedBook.set(getSavedBook);
+            });
         }catch (RuntimeException e){
             log.error("save(...) ", e);
             return ResponseEntity.badRequest().build();

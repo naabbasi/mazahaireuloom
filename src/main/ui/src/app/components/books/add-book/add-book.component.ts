@@ -37,19 +37,24 @@ export class AddBookComponent extends GenericComponent implements OnInit {
     bookPublishDate: null,
     bookAuthor: {bookAuthorName: ''},
     bookPublisher: {bookPublisherName: ''},
-    bookQuantities: 0,
-    bookVolumes: 0,
+    bookQuantities: null,
+    bookVolumes: null,
     tags: []
   };
   minDate = new Date(2018, 0, 1);
   visible = true;
   tags: Tags[] = [];
+  showKeyboardStatus: boolean = true;
 
   constructor(private http: HttpConfig, snackBar: MatSnackBar, public datepipe: DatePipe) {
     super(snackBar)
   }
 
   ngOnInit() {
+  }
+
+  showKeyboard() {
+    super.showKeyboard(this.showKeyboardStatus);
   }
 
   add(event: MatChipInputEvent): void {

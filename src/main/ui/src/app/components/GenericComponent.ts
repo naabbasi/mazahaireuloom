@@ -21,6 +21,12 @@ export class GenericComponent {
     }
   }
 
+  showKeyboard(showKeyboard?: boolean) {
+    if(showKeyboard && this.snackBar != undefined){
+      this.snackBar.openFromTemplate(this.template);
+    }
+  }
+
   hideKeyboard(){
     if(this.snackBar != undefined){
       this.snackBar.dismiss();

@@ -10,10 +10,11 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import { GenericDialogComponent } from './generic-dialog/generic-dialog.component';
+import {ArabicNumberKeyboardDirective} from "../directives/arabic-number-keyboard.directive";
+import {ArabicLetterKeyboardDirective} from "../directives/arabic-letter-keyboard.directive";
 
 @NgModule({
     imports: [
-        CommonModule,
         MatButtonModule,
         MatMenuModule,
         MatToolbarModule,
@@ -33,8 +34,10 @@ import { GenericDialogComponent } from './generic-dialog/generic-dialog.componen
         MatDividerModule,
         MatSnackBarModule,
         MatProgressBarModule,
-        MatDialogModule
+        MatDialogModule,
+        ArabicNumberKeyboardDirective,
+        ArabicLetterKeyboardDirective
     ],
-    declarations: [GenericDialogComponent]
+  declarations: [GenericDialogComponent, ArabicNumberKeyboardDirective, ArabicLetterKeyboardDirective]
 })
 export class MyMaterialModule { }
