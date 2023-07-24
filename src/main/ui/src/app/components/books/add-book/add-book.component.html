@@ -28,8 +28,8 @@
     <br>
     <mat-form-field class="text-box-width-seventy-five" appearance="outline">
       <mat-label>ادرہ اشاعت</mat-label>
-      <input matInput #bookPublisher name="bookPublisherName" [(ngModel)]="book.bookPublisher.bookPublisherName"
-             (focus)="bindKeyboard(bookPublisher)" (blur)="hideKeyboard()"
+      <input matInput #bookPublisher name="bookPublisherName" [(ngModel)]="book.bookPublisher.bookPublisherName" appArabicLetterKeyboard
+             (focus)="showKeyboard()" (blur)="hideKeyboard()"
              required placeholder="ادرہ اشاعت"
              oninvalid="this.setCustomValidity('ادرہ اشاعت کا اندراج کریں')"
              oninput="setCustomValidity('')">

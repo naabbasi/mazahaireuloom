@@ -17,7 +17,7 @@ export class ArabicNumberKeyboardDirective implements ControlValueAccessor {
   private value: string;
 
   constructor(private _elementRef: ElementRef, private _renderer: Renderer2) {
-    console.log("ArabicKeyboardDirective has been initialized")
+    console.log("ArabicNumberKeyboardDirective has been initialized")
   }
 
   @HostListener('input', ['$event.target.value'])

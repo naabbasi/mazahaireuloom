@@ -1,5 +1,5 @@
 //http://www.omniglot.com/language/numbers/urdu.htm
-export const arabicLetters = {
+export const arabicLettersAndNumbers = {
   "q": "ق",
   "w": "و",
   "e": "ع",

@@ -1,6 +1,6 @@
 import {Directive, ElementRef, forwardRef, Host, HostBinding, HostListener, Renderer2} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {arabicLetters} from "../GenericUtils";
+import {arabicLettersAndNumbers} from "../GenericUtils";
 
 @Directive({
   selector: '[appArabicLetterKeyboard]',
@@ -62,7 +62,7 @@ export class ArabicLetterKeyboardDirective implements ControlValueAccessor {
     let arabicWords = '';
     let valueAsArray = value.split('');
     for (let c = 0; c < valueAsArray.length; c++) {
-      let isArabic = arabicLetters[valueAsArray[c]];
+      let isArabic = arabicLettersAndNumbers[valueAsArray[c]];
       if (isArabic !== undefined) {
         arabicWords += isArabic;
       } else {

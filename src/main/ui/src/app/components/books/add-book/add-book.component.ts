@@ -85,15 +85,18 @@ export class AddBookComponent extends GenericComponent implements OnInit {
       this.book.tags = this.tags;
     }
 
+    let bookHttpRequestObject: Book;
     if (this.book.bookPublishDateMomentum != null) {
       this.book.bookPublishDate = this.datepipe.transform(this.book.bookPublishDateMomentum.toDate(), 'dd-MM-yyyy');
-      delete this.book.bookPublishDateMomentum;
-      delete this.book.bookId;
+      //Creating a clone due to the date input, Without clone if this.book.bookPublishDateMomentum is delete then date picker
+      //will be shown as required
+      bookHttpRequestObject = Object.assign({}, this.book);
+
+      delete bookHttpRequestObject.bookPublishDateMomentum;
+      delete bookHttpRequestObject.bookId;
     }
 
-    console.log(this.book);
-
-    this.http.post("/books", this.book).subscribe(res => {
+    this.http.post("/books", bookHttpRequestObject).subscribe(res => {
       this.statusStyle = {
         "font-size": "12px",
         "font-weight": "normal",
