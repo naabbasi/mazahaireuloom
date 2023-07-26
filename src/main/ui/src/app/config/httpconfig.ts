@@ -37,6 +37,15 @@ export class HttpConfig {
       );
   }
 
+  public put<T>(url: string, body) : Observable<any>{
+    let completeUrl = `${this.baseUrl}${url}`;
+    return this.httpClient.put(completeUrl,body, this.options)
+      .pipe(
+        retry(3),
+        catchError(this.handleError)
+        );
+  }
+
   public delete<T>(url: string) : Observable<any> {
     let completeUrl = `${this.baseUrl}${url}`;
     return this.httpClient.delete(completeUrl, this.options)

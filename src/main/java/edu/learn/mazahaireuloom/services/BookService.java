@@ -29,8 +29,9 @@ public class BookService {
     public Mono<Book> findByBookName(String bookName) {
         return this.bookRepo.findByBookName(bookName);
     }
+
     public Mono<Book> save(Book book) {
-        return this.bookRepo.save(book);
+        return this.bookRepo.updateBook(book, book.getBookId());
     }
 
     public Mono<Book> updateBook(Book updateBook, String bookId) {

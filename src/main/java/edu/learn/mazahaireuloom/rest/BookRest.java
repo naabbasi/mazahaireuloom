@@ -66,7 +66,7 @@ public class BookRest {
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Book> update(@Valid @RequestBody Book book) {
         try{
-            this.bookService.save(book);
+            this.bookService.updateBook(book, book.getBookId()).subscribe();
         }catch (RuntimeException e){
             log.error("update(...) ", e);
             return ResponseEntity.badRequest().build();

@@ -7,6 +7,6 @@ export class Book {
   bookPublishDateMomentum : any;
   bookPublishDate : string;
   tags: any;
-  bookQuantities : number;
-  bookVolumes : number;
+  bookQuantities : number | string;
+  bookVolumes : number | string;
 }

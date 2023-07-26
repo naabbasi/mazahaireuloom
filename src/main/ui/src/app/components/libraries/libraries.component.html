@@ -2,11 +2,11 @@
   <mat-card-header>
     <form #searchBook="ngForm" ngNativeValidate style="width: 100%;">
       <mat-form-field class="text-box-width-seventy-five" appearance="outline">
-        <mat-label>لابیرری کا نام یا لابیرری کا نمبر کا اندراج کریں</mat-label>
+        <mat-label>مكتبة کا نام یا مكتبة کا نمبر کا اندراج کریں</mat-label>
         <input matInput #findBook id="findBook" name="findBook" (keyup)='keyUp.next($event.target.value)'
                (focus)="bindKeyboard(findBook)" (blur)="hideKeyboard()" (keyup.enter)="onEnter(findBook.value)"
-               required placeholder="لابیرری کا نام یا لابیرری کا نمبر کا اندراج کریں"
-               oninvalid="this.setCustomValidity('لابیرری کا نام یا لابیرری کا نمبر کا اندراج کریں')"
+               required placeholder="مكتبة کا نام یا مكتبة کا نمبر کا اندراج کریں"
+               oninvalid="this.setCustomValidity('مكتبة کا نام یا مكتبة کا نمبر کا اندراج کریں')"
                oninput="setCustomValidity('')">
       </mat-form-field>
       <br>
@@ -24,7 +24,7 @@
 
     <!-- Book Name Column -->
     <ng-container matColumnDef="libraryName">
-      <th mat-header-cell *matHeaderCellDef style="width: 25%;"> لابیرری کا نام </th>
+      <th mat-header-cell *matHeaderCellDef style="width: 25%;"> مكتبة کا نام </th>
       <td mat-cell *matCellDef="let element">
         <a href="javascript: void(0)" routerLink="/libraries/edit/{{element.libraryId}}">{{element.libraryName}} </a>
       </td>
@@ -32,7 +32,7 @@
 
     <!-- Book Author Column -->
     <ng-container matColumnDef="libraryNumber">
-      <th mat-header-cell *matHeaderCellDef style="width: 25%;"> لابیرری کا نمبر </th>
+      <th mat-header-cell *matHeaderCellDef style="width: 25%;"> مكتبة کا نمبر </th>
       <td mat-cell *matCellDef="let element"> {{element.libraryNumber}} </td>
     </ng-container>
 

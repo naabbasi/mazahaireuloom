@@ -44,7 +44,7 @@ export class AddLibraryComponent extends GenericComponent implements OnInit {
         "font-weight": "normal",
         "color": "#0F0"
       };
-      $('#status').html("لابیرری کا اندراج ہوچکا ہے");
+      $('#status').html("مكتبة کا اندراج ہوچکا ہے");
     }, error => {
       $('#status').html(error);
     });

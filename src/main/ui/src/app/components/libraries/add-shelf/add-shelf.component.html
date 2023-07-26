@@ -1,11 +1,11 @@
 <div style="margin-top: 5%; margin-right: 23%;" dir="rtl">
   <form (submit)="onSave()" #addNewShelf="ngForm" ngNativeValidate>
     <mat-form-field class="text-box-width-seventy-five" appearance="outline">
-      <mat-label>لابیرری کا نام</mat-label>
+      <mat-label>مكتبة کا نام</mat-label>
       <input matInput #libraryId name="libraryId" [(ngModel)]="shelf.libraryId" [matAutocomplete]="auto"
              (focus)="bindKeyboard(libraryId)" (blur)="hideKeyboard()"
-             placeholder="لابیرری کا نام" [matAutocomplete]="auto"
-             oninvalid="this.setCustomValidity('لابیرری کا نام کا اندراج کریں')"
+             placeholder="مكتبة کا نام" [matAutocomplete]="auto"
+             oninvalid="this.setCustomValidity('مكتبة کا نام کا اندراج کریں')"
              oninput="setCustomValidity('')">
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let option of filteredOptions | async" name="libraryId" [value]="option.libraryId" [displayWith]="option.libraryName" >

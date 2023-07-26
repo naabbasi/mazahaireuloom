@@ -13,8 +13,7 @@ $light-theme: mat.define-light-theme((
     warn: $my-theme-warn,
   ),
   typography: mat.define-typography-config(
-    $font-family: 'NotoNaskhArabicUI-Bold',
-    
+    $font-family: 'NotoNaskhArabicUI-Bold',    
   ),
   density: 0,
 ));

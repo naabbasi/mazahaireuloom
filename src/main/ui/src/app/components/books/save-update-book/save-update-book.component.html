@@ -39,10 +39,9 @@
       <mat-label>سن اشاعت</mat-label>
       <input matInput [matDatepicker]="picker" #bookPublishDate name="bookPublishDate"
              [(ngModel)]="book.bookPublishDateMomentum"
-             required placeholder="سن اشاعت"
+             required placeholder="سن اشاعت" readonly
              oninvalid="this.setCustomValidity('سن اشاعت کا اندراج کریں')"
              oninput="setCustomValidity('')">
-      <mat-hint>dd-MM-yyyy</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
@@ -84,6 +83,7 @@
     </mat-form-field>
     <br>
     <button type="submit" mat-raised-button color="primary" [disabled]="!addNewBook.form.valid">محفوظ کریں</button>
+    <button type="button" mat-raised-button  (click)="onDelete()">حذف کردیں</button>
     <br>
     <small id="status" [ngStyle]="statusStyle"></small>
   </form>

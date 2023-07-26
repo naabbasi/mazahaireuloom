@@ -45,7 +45,7 @@ export class EditBookComponent extends GenericComponent implements OnInit {
         this.book = book;
         console.log(this.book);
       });
-    })
+    });
   }
 
   add(event: MatChipInputEvent): void {

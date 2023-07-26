@@ -10,6 +10,7 @@ spring:
             database: mazahireuloom
             host: localhost
             auto-index-creation: false
+            uuid-representation: standard
 logging:
     level:
         org:

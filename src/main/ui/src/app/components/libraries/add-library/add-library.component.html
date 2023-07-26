@@ -1,20 +1,20 @@
 <div style="margin-top: 5%; margin-right: 23%;" dir="rtl">
   <form (submit)="onSave()"  #addNewLibrary="ngForm" ngNativeValidate>
     <mat-form-field class="text-box-width-seventy-five" appearance="outline">
-      <mat-label>لابیرری کا نام</mat-label>
+      <mat-label>مكتبة کا نام</mat-label>
       <input matInput #libraryName name="libraryName"
              (focus)="bindKeyboard(libraryName)" (blur)="hideKeyboard()" [(ngModel)]="library.libraryName"
-             required placeholder="لابیرری کا نام"
-             oninvalid="this.setCustomValidity('لابیرری کا نام کا اندراج کریں')"
+             required placeholder="مكتبة کا نام"
+             oninvalid="this.setCustomValidity('مكتبة کا نام کا اندراج کریں')"
              oninput="setCustomValidity('')">
     </mat-form-field>
     <br>
     <mat-form-field class="text-box-width-seventy-five" appearance="outline">
-      <mat-label>لابیرری کا نمبر</mat-label>
+      <mat-label>مكتبة کا نمبر</mat-label>
       <input matInput #libraryNumber name="libraryNumber" [(ngModel)]="library.libraryNumber"
              (focus)="bindKeyboard(libraryNumber)" (blur)="hideKeyboard()"
-             required placeholder="لابیرری کا نمبر"
-             oninvalid="this.setCustomValidity('لابیرری کا نمبر کا اندراج کریں')"
+             required placeholder="مكتبة کا نمبر"
+             oninvalid="this.setCustomValidity('مكتبة کا نمبر کا اندراج کریں')"
              oninput="setCustomValidity('')">
     </mat-form-field>
     <br>
